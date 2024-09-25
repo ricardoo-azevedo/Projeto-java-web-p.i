@@ -21,6 +21,13 @@ public class Teste {
         EspecialidadeInterface iEspecialidade = new EspecialidadeDAO();
         Especialidade especialidade3 = new Especialidade();
      
+        /*Especialidade consulta = iEspecialidade.consultarEspecialidade(7);
+        System.out.println("Id: "+consulta.getId());
+        System.out.println("nome: "+consulta.getNome());*/
+        
+        
+        
+        			
         
         
     }

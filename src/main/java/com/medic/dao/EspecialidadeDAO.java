@@ -64,33 +64,37 @@ public class EspecialidadeDAO implements EspecialidadeInterface{
 
 
     @Override /*to pegando o jeito da coisa */
-    public void consultarEspecialidade(int IdEspecialidade) {
-        String sql = "SELECT * FROM ESPECIALIDADE WHERE idEspecialidade = ?";
-
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-
-            /*passando o id da especialidade diretamente */
-            ps.setInt(1, IdEspecialidade);
-
-            /*usando o Result set para receber os resultados */
-            ResultSet rs = ps.executeQuery();
-
-            /*porecessando o objeto de resultset pra ler os resultados */
-            while (rs.next()) {
-
-                /*consultando os dados de uma tabela e inserindo em uma variavel de mesmo nome na tabela */
-                int id = rs.getInt("idEspecialidade");
-                String nome = rs.getString("NOME");
-                /*printando os dados recebidos */
-                System.out.println("[Id: "+id+" | Especialidade: "+nome+"]");
-            }
-            
-            /*caso tudo de errado vai lançar uma exception */;
-        } catch (Exception e) {
-            System.out.println("[Erro ao consultar especialidade: "+e.getMessage()+"]");
-        }
-
+	    public Especialidade consultarEspecialidade(int IdEspecialidade) {
+	        String sql = "SELECT * FROM ESPECIALIDADE WHERE idEspecialidade = ?";
+	        Especialidade especialidade = null;
+	       
+	
+	        try {
+	            PreparedStatement ps = connection.prepareStatement(sql);
+	
+	            /*passando o id da especialidade diretamente */
+	            ps.setInt(1, IdEspecialidade);
+	
+	            /*usando o Result set para receber os resultados */
+	            ResultSet rs = ps.executeQuery();
+	
+	            /*porecessando o objeto de resultset pra ler os resultados */
+	            if (rs.next()) {
+	
+	                /*consultando os dados de uma tabela e inserindo em uma variavel de mesmo nome na tabela */
+	                int id = rs.getInt("idEspecialidade");
+	                String nome = rs.getString("NOME");
+	                /*printando os dados recebidos */
+	                
+	                especialidade = new Especialidade(id, nome);
+	                
+	            }
+	            
+	            /*caso tudo de errado vai lançar uma exception */;
+	        } catch (Exception e) {
+	            System.out.println("[Erro ao consultar especialidade: "+e.getMessage()+"]");
+	        }
+	        return especialidade;
 
 
     }
