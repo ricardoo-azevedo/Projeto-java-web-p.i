@@ -4,73 +4,77 @@
 
 ```mermaid
 erDiagram
-    UNIDADESAUDE {
-        INT idUnidadeSaude PK
-        VARCHAR nome
-        INT idEndereco FK
-    }
-    
-    ENDERECO {
-        INT idEndereco PK
-        VARCHAR logradouro
-        VARCHAR numero
-        VARCHAR complemento
-        VARCHAR bairro
-        VARCHAR cidade
-        VARCHAR uf
-        VARCHAR cep
-    }
-    
-    TELEFONE {
-        INT idTelefone PK
-        VARCHAR numero
-        ENUM tipo
-        INT idPaciente FK
-        INT idMedico FK
-        INT idUnidadeSaude FK
-    }
-    
-    PACIENTE {
-        INT idPaciente PK
-        VARCHAR nome
-        VARCHAR CPF
-        DATE data_nascimento
+    UnidadeSaude {
+        int idUnidadeSaude PK
+        varchar nome
+        int idEndereco FK
     }
 
-    FAMILIA {
-        INT idFamilia PK
-        INT idResponsavel FK
+    Endereco {
+        int idEndereco PK
+        varchar logradouro
+        varchar numero
+        varchar complemento
+        varchar bairro
+        varchar cidade
+        varchar uf
+        varchar cep
     }
 
-    MEDICO {
-        INT idMedico PK
-        VARCHAR nome
-        VARCHAR CRM
-        INT idEspecialidade FK
+    Medico {
+        int idMedico PK
+        varchar nome
+        varchar CRM
+        int idEspecialidade FK
     }
 
-    ESPECIALIDADE {
-        INT idEspecialidade PK
-        VARCHAR nome
+    Especialidade {
+        int idEspecialidade PK
+        varchar nome
     }
 
-    AGENDAMENTO {
-        INT idAgendamento PK
-        INT idPaciente FK
-        INT idMedico FK
-        DATETIME data_hora
-        VARCHAR statusAgendamento
-        TEXT observacoes
+    Telefone {
+        int idTelefone PK
+        varchar numero
+        int idPaciente FK
+        int idMedico FK
+        int idUnidadeSaude FK
     }
 
-    UNIDADESAUDE ||--o{ ENDERECO : "1,1"
-    TELEFONE }o--|| PACIENTE : "0,N"
-    TELEFONE }o--|| MEDICO : "0,N"
-    TELEFONE }o--|| UNIDADESAUDE : "0,N"
-    PACIENTE ||--|{ FAMILIA : "1,1"
-    AGENDAMENTO }o--|| PACIENTE : "0,N"
-    AGENDAMENTO }o--|| MEDICO : "0,N"
-    MEDICO }o--|| ESPECIALIDADE : "0,N"
+    Paciente {
+        int idPaciente PK
+        varchar nome
+        varchar CPF
+        date dataNascimento
+        int idFamilia FK
+    }
+
+    Agendamento {
+        int idAgendamento PK
+        int idPaciente FK
+        int idMedico FK
+        datetime dataHora
+        varchar statusAgendamento
+        text observacoes
+    }
+
+    Familia {
+        int idFamilia PK
+        int idEndereco FK
+    }
+
+    %% Relacionamentos
+
+    UnidadeSaude ||--o{ Endereco : "1-1"
+    Medico ||--o{ Especialidade : "1-1"
+    Telefone ||--o{ Paciente : "1-1"
+    Telefone ||--o{ Medico : "1-1"
+    Telefone ||--o{ UnidadeSaude : "1-1"
+    Paciente ||--o{ Familia : "1-1"
+    Paciente ||--o{ Agendamento : "1-N"
+    Medico ||--o{ Agendamento : "1-N"
+    Familia ||--o{ Endereco : "1-1"
+
 
 ```
 
@@ -79,73 +83,87 @@ erDiagram
 ```mermaid
 classDiagram
     class UnidadeSaude {
-        +int idUnidadeSaude
-        +String nome
-        +Endereco endereco
+        int idUnidadeSaude
+        String nome
+        int idEndereco
     }
     
     class Endereco {
-        +int idEndereco
-        +String logradouro
-        +String numero
-        +String complemento
-        +String bairro
-        +String cidade
-        +String uf
-        +String cep
-    }
-
-    class Telefone {
-        +int idTelefone
-        +String numero
-        +Enum tipo
-        +Paciente paciente
-        +Medico medico
-        +UnidadeSaude unidadeSaude
-    }
-
-    class Paciente {
-        +int idPaciente
-        +String nome
-        +String CPF
-        +Date data_nascimento
-        +Familia familia
-    }
-
-    class Familia {
-        +int idFamilia
-        +Paciente responsavel
+        int idEndereco
+        String logradouro
+        String numero
+        String complemento
+        String bairro
+        String cidade
+        String uf
+        String cep
     }
 
     class Medico {
-        +int idMedico
-        +String nome
-        +String CRM
-        +Especialidade especialidade
+        int idMedico
+        String nome
+        String CRM
+        int idEspecialidade
     }
 
     class Especialidade {
-        +int idEspecialidade
-        +String nome
+        int idEspecialidade
+        String nome
+    }
+
+    class Telefone {
+        int idTelefone
+        String numero
+        int idPaciente
+        int idMedico
+        int idUnidadeSaude
+    }
+
+    class Paciente {
+        int idPaciente
+        String nome
+        String CPF
+        Date dataNascimento
+        int idFamilia
     }
 
     class Agendamento {
-        +int idAgendamento
-        +Paciente paciente
-        +Medico medico
-        +DateTime data_hora
-        +String statusAgendamento
-        +String observacoes
+        int idAgendamento
+        int idPaciente
+        int idMedico
+        DateTime dataHora
+        String statusAgendamento
+        String observacoes
     }
 
-    UnidadeSaude "1" -- "1" Endereco : "localizado em"
-    Telefone "0..N" -- "1" Paciente : "pertence a"
-    Telefone "0..N" -- "1" Medico : "associado a"
-    Telefone "0..N" -- "1" UnidadeSaude : "pertence a"
-    Paciente "1" -- "1" Familia : "faz parte de"
-    Agendamento "0..N" -- "1" Paciente : "agendado para"
-    Agendamento "0..N" -- "1" Medico : "realizado por"
-    Medico "0..N" -- "1" Especialidade : "especializa-se em"
+    class Familia {
+        int idFamilia
+        int idEndereco
+    }
+
+    %% Relações entre as entidades
+
+    UnidadeSaude --> Endereco : "1-1" 
+    Medico --> Especialidade : "1-1" 
+    Telefone --> Paciente : "1-1" 
+    Telefone --> Medico : "1-1" 
+    Telefone --> UnidadeSaude : "1-1"
+    Paciente --> Familia : "1-1"
+    Paciente --> Agendamento : "1-*" 
+    Medico --> Agendamento : "1-*"
+    Familia --> Endereco : "1-1" 
+
+    %% Comentários sobre as cardinalidades
+    %% UnidadeSaude e Endereco têm uma relação de 1 para 1
+    %% Médico e Especialidade têm uma relação de 1 para 1
+    %% Paciente e Telefone têm uma relação de 1 para 1
+    %% Médico e Telefone têm uma relação de 1 para 1
+    %% Unidade de Saúde e Telefone têm uma relação de 1 para 1
+    %% Paciente e Família têm uma relação de 1 para 1
+    %% Paciente e Agendamento têm uma relação de 1 para muitos
+    %% Médico e Agendamento têm uma relação de 1 para muitos
+    %% Família e Endereço têm uma relação de 1 para 1
+
 
 
 
