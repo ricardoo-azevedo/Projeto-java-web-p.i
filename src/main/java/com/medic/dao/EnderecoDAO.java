@@ -82,7 +82,7 @@ public class EnderecoDAO implements EnderecoInterface{
                 String logradouro = rs.getString("logradouro");
                 String numero = rs.getString("numero");
                 String complemento = rs.getString("complemento");
-                String bairro = rs.getString("complemento");
+                String bairro = rs.getString("bairro");
                 String cidade = rs.getString("cidade");
                 String uf = rs.getString("uf");
                 String cep = rs.getString("cep");
