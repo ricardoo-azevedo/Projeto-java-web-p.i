@@ -1,8 +1,10 @@
 package com.medic.dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,16 +32,14 @@ public class EnderecoDAO implements EnderecoInterface{
 
 
     @Override
-    public void inserirEndereco(Endereco endereco) {
+    public int inserirEndereco(Endereco endereco) {
         String sql = "INSERT INTO ENDERECO (logradouro, numero, complemento, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        if (connection == null) {
-            System.out.println("[Erro] A conexão é null.");
-            return; // Ou lance uma exceção
-        }
+        /*criar uma variavel id */
+        int id = 0;
 
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+        try {                                                   /* apos o sql, o segundo parametro vai retornar a chave do id que foi auto_incrementado*/
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             /*quando é pra inserir, tem q retornar o dado do objeto*/
             ps.setString(1, endereco.getLogradouro());
             ps.setString(2, endereco.getNumero());
@@ -49,9 +49,19 @@ public class EnderecoDAO implements EnderecoInterface{
             ps.setString(6, endereco.getUf());
             ps.setString(7, endereco.getCep());
             ps.execute();
+
+            /*Criar uma variavel do tipo ResultSet (que diferente deo Statement, é usado para retornar), essa variavel recebe ps executando um retrono de chave autoincrmentada */ 
+            ResultSet idAuto = ps.getGeneratedKeys();
+
+            /*Apos a condição, o id vai receber o idAuto executando o get q pede o index da coluna consultada*/
+            if(idAuto.next()){
+                id = idAuto.getInt(1); 
+            }
         }catch (Exception e) {
             System.out.println("[Erro ao inserir Endereço: "+e.getMessage()+"]");
         }
+
+        return id;
     }
 
 
