@@ -7,6 +7,8 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 
 	/*Essas constantes são as configurações de conexão com o bd*/
+	
+												   /*Coloquem 3306 no de vcs*/
 	private static final String URL = "jdbc:mysql://localhost:3307/bdmedic";
 	private static final String USER = "root";
 	private static final String PASSWORD = "";
