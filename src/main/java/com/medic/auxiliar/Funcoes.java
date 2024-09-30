@@ -1,4 +1,4 @@
-package auxiliar;
+package com.medic.auxiliar;
 
 import java.sql.Date;
 import java.text.ParseException;
