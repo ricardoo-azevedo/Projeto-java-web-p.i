@@ -71,6 +71,7 @@ public class EnderecoDAO implements EnderecoInterface{
         String sql ="SELECT * FROM ENDERECO WHERE idEndereco = ?";
         Endereco endereco = null;
         try {
+
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1,idEndereco);
             ResultSet rs = ps.executeQuery();

@@ -1,25 +1,25 @@
 package com.medic.model;
 
 public class Especialidade {
-private int  idEspecialidade;
+private int  id;
 private String nome;
 
 public Especialidade () {}
 
 
 public Especialidade(int idEspecialidade, String nome) {
-	this.idEspecialidade = idEspecialidade;
+	this.id = idEspecialidade;
 	this.nome = nome;
 	
 }
 
 
 public int getIdEspecialidade() {
-	return idEspecialidade;
+	return id;
 }
 
 public void setIdEspecialidade(int idEspecialidade) {
-	this.idEspecialidade = idEspecialidade;
+	this.id = idEspecialidade;
 }
 
 
@@ -33,6 +33,6 @@ public void setNome(String nome) {
 }
 
 public String toString() {
-	return "Especialidade{"  +"idEspecialidade = " + idEspecialidade + ", nome = "+ nome + "}"; 
+	return "Especialidade{"  +"idEspecialidade = " + id + ", nome = "+ nome + "}"; 
 } 
 }
