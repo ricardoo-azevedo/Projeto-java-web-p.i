@@ -1,4 +1,9 @@
+
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 
 <!DOCTYPE html>
 <html class="no-js" lang="pt-BR">
@@ -109,9 +114,8 @@
 											<li class="nav-item">
 												<a class="page-scroll" href="#contact">Contact</a>
 											</li>
-											</li>
 											<li class="nav-item">
-												<a class="page-scroll" href="">iMedic</a>
+												<a href="./app/index.jsp">iMedic</a>
 											</li>
 										</ul>
 									</div> <!-- navbar collapse -->

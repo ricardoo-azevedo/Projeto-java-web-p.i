@@ -1,0 +1,98 @@
+
+
+
+
+form{
+	padding: 10px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	border-radius: 4px;
+}
+
+input, select, option{
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.coluna-esquerda{
+	background-color: rgb(25, 41, 79);
+}
+
+   /* parte do dashboard */
+   
+   
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+      
+        .card h3 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+        }
+        .card .count {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .icon {
+            font-size: 70px;
+            margin-bottom: 10px;
+            
+        }
+       .medicoP {
+       font-size: medium;
+       }
+
+  
+
+        
+        .medicoP  {
+        font-size: 120px;
+        }
+        
+/* parte direita dos a*/
+
+
+
+
+.sidebar-heading {
+	color: #fff;
+	font-weight: 400;
+}
+
+/* fade nos elementos */
+.fade-in-element {
+	animation: fadeIn 0.5s;
+	-webkit-animation: fadeIn 0.5s;
+	-moz-animation: fadeIn 0.5s;
+	-o-animation: fadeIn 0.5s;
+	-ms-animation: fadeIn 0.5s;
+}
+			
+@keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@-moz-keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@-o-keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@-ms-keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+/* fim fade nos elementos */
