@@ -32,6 +32,7 @@ case 1:{
 	String uf = request.getParameter("inputUf");	
 	String cep = request.getParameter("inputCep");	
 	
+	
 	Endereco endereco = new Endereco();
 	endereco.setLogradouro(logradouro);
 	endereco.setNumero(numero);
@@ -57,6 +58,9 @@ case 1:{
 	iTelefone.inserir(telefone);	
 	
 	response.sendRedirect("form-unidade-saude.jsp");
+	
+	
+
 
 	break;
 }

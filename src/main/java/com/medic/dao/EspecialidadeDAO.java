@@ -18,8 +18,8 @@ public class EspecialidadeDAO implements EspecialidadeInterface {
         connectionFactory = new ConnectionFactory();
     }
     /* Especialidade
-     * Inserir [OK Ta no testando e falta colocar oq ricardo pediu]
-     * consultar [86% ta dando erro numa coisa e vou dormir e tento depois]
+     * Inserir [OK]
+     * consultar [ok]
      * excluir[0k]
      * editar[ok]
      * listar[ok]

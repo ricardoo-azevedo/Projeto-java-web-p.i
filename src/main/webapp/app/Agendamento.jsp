@@ -24,11 +24,10 @@
             <div class="sidebar-heading border-bottom bg-success text-center">Medic</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="index.jsp">Painel</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-unidade-saude.jsp">Unidade Saúde (temp)</a>
+                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-unidade-saude.jsp">Unidade de Saúde</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-paciente.jsp">Paciente</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-medico.jsp">Medico(a)</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="#!">Events</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="#!">Profile</a>
+                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="agendamento.jsp">Agendamento</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="../index.jsp">Sair</a>
             </div>
         </div>
@@ -71,51 +70,14 @@
 
                         <form action="controle.jsp?op=4" method="post">
                             <div class="row">
-                                <div class="form-floating mb-3 col-md-2">
-                                    <label class="text-dark mt-1" for="paciente"></label>
-                                    <select id="paciente" name="paciente">
-                                        <!-- Parte BD Paciente -->
-                                        <option value="1">Paciente 1</option>
-                                        <option value="2">Paciente 2</option>
-                                    </select>
-                                    <br><br>
-                                </div>
-
-                                <div class="form-floating mb-3 col-md-4">
-                                    <label for="medico"></label>
-                                    <select id="medico" name="medico">
-                                        <!-- Parte BD Médico -->
-                                        <option value="1">Médico 1</option>
-                                        <option value="2">Médico 2</option>
-                                    </select>
-                                    <br><br>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-floating mb-3 col-md-4">
-                                    <label for="data_hora"></label>
-                                    <input type="datetime-local" id="data_hora" name="data_hora" required>
-                                    <br><br>
-                                </div>
-
-                                <div class="form-floating mb-3 col-md-3">
-                                    <!-- Status do Agendamento -->
-                                    <label for="status"></label>
-                                    <select id="status" name="status">
-                                        <option value="pendente">Ativo</option>
-                                        <option value="confirmado">Inativo</option>
-                                    </select>
-                                    <br><br>
-                                </div>
-
-                                <div class="form-floating mb-3 col-md-4">
-                                    <!-- Observações -->
+                                <div class="form-floating mb-3 col-md-12">
+                                    
                                     <label for="observacoes">Obs:</label>
-                                    <textarea id="observacoes" name="observacoes"></textarea>
+                                    <textarea id="observacoes" name="observacoes" class="form-control"></textarea>
                                     <br><br>
                                 </div>
                             </div>
+
                             <div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
                                 <button type="submit" class="btn btn-lg btn-success">Salvar</button>
                             </div>

@@ -1,9 +1,13 @@
 
+<%@page import="com.medic.model.Telefone"%>
+<%@page import="com.medic.interfaces.TelefoneInterface"%>
+<%@page import="com.medic.dao.TelefoneDAO"%>
 
 	<%@page import="com.medic.dao.UnidadeSaudeDAO"%>
 <%@page import="com.medic.interfaces.UnidadeSaudeInterface"%>
 <%@page import="com.medic.model.UnidadeSaude"%>
 <%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -25,21 +29,20 @@
 </head>
 <body>
 	<div class="d-flex" id="wrapper">
-		<!-- Sidebar-->
+		
 		<div class="border-end coluna-esquerda bg-success" id="sidebar-wrapper">
 			<div class="sidebar-heading border-bottom bg-success">Unidade de Saúde</div>
 			<div class="list-group list-group-flush">
 				
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="index.jsp">Painel</a>
+                  <a class="list-group-item list-group-item-action list-group-item-success p-3" href="index.jsp">Painel</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-unidade-saude.jsp">Unidade de Saúde</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-paciente.jsp">Paciente</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-medico.jsp">Medico(a)</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="#!">Events</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="#!">Profile</a>
+                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="Agendamento.jsp">Agendamento</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="../index.jsp">Sair</a>
 			</div>
 		</div>
-		<!-- Page content wrapper-->
+		
 		 <div class="col" id="page-content-wrapper">
             <!-- Top navigation-->
             <nav class="navbar navbar-expand-lg navbar-light  bg-Light border-bottom">
@@ -72,7 +75,7 @@
 						<h1 class="mt-4">Cadastrar Unidade de Saúde</h1>
 					
 						 
-					<!--  <form action="controle.jsp?op=1" method="post">-->	
+					 <form action="controle.jsp?op=1" method="post">
 
 							<div class="row">
 
@@ -165,25 +168,73 @@
 
 						</form>
 
-			
+			<table id="agendamentosTable" style="width: 100%; border-collapse: collapse; margin-top: 3px; font-family: Arial, sans-serif;">
+    <thead>
+        <tr style="background-color: #4CAF50; color: white;">
+            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;"> ID</th>
+            <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">Nome</th>
+            <th style="padding: 12px; text-align: center; border: 1px solid #ddd;">editar</th>
+             <th style="padding: 12px; text-align: center; border: 1px solid #ddd;">Excluir</th>
+             
+        </tr>
+    </thead>
+    <tbody>
 						<%
-					// TEMP                	
-					UnidadeSaudeInterface iUnidadeSaude = new UnidadeSaudeDAO();
-					List<UnidadeSaude> lista = iUnidadeSaude.listarUnidadeSaude();
+    UnidadeSaudeInterface iUnidadeSaude = new UnidadeSaudeDAO();
+    List<UnidadeSaude> lista = iUnidadeSaude.listarUnidadeSaude();
+    
+     TelefoneInterface InterTelefone =  new TelefoneDAO();
+     List<Telefone> listar = InterTelefone.listar();
+    
+%>
 
-					for (int i = 0; i < lista.size(); i++) {
-						out.println("ID: " + lista.get(i).getId());
-						out.println(" - NOME: " + lista.get(i).getNome() + "<br>");
-						out.println(lista.get(i).getEndereco() + "<br><br>");
-					}
-					%>
-			
+
+
+        <%
+        for (UnidadeSaude unidade : lista) {
+        	
+        	
+        	
+        %>
+        <tr style="border: 3px solid;">
+            <td style="padding: 12px;"><%= unidade.getId() %></td>
+            
+            <td style="padding: 12px;">
+           
+                <%= unidade.getNome() %> 
+             
+               
+         
+            
+          
+            </td>
+            
+            <td style="padding: 12px; text-align: center;">
+            
+                            <button style="background-color: #00008B; border: none;   padding: 8px 12px; color: white; cursor: pointer; border-radius: 5px; margin-right: 5px;">Editar</button>  
+                              
+          
+            </td>
+              <td style="padding: 12px; text-align: center;">
+            
+                  <button style="background-color: red; border: none;   padding: 8px 12px; color: white; cursor: pointer; border-radius: 5px; margin-right: 5px;">Excluir</button>  
+                              
+          
+            </td>
+        </tr>
+        <%
+          
+        }
+        
+        %>
+        
+    </tbody>
 					
 					</div>
 					
 					<div class="col-md-5 coluna-direita">
                         <!-- Conteúdo da coluna direita aqui -->
-                        <iframe  style="width: 100%; height: 90vh;" src="https://cnes2.datasus.gov.br/Lista_Es_Municipio.asp?VEstado=26&VCodMunicipio=260890&NomeEstado="></iframe>
+                      
                     </div>
 
 
@@ -197,6 +248,8 @@
 	<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<!-- Core theme JS-->
 	<script src="js/scripts.js"></script>
+	
+	
 
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
@@ -211,6 +264,7 @@
 				} else {
 					$(this).mask('(00) 00000-0000');
 				}
+			
 			});
 		});
 	</script>

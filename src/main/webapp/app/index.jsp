@@ -34,8 +34,7 @@
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-unidade-saude.jsp">Unidade de Saúde</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-paciente.jsp">Paciente</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-medico.jsp">Medico(a)</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="#!">Events</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="#!">Profile</a>
+                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="Agendamento.jsp">Agendamento</a>
                 <a class="list-group-item list-group-item-action list-group-item-success p-3" href="../index.jsp">Sair</a>
             </div>
         </div>
@@ -71,23 +70,23 @@
         <div class="dashboard d-block">
             <div class="card mt-3">
                 <i class="icon bi bi-clipboard2-pulse text-success"> Médicos</i>
-                <div class="count text-success"><%= request.getAttribute("numDoutores") %></div>
+                <div class="count text-success text-center"><%= request.getAttribute("numDoutores") %></div>
             </div>
             <div class="card mt-3">
                 <i class="icon bi bi-capsule text-danger"> Pacientes</i>
-                <div class="count text-danger"><%= request.getAttribute("numPacientes") %></div>
+                <div class="count text-danger text-center"><%= request.getAttribute("numPacientes") %></div>
             </div>
         </div>
     </div>
 
     <div class="col-md-5 coluna-direita">
         <div class="card mt-3">
-            <i class="icon bi bi-hospital-fill text-dark"> Unidades</i>
-            <div class="count text-dark"><%= request.getAttribute("numUnidade") %></div>
+            <i class="icon bi bi-hospital-fill text-danger"> Unidades</i>
+            <div class="count text-danger text-center"><%= request.getAttribute("numUnidade") %></div>
         </div>
         <div class="card mt-3">
             <i class="icon bi bi-people-fill  text-warning"> Famílias</i>
-            <div class="count text-warning"><%= request.getAttribute("numFamilia") %></div>
+            <div class="count text-warning text-center"><%= request.getAttribute("numFamilia") %></div>
         </div>
     </div>
 </div>
