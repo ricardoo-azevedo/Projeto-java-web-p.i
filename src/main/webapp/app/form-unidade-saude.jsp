@@ -247,50 +247,26 @@
 					<div class="col-md-5 coluna-direita">
                         <!-- Conteúdo da coluna direita aqui -->
                         
-                        <div style="margin-top:20px; display: flex; justify-content: flex-start; flex-wrap: wrap;">                                              	        
-
-							<div class="card text-white bg-secondary card2">
-							  <div class="card-header" style="display: flex; justify-content: space-between;">
-							  	<span>UNIDADE DE SAÚDE</span>
-							  	<span class="badge bg-dark" style="font-size: 16px;"><%= lista.size() %></span>							
-							  </div>
-							  <div class="card-body">
-							    <h5 class="card-title">Título</h5>
-							    <p class="card-text">Texto breve opicional</p>
-							  </div>
-							</div>
-							
-							<div class="card text-white bg-primary card2">
-							  <div class="card-header" style="display: flex; justify-content: space-between;">
-							  	<span>UNIDADE DE SAÚDE</span>
-							  	<span class="badge bg-dark" style="font-size: 16px;"><%= lista.size() %></span>							
-							  </div>
-							  <div class="card-body">
-							    <h5 class="card-title">Título</h5>
-							    <p class="card-text">Texto breve opicional</p>
-							  </div>
-							</div>
-							
-							<div class="card text-white bg-success card2">
-							  <div class="card-header" style="display: flex; justify-content: space-between;">
-							  	<span>UNIDADE DE SAÚDE</span>
-							  	<span class="badge bg-dark" style="font-size: 16px;"><%= lista.size() %></span>							
-							  </div>
-							  <div class="card-body">
-							    <h5 class="card-title">Título</h5>
-							    <p class="card-text">Texto breve opicional</p>
-							  </div>
-							</div>
-							
-							<div class="card text-white bg-danger card2">
-							  <div class="card-header" style="display: flex; justify-content: space-between;">
-							  	<span>UNIDADE DE SAÚDE</span>
-							  	<span class="badge bg-dark" style="font-size: 16px;"><%= lista.size() %></span>							
-							  </div>
-							  <div class="card-body">
-							    <h5 class="card-title">Título</h5>
-							    <p class="card-text">Texto breve opicional</p>
-							  </div>
+                       <div class="dashboard d-block">
+            <div class="card mt-3 p-3">
+                <i class="icon bi bi-hospital-fill text-primary text-center fs-3"> Unidade de saúde </i>
+                <div class="count text-primary text-center fs-1"><%= lista.size() %></div>
+            </div>
+            <div class="card mt-3 p-3  ">
+                <i class="icon bi bi-capsule text-danger text-center fs-3"> Pacientes</i>
+                <div class="count text-danger text-center fs-1"><%= lista.size() %></div>
+            </div>
+            <div class="card mt-3 p-3 ">
+                <i class="icon bi bi-people-fill text-warning text-center fs-3"> Familias</i>
+                <div class="count text-warning text-center fs-1"><%= lista.size() %></div>
+            </div>
+            <div class="card mt-3 p-3 ">
+                <i class="icon bi bi-capsule text-success text-center fs-3"> Médicos</i>
+                <div class="count text-success text-center fs-1"><%= lista.size() %></div>
+            </div>
+            
+      
+        
 							</div>						
 						</div>                        
                     </div>
