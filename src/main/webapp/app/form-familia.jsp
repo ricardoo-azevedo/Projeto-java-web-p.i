@@ -1,6 +1,6 @@
 <%@page import="com.medic.model.Familia"%>
-<%@page import="com.medic.dao.FamiliaDAO"%>
 <%@page import="com.medic.interfaces.FamiliaInterface"%>
+<%@page import="com.medic.dao.FamiliaDAO"%>
 <%@page import="com.medic.auxiliar.Funcoes"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@page import="com.medic.model.Paciente"%>
@@ -76,18 +76,18 @@
 					
 						<%
 						
-						if(request.getParameter("exibirAlertUS") != null){	
-							String nomeUS = request.getParameter("exibirAlertUS");
+						if(request.getParameter("exibirAlert") != null){	
+							String nomeUS = request.getParameter("exibirAlert");
 							%>
 							
-							<div class="alert alert-success alert-dismissible fade show" role="alert" id="alertUS">
-							  Unidade de Saúde <%= nomeUS %> modificada!
+							<div class="alert alert-success alert-dismissible fade show" role="alert" id="alertFamilia">
+							  Família <%= nomeUS %> modificada!
 							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 							</div>
 							
 							<script>
 							    setTimeout(function(){
-							        window.location.href = 'form-unidade-saude.jsp';
+							        window.location.href = 'form-familia.jsp';
 							    }, 3000);
 							</script>
 														
@@ -96,65 +96,88 @@
 						
 						%>						
 					
-						<h1 class="mt-4">Inserir Paciente</h1>
+						<h1 class="mt-4">Inserir Família</h1>
 					
-						<form action="controle.jsp?op=4" method="post" id="formulario">
+						<form action="controle.jsp?op=8" method="post" id="formulario">
 
 							<div class="row">
 
-								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputCpf" name="inputCpf" placeholder=" " required autocomplete="off"> 
-									<label for="inputCpf" style="margin-left: 10px;">CPF</label>
+								<div class="form-floating mb-3 col-md-6">
+									<input type="text" class="form-control" id="inputLogradouro" name="inputLogradouro" placeholder=" " required autocomplete="off">
+									<label for="inputLogradouro" style="margin-left: 10px;">Logradouro</label>
+								</div>
+
+								<div class="form-floating mb-3 col-md-2">
+									<input type="text" class="form-control" id="inputNumero" name="inputNumero" placeholder=" " required autocomplete="off">
+									<label for="inputNumero" style="margin-left: 10px;">Número</label>
 								</div>
 
 								<div class="form-floating mb-3 col-md-4">
-									<input type="date" class="form-control" id="inputNascimento" name="inputNascimento" placeholder=" " required autocomplete="off"> 
-									<label for="inputNascimento" style="margin-left: 10px;">Data de Nascimento</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputTelefone" name="inputTelefone" placeholder=" " required autocomplete="off">
-									<label for="inputTelefone" style="margin-left: 10px;">Telefone</label>
+									<input type="text" class="form-control" id="inputComplemento" name="inputComplemento" placeholder=" " autocomplete="off">
+									<label for="inputComplemento" style="margin-left: 10px;">Complemento</label>
 								</div>
 
 							</div>
-							
+
 							<div class="row">
 
-								<div class="form-floating mb-3 col-md-8">
-									<input type="text" class="form-control" id="inputNome" name="inputNome" placeholder=" " required autocomplete="off"> 
-									<label for="inputNome" style="margin-left: 10px;">Nome</label>
+								<div class="form-floating mb-3 col-md-3">
+									<input type="text" class="form-control" id="inputBairro" name="inputBairro" placeholder=" " required autocomplete="off">
+									<label for="inputBairro" style="margin-left: 10px;">Bairro</label>
 								</div>
-								
+
 								<div class="form-floating mb-3 col-md-4">
-									<select class="form-select" id="inputFamilia" name="inputFamilia" required>
-										<option value="" selected disabled>Selecione</option>
-										<%
-										
-										FamiliaInterface iFamilia = new FamiliaDAO();
-										List<Familia> listaFamilia = iFamilia.listar();
-										
-										for(int i = 0; i < listaFamilia.size(); i++) {
-										
-										%>
-										<option value="<%= listaFamilia.get(i).getId() %>"><%= "Número: "+listaFamilia.get(i).getId() %></option>
-										<%
-										}
-										%>
-										</select> <label for="familia" style="margin-left: 10px;">Família</label>
+									<input type="text" class="form-control" id="inputCidade" name="inputCidade" placeholder=" " required autocomplete="off">
+									<label for="inputCidade" style="margin-left: 10px;">Cidade</label>
+								</div>
+
+								<div class="form-floating mb-3 col-md-3">
+									<select class="form-select" id="uf" name="inputUf" required>
+										<option value="" selected disabled>Selecione o estado</option>
+										<option value="AC">Acre</option>
+										<option value="AL">Alagoas</option>
+										<option value="AP">Amapá</option>
+										<option value="AM">Amazonas</option>
+										<option value="BA">Bahia</option>
+										<option value="CE">Ceará</option>
+										<option value="DF">Distrito Federal</option>
+										<option value="ES">Espírito Santo</option>
+										<option value="GO">Goiás</option>
+										<option value="MA">Maranhão</option>
+										<option value="MT">Mato Grosso</option>
+										<option value="MS">Mato Grosso do Sul</option>
+										<option value="MG">Minas Gerais</option>
+										<option value="PA">Pará</option>
+										<option value="PB">Paraíba</option>
+										<option value="PR">Paraná</option>
+										<option value="PE">Pernambuco</option>
+										<option value="PI">Piauí</option>
+										<option value="RJ">Rio de Janeiro</option>
+										<option value="RN">Rio Grande do Norte</option>
+										<option value="RS">Rio Grande do Sul</option>
+										<option value="RO">Rondônia</option>
+										<option value="RR">Roraima</option>
+										<option value="SC">Santa Catarina</option>
+										<option value="SP">São Paulo</option>
+										<option value="SE">Sergipe</option>
+										<option value="TO">Tocantins</option>
+									</select> <label for="uf" style="margin-left: 10px;">UF</label>
+								</div>
+
+								<div class="form-floating mb-3 col-md-2">
+									<input type="text" class="form-control" id="inputCep" name="inputCep" placeholder=" " required autocomplete="off">
+									<label for="inputCep" style="margin-left: 10px;">CEP</label>
 								</div>
 
 							</div>
 
 							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">							
-								<a href="form-adicionar-paciente.jsp" class="btn btn-lg btn-primary">Adicionar Paciente (SEM USO)</a>
 								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
 								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
 							
-							<input type="hidden" id="inputIdPaciente" name="inputIdPaciente">
 							<input type="hidden" id="inputIdFamilia" name="inputIdFamilia">
-							<input type="hidden" id="inputIdTelefone" name="inputIdTelefone">
+							<input type="hidden" id="inputIdEndereco" name="inputIdEndereco">							
 							
 						</form>		
 						
@@ -163,43 +186,45 @@
 						    <thead>
 						      <tr>
 						        <th scope="col" style="width: 7%; text-align: center;">#</th>
-						        <th scope="col">CPF</th>
-						        <th scope="col">NOME</th>
-						        <th scope="col">NASCIMENTO</th>
+						        <th scope="col">LOGRADOURO</th>
+						        <th scope="col">NÚMERO</th>
+						        <th scope="col">CIDADE</th>
+						        <th scope="col">UF</th>
 						        <th colspan="2" scope="col" style="width: 20%; text-align: center;">AÇÕES</th>
 						      </tr>
 						    </thead>
 						    <tbody id="clientesTableBody">
 						      <%
 				              	
-								PacienteInterface iPaciente = new PacienteDAO();
-								List<Paciente> lista = iPaciente.listar();
-								TelefoneInterface iTelefone = new TelefoneDAO();
-								Funcoes f = new Funcoes();
-						      
+								FamiliaInterface iFamilia = new FamiliaDAO();
+								List<Familia> lista = iFamilia.listar();
+								
 						      for(int i = 0; i < lista.size(); i++) {
 						    	  
 						      %>
 						      <tr>
 						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
-						        <td><%= lista.get(i).getCpf() %></td>
-						        <td><%= lista.get(i).getNome() %></td>
-						        <td><%= lista.get(i).getDataNascimento() %></td>
+						        <td><%= lista.get(i).getEndereco().getLogradouro() %></td>
+						        <td><%= lista.get(i).getEndereco().getNumero() %></td>
+						        <td><%= lista.get(i).getEndereco().getCidade() %></td>
+						        <td><%= lista.get(i).getEndereco().getUf() %></td>
 						        <td style="text-align: center;">						          
-						          <a href="#" class="edit-paciente-btn" 
-								     data-idPaciente="<%= lista.get(i).getId() %>"
-								     data-idTelefone="<%= iTelefone.buscarPaciente(lista.get(i).getId()).getId() %>"
-								     data-idFamilia="<%= lista.get(i).getFamilia().getId() %>"
-								     data-cpf="<%= lista.get(i).getCpf() %>"
-								     data-nome="<%= lista.get(i).getNome() %>"
-								     data-nascimento="<%= lista.get(i).getDataNascimento() %>"
-								     data-telefone="<%= iTelefone.buscarPaciente(lista.get(i).getId()).getNumero() %>">
+						          <a href="#" class="edit-familia-btn" 
+								     data-idFamilia="<%= lista.get(i).getId() %>"
+								     data-idEndereco="<%= lista.get(i).getEndereco().getId() %>"
+								     data-logradouro="<%= lista.get(i).getEndereco().getLogradouro() %>"
+								     data-numero="<%= lista.get(i).getEndereco().getNumero() %>"
+								     data-complemento="<%= lista.get(i).getEndereco().getComplemento() %>"
+								     data-bairro="<%= lista.get(i).getEndereco().getBairro() %>"
+								     data-cidade="<%= lista.get(i).getEndereco().getCidade() %>"
+								     data-uf="<%= lista.get(i).getEndereco().getUf() %>"
+								     data-cep="<%= lista.get(i).getEndereco().getCep() %>">
 								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
 								  </a>
 																  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=6&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
+						          <a href="controle.jsp?op=10&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
 						      <%
@@ -315,14 +340,14 @@
 	        alert.close();
 	    }, 2000);
 	    	   
-	    document.querySelectorAll('.edit-paciente-btn').forEach(button => {
+	    document.querySelectorAll('.edit-familia-btn').forEach(button => {
 	        button.addEventListener('click', function(event) {
 	            event.preventDefault();
 	           
 	            let btnSalvar = document.getElementById('btnSalvar');
 	            btnSalvar.innerText = 'Editar';
 	            
-	            document.getElementById('formulario').action = "controle.jsp?op=5";
+	            document.getElementById('formulario').action = "controle.jsp?op=9";
 	        });
 	    });
 
@@ -331,7 +356,7 @@
 	        let btnSalvar = document.getElementById('btnSalvar');
 	        btnSalvar.innerText = 'Salvar';
 	        
-	        document.getElementById('formulario').action = "controle.jsp?op=4";
+	        document.getElementById('formulario').action = "controle.jsp?op=8";
 	    });
 		
 	</script>

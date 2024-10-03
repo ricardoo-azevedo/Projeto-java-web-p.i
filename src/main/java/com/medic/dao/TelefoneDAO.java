@@ -36,8 +36,7 @@ public class TelefoneDAO implements TelefoneInterface{
 			
 			if(telefone.getPaciente() == null) {
 				ps.setString(2, null);	
-			}else {			
-
+			}else {				
 				ps.setInt(2, telefone.getPaciente().getId());
 			}
 			
@@ -69,7 +68,7 @@ public class TelefoneDAO implements TelefoneInterface{
 	@Override
 	public Telefone consultar(int idTelefone) {
 		
-		String sql = "SELECT * FROM TELEFONE WHERE IDTELEFONE=?";
+		String sql = "SELECT * FROM TELEFONE WHERE IDTELEFONE=?;";
 		Telefone telefone = null;
 
 		try {
@@ -94,7 +93,7 @@ public class TelefoneDAO implements TelefoneInterface{
 	@Override
 	public void editar(Telefone telefone) {
 
-		String sql = "UPDATE TELEFONE SET NUMERO=? WHERE IDTELEFONE=?";
+		String sql = "UPDATE TELEFONE SET NUMERO=? WHERE IDTELEFONE=?;";
 
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -110,7 +109,7 @@ public class TelefoneDAO implements TelefoneInterface{
 	@Override
 	public void excluir(int idTelefone) {
 		
-		String sql = "DELETE FROM TELEFONE WHERE IDTELEFONE=?";
+		String sql = "DELETE FROM TELEFONE WHERE IDTELEFONE=?;";
 
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -149,7 +148,7 @@ public class TelefoneDAO implements TelefoneInterface{
 	@Override
 	public Telefone buscarUnidadeSaude(int idUnidadeSaude) {
 		
-		String sql = "SELECT * FROM TELEFONE WHERE IDUNIDADESAUDE=?";
+		String sql = "SELECT * FROM TELEFONE WHERE IDUNIDADESAUDE=?;";
 		Telefone telefone = null;
 		
 		try {
@@ -173,7 +172,7 @@ public class TelefoneDAO implements TelefoneInterface{
 	@Override
 	public Telefone buscarPaciente(int idPaciente) {
 		
-		String sql = "SELECT * FROM TELEFONE WHERE IDPACIENTE=?";
+		String sql = "SELECT * FROM TELEFONE WHERE IDPACIENTE=?;";
 		Telefone telefone = null;
 		
 		try {
@@ -193,28 +192,5 @@ public class TelefoneDAO implements TelefoneInterface{
 		
 		return telefone;
 	}
-
-    @Override
-    public Telefone buscarMedico(int idMedico) {
-        String sql = "SELECT * FROM TELEFONE WHERE IDMEDICO=?;";
-		Telefone telefone = null;
-		
-		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1, idMedico);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				int idTelefone = rs.getInt("IDTELEFONE");
-				String numero = rs.getString("NUMERO");
-				telefone = new Telefone();
-				telefone.setId(idTelefone);
-				telefone.setNumero(numero);
-			}
-		} catch (SQLException e) {
-			System.err.println(">>> Erro ao consultar telefone: " + e);
-		}
-		
-		return telefone;
-    }
 
 }

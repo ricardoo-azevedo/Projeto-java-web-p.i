@@ -3,6 +3,7 @@ package com.medic.model;
 import java.sql.Date;
 
 public class Paciente {
+
 	private int id;
 	private String nome;
 	private String cpf;
@@ -72,4 +73,5 @@ public class Paciente {
 		return "Paciente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento
 				+ ", familia=" + familia + "]";
 	}
+
 }

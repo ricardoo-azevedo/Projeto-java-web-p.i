@@ -12,137 +12,127 @@ import com.medic.model.Especialidade;
 import com.medic.model.Medico;
 import com.medic.service.ConnectionFactory;
 
-public class MedicoDAO implements MedicoInterface{
+public class MedicoDAO implements MedicoInterface {
 
-    private Connection connection;
+	private Connection connection;
+	private ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private ConnectionFactory connectionFactory = new ConnectionFactory();
+	public MedicoDAO() {
+		try {
+			connection = connectionFactory.getConexao();
+		} catch (Exception e) {
+			System.out.println("[Erro ao retornar Conexão: " + e.getMessage() + "]");
+		}
+	}
 
+	@Override
+	public int inserirMedico(Medico medico) {
+		String sql = "INSERT INTO MEDICO (NOME, CRM, IDESPECIALIDADE) VALUES (?, ?, ?)";
 
-    public MedicoDAO(){
-        try{
-            connection = connectionFactory.getConexao();
-        }catch(Exception e){
-            System.out.println("[Erro ao retornar Conexão: "+e.getMessage()+"]");
-        }
-    }
+		int id = 0;
 
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, medico.getNome());
+			ps.setString(2, medico.getCrm());
+			ps.setInt(3, medico.getEspecialidade().getId());
+			ps.execute();
 
-    @Override
-    public int inserirMedico(Medico medico) {
-        String sql = "INSERT INTO MEDICO (NOME, CRM, IDESPECIALIDADE) VALUES (?, ?, ?)";
+			ResultSet idAuto = ps.getGeneratedKeys();
 
-        int id = 0;
+			if (idAuto.next()) {
+				id = idAuto.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println("[Erro ao inserir Medico: " + e.getMessage() + "]");
+		}
+		return id;
 
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, medico.getNome());
-            ps.setString(2, medico.getCrm());
-            ps.setInt(3, medico.getEspecialidade().getIdEspecialidade());
-            ps.execute();
+	}
 
-            ResultSet idAuto = ps.getGeneratedKeys();
+	@Override
+	public Medico consultarMedico(int idMedico) {
+		String sql = "SELECT * FROM MEDICO WHERE IDMEDICO = ?";
+		Medico medico = null;
 
-            if(idAuto.next()){
-                id = idAuto.getInt(1);
-            }
-        } catch (Exception e) {
-            System.out.println("[Erro ao inserir Medico: "+e.getMessage()+"]");
-        }
-        return id;
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, idMedico);
+			ResultSet rs = ps.executeQuery();
 
+			while (rs.next()) {
+				int id = rs.getInt("IDMEDICO");
+				String nome = rs.getString("NOME");
+				String crm = rs.getString("CRM");
+				int idEspecialidade = rs.getInt("IDESPECIALIDADE");
 
-    }
+				Especialidade especialidade = new EspecialidadeDAO().consultar(idEspecialidade);
 
+				medico = new Medico(id, nome, crm, especialidade);
+			}
+		} catch (Exception e) {
+			System.out.println("[Erro ao consultar Medico: " + e.getMessage() + "]");
+		}
+		return medico;
+	}
 
-    @Override
-    public Medico consultarMedico(int idMedico) {
-        String sql = "SELECT * FROM MEDICO WHERE IDMEDICO = ?";
-        Medico medico = null;
+	@Override
+	public void editarMedico(Medico medico) {
+		String sql = "UPDATE MEDICO SET NOME = ?, CRM = ?, IDESPECIALIDADE = ?, WHERE IDMEDICO = ?";
 
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, idMedico);
-            ResultSet rs = ps.executeQuery();
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, medico.getNome());
+			ps.setString(2, medico.getCrm());
+			ps.setInt(3, medico.getEspecialidade().getId());
+			ps.setInt(4, medico.getId());
+			ps.executeUpdate();
 
-            while (rs.next()) {
-                int id = rs.getInt("IDMEDICO");
-                String nome = rs.getString("NOME");
-                String crm = rs.getString("CRM");
-                int idEspecialidade = rs.getInt("IDESPECIALIDADE");
+		} catch (Exception e) {
+			System.out.println("[Erro ao editar Medico: " + e.getMessage() + "]");
+		}
+	}
 
-                Especialidade especialidade = new EspecialidadeDAO().consultar(idEspecialidade);
-                
-                medico = new Medico(id, nome, crm, especialidade);
-            }
-        } catch (Exception e) {
-            System.out.println("[Erro ao consultar Medico: "+e.getMessage()+"]");
-        }
-        return medico;
-    }
+	@Override
+	public void excluirMedico(int idMedico) {
+		String sql = "DELETE FROM MEDICO WHERE IDMEDICO = ?";
 
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, idMedico);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("[Erro ao excluir Medico: " + e.getMessage() + "]");
+		}
+	}
 
-    @Override
-    public void editarMedico(Medico medico) {
-        String sql = "UPDATE MEDICO SET NOME = ?, CRM = ?, IDESPECIALIDADE = ?, WHERE IDMEDICO = ?";
+	@Override
+	public List<Medico> listarMedico() {
+		List<Medico> medicos = new ArrayList<>();
+		String sql = "SELECT * FROM MEDICO";
 
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, medico.getNome());
-            ps.setString(2, medico.getCrm());
-            ps.setInt(3, medico.getEspecialidade().getIdEspecialidade());
-            ps.setInt(4, medico.getId());
-            ps.executeUpdate();
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
 
-        } catch (Exception e) {
-            System.out.println("[Erro ao editar Medico: "+e.getMessage()+"]");
-        }
-    }
+			while (rs.next()) {
+				Medico medico = new Medico();
+				medico.setId(rs.getInt("idMedico"));
+				medico.setNome(rs.getString("NOME"));
+				int idEspecialidade = rs.getInt("idEspecialidade");
 
+				Especialidade especialidade = new EspecialidadeDAO().consultar(idEspecialidade);
 
-    @Override
-    public void excluirMedico(int idMedico) {
-        String sql = "DELETE FROM MEDICO WHERE IDMEDICO = ?";
+				medico.setEspecialidade(especialidade);
 
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, idMedico);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("[Erro ao excluir Medico: "+e.getMessage()+"]");
-        }
-    }
+				medicos.add(medico);
 
+			}
 
-    @Override
-    public List<Medico> listarMedico() {
-        List<Medico> medicos = new ArrayList<>();
-        String sql = "SELECT * FROM MEDICO";
-
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()){
-                Medico medico = new Medico();
-                medico.setId(rs.getInt("idMedico"));
-                medico.setNome(rs.getString("NOME"));
-                int idEspecialidade = rs.getInt("idEspecialidade");
-
-                Especialidade especialidade = new EspecialidadeDAO().consultar(idEspecialidade);
-
-                medico.setEspecialidade(especialidade);
-
-                medicos.add(medico);
-                
-            }
-
-            
-        } catch (Exception e) {
-            System.out.println("[Erro: ao listar Medico: "+e.getMessage()+"]");
-        }
-        return medicos;
-    }
-
+		} catch (Exception e) {
+			System.out.println("[Erro: ao listar Medico: " + e.getMessage() + "]");
+		}
+		return medicos;
+	}
 
 }

@@ -14,6 +14,5 @@ public interface TelefoneInterface {
     
     Telefone buscarUnidadeSaude(int idTelefone);
     Telefone buscarPaciente(int idPaciente);
-    Telefone buscarMedico(int idMedico); 
 
 }

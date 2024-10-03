@@ -23,12 +23,7 @@
         <div class="border-center coluna-esquerda bg-success" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-success text-center">Medic</div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="index.jsp">Painel</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-unidade-saude.jsp">Unidade de Saúde</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-paciente.jsp">Paciente</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-medico.jsp">Medico(a)</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="agendamento.jsp">Agendamento</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="../index.jsp">Sair</a>
+                <%@ include file="menu.jsp" %>
             </div>
         </div>
         <!-- Page content wrapper -->

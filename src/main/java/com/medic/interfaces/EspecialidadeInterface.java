@@ -5,11 +5,11 @@ import java.util.List;
 import com.medic.model.Especialidade;
 
 public interface EspecialidadeInterface {
-    int inserir(Especialidade especialidade);
-    List<Especialidade> listar();
-   void excluir(Especialidade especialidade);
-   void editar(Especialidade especialidade);
-   public Especialidade consultar(int IdEspecialidade);
 	
-	
+	void inserir(Especialidade especialidade);
+	Especialidade consultar(int idEspecialidade);
+	void editar(Especialidade especialidade);
+	void excluir(int idEspecialidade);
+	List<Especialidade> lista();
+
 }

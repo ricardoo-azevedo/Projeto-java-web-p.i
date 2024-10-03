@@ -1,6 +1,6 @@
 <%@page import="com.medic.model.Familia"%>
-<%@page import="com.medic.dao.FamiliaDAO"%>
 <%@page import="com.medic.interfaces.FamiliaInterface"%>
+<%@page import="com.medic.dao.FamiliaDAO"%>
 <%@page import="com.medic.auxiliar.Funcoes"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@page import="com.medic.model.Paciente"%>
@@ -26,6 +26,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link href="css/styles.css" rel="stylesheet" />
 <link href="css/estilo.css" rel="stylesheet" />
+
+  <style>
+    /* Opcional: Suavizar ainda mais a transição do colapso */
+    .collapse {
+      transition: height 1s ease;
+    }
+  </style>
+
 </head>
 <body>
 	<div class="d-flex" id="wrapper">
@@ -91,14 +99,15 @@
 							    }, 3000);
 							</script>
 														
-							<%							
+							<%
+							
 						}
 						
 						%>						
 					
-						<h1 class="mt-4">Inserir Paciente</h1>
+						<h1 class="mt-4">Inserir Paciente na Família</h1>
 					
-						<form action="controle.jsp?op=4" method="post" id="formulario">
+						<form action="controle.jsp?op=7" method="post" id="formulario">
 
 							<div class="row">
 
@@ -127,7 +136,7 @@
 								</div>
 								
 								<div class="form-floating mb-3 col-md-4">
-									<select class="form-select" id="inputFamilia" name="inputFamilia" required>
+									<select class="form-select" id="uf" name="inputFamilia" required>
 										<option value="" selected disabled>Selecione</option>
 										<%
 										
@@ -145,68 +154,60 @@
 								</div>
 
 							</div>
-
-							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">							
-								<a href="form-adicionar-paciente.jsp" class="btn btn-lg btn-primary">Adicionar Paciente (SEM USO)</a>
+							
+							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
 								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
 								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
 							
-							<input type="hidden" id="inputIdPaciente" name="inputIdPaciente">
-							<input type="hidden" id="inputIdFamilia" name="inputIdFamilia">
-							<input type="hidden" id="inputIdTelefone" name="inputIdTelefone">
-							
 						</form>		
 						
-						<div class="table-overflow mt-4">
-	                      <table class="table table-bordered table-light table-striped table-hover" style="border-radius: 8px;">
-						    <thead>
-						      <tr>
-						        <th scope="col" style="width: 7%; text-align: center;">#</th>
-						        <th scope="col">CPF</th>
-						        <th scope="col">NOME</th>
-						        <th scope="col">NASCIMENTO</th>
-						        <th colspan="2" scope="col" style="width: 20%; text-align: center;">AÇÕES</th>
-						      </tr>
-						    </thead>
-						    <tbody id="clientesTableBody">
-						      <%
-				              	
+						<div class="mt-4">
+						
+							<div class="accordion accordion-flush" id="accordionFlushExample">
+							
+							<%
 								PacienteInterface iPaciente = new PacienteDAO();
-								List<Paciente> lista = iPaciente.listar();
 								TelefoneInterface iTelefone = new TelefoneDAO();
 								Funcoes f = new Funcoes();
+								List<Paciente> lista = iPaciente.listar();
 						      
-						      for(int i = 0; i < lista.size(); i++) {
-						    	  
-						      %>
-						      <tr>
-						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
-						        <td><%= lista.get(i).getCpf() %></td>
-						        <td><%= lista.get(i).getNome() %></td>
-						        <td><%= lista.get(i).getDataNascimento() %></td>
-						        <td style="text-align: center;">						          
-						          <a href="#" class="edit-paciente-btn" 
-								     data-idPaciente="<%= lista.get(i).getId() %>"
-								     data-idTelefone="<%= iTelefone.buscarPaciente(lista.get(i).getId()).getId() %>"
-								     data-idFamilia="<%= lista.get(i).getFamilia().getId() %>"
-								     data-cpf="<%= lista.get(i).getCpf() %>"
-								     data-nome="<%= lista.get(i).getNome() %>"
-								     data-nascimento="<%= lista.get(i).getDataNascimento() %>"
-								     data-telefone="<%= iTelefone.buscarPaciente(lista.get(i).getId()).getNumero() %>">
-								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
-								  </a>
-																  
-						        </td>
-						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=6&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
-						        </td>
-						      </tr>
-						      <%
-						      }
-						      %>
-						    </tbody>
-						  </table>
+								iFamilia = new FamiliaDAO();
+								listaFamilia = iFamilia.listarFamiliaPaciente();
+						     	for(int i = 0; i < listaFamilia.size(); i++) {
+							%>
+							
+							  <div class="accordion-item">
+							    <h2 class="accordion-header">
+							      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= (i+1) %>" aria-expanded="false" aria-controls="flush-collapse<%= (i+1) %>">
+							        Família: <%= listaFamilia.get(i).getId() %>
+							      </button>
+							    </h2>
+							    <div id="flush-collapse<%= (i+1) %>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+							      <div class="accordion-body">
+							      
+							    	<%
+							    	
+							    	List<Paciente> listaPacientes = iPaciente.listarPacientesFamilia(listaFamilia.get(i).getId());
+							    	for(int j=0; j<listaPacientes.size(); j++){
+							    		
+							    		out.println(listaPacientes.get(j));
+							    		out.println("<br><br>");
+							    		
+							    	}
+							    	
+							    	%>  	
+							      
+							      </div>
+							    </div>
+							  </div>
+							  
+							   <%
+						     	}	  
+							   %>
+							  
+							</div>						
+	                      
 						</div>			
 					
 					</div>
@@ -313,26 +314,8 @@
 	        var alertElement = document.getElementById('alertUS');
 	        var alert = new bootstrap.Alert(alertElement);
 	        alert.close();
-	    }, 2000);
-	    	   
-	    document.querySelectorAll('.edit-paciente-btn').forEach(button => {
-	        button.addEventListener('click', function(event) {
-	            event.preventDefault();
-	           
-	            let btnSalvar = document.getElementById('btnSalvar');
-	            btnSalvar.innerText = 'Editar';
-	            
-	            document.getElementById('formulario').action = "controle.jsp?op=5";
-	        });
-	    });
+	    }, 2000);	    	   
 
-	    // Captura o evento de clique no botão de limpar
-	    document.getElementById('btnLimpar').addEventListener('click', function() {
-	        let btnSalvar = document.getElementById('btnSalvar');
-	        btnSalvar.innerText = 'Salvar';
-	        
-	        document.getElementById('formulario').action = "controle.jsp?op=4";
-	    });
 		
 	</script>
 
