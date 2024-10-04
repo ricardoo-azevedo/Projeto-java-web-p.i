@@ -1,3 +1,9 @@
+<%@page import="com.medic.model.Medico"%>
+<%@page import="com.medic.model.Especialidade"%>
+<%@page import="com.medic.dao.MedicoDAO"%>
+<%@page import="com.medic.interfaces.MedicoInterface"%>
+<%@page import="com.medic.dao.EspecialidadeDAO"%>
+<%@page import="com.medic.interfaces.EspecialidadeInterface"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@page import="com.medic.auxiliar.Funcoes"%>
 <%@page import="com.medic.interfaces.PacienteInterface"%>
@@ -26,6 +32,9 @@ TelefoneInterface iTelefone = new TelefoneDAO();
 UnidadeSaudeInterface iUnidadeSaude = new UnidadeSaudeDAO();
 FamiliaInterface iFamilia = new FamiliaDAO();
 PacienteInterface iPaciente = new PacienteDAO();
+EspecialidadeInterface iEspecialidade = new EspecialidadeDAO();
+MedicoInterface iMedico = new MedicoDAO();
+
 
 switch(op){
 
@@ -295,6 +304,29 @@ case 10:{
 	iFamilia.excluir(idFamilia);
 
 	response.sendRedirect("form-familia.jsp");
+	
+	break;
+}
+
+case 11:{
+	String crm = request.getParameter("inputCrm");
+	String nome = request.getParameter("inputNome");
+	String ntelefone = request.getParameter("inputTelefone");
+	int idEspecialidade = Integer.parseInt(request.getParameter("inputEspecialidade"));
+	Especialidade especialidade = iEspecialidade.consultar(idEspecialidade);
+	Medico medico = new Medico();
+	medico.setNome(nome);
+	medico.setCrm(crm);
+	medico.setEspecialidade(especialidade);
+    int idMedico =	iMedico.inserirMedico(medico);
+    medico.setId(idMedico);
+	Telefone telefone = new Telefone();
+	telefone.setNumero(ntelefone);
+	telefone.setMedico(medico);
+	iTelefone.inserir(telefone);
+	
+	
+	//response.sendRedirect("form-medico.jsp");
 	
 	break;
 }

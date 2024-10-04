@@ -192,5 +192,30 @@ public class TelefoneDAO implements TelefoneInterface{
 		
 		return telefone;
 	}
+	
+	
+	@Override
+	public Telefone buscarMedico(int idMedico) {
+		
+		String sql = "SELECT * FROM TELEFONE WHERE IDMEDICO = ?;";
+		Telefone telefone = null;
+		
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, idMedico);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int idTelefone = rs.getInt("IDTELEFONE");
+				String numero = rs.getString("NUMERO");
+				telefone = new Telefone();
+				telefone.setId(idTelefone);
+				telefone.setNumero(numero);
+			}
+		} catch (SQLException e) {
+			System.err.println(">>> Erro ao consultar telefone: " + e);
+		}
+		
+		return telefone;
+	}
 
 }

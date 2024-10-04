@@ -119,6 +119,8 @@ public class MedicoDAO implements MedicoInterface {
 				Medico medico = new Medico();
 				medico.setId(rs.getInt("idMedico"));
 				medico.setNome(rs.getString("NOME"));
+				medico.setCrm(rs.getString("CRM"));	
+				
 				int idEspecialidade = rs.getInt("idEspecialidade");
 
 				Especialidade especialidade = new EspecialidadeDAO().consultar(idEspecialidade);

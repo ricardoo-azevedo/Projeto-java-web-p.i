@@ -11,8 +11,8 @@ public interface TelefoneInterface {
     void editar(Telefone telefone);
     void excluir(int idTelefone);
     List<Telefone> listar();
-    
     Telefone buscarUnidadeSaude(int idTelefone);
     Telefone buscarPaciente(int idPaciente);
+    Telefone buscarMedico(int idMedico);
 
 }
