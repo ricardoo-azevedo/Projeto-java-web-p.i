@@ -326,10 +326,29 @@ case 11:{
 	iTelefone.inserir(telefone);
 	
 	
-	//response.sendRedirect("form-medico.jsp");
+	response.sendRedirect("form-medico.jsp");
 	
 	break;
 }
+case 12:{
+	String nome = request.getParameter("inputNome");
+	Especialidade especialidade = new Especialidade(nome);
+	iEspecialidade.inserir(especialidade);
+	response.sendRedirect("form-especialidade.jsp?exibirAlert="+nome);
+	
+	break;
+}
+case 13:{
+//resevado para editar especialidade.
+	break;
+}
+case 14:{
+	int idEspecialidade = Integer.parseInt(request.getParameter("id"));
+	iEspecialidade.excluir(idEspecialidade);
+	response.sendRedirect("form-especialidade.jsp");
+	break;
+}
+
 default:{
 	
 

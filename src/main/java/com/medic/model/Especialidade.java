@@ -12,6 +12,12 @@ public class Especialidade {
 	public Especialidade() {
 			
 	}
+	
+
+	public Especialidade(String nome) {
+		this.nome = nome;
+	}
+
 
 	public Especialidade(int id, String nome) {
 		this.id = id;

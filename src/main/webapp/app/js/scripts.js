@@ -142,3 +142,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.edit-especialidade-btn');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            // Pega os dados do botão de edição
+            const nome = this.getAttribute('data-nome');
+  
+            // Preenche o formulário com os dados
+            document.getElementById('inputNome').value = nome;
+           
+            // IDs ocultos
+            const idEspecialidade = this.getAttribute('data-idEspecialidade');
+			document.getElementById('inputId').value = idEspecialidade;
+			
+			
+        });
+    });
+});
