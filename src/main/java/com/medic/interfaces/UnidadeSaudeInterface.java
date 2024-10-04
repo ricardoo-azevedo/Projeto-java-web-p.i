@@ -5,9 +5,11 @@ import java.util.List;
 import com.medic.model.UnidadeSaude;
 
 public interface UnidadeSaudeInterface {
-    int inserirUnidadeSaude(UnidadeSaude unidadeSaude);
-    UnidadeSaude consultarUnidadeSaude(int idUnidadeSaude);
-    void editarUnidadeSaude(UnidadeSaude unidadeSaude);
-    void excluirUnidadeSaude(int idUnidadeSaude);
-    List<UnidadeSaude> listarUnidadeSaude();
+	
+	int inserir(UnidadeSaude unidadeSaude);
+	UnidadeSaude consultar(int idUnidadeSaude);
+    void editar(UnidadeSaude unidadeSaude);
+    void excluir(int idUnidadeSaude);
+    List<UnidadeSaude> listar();
+
 }

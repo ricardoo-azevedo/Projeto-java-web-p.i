@@ -3,7 +3,7 @@ package com.medic.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,162 +12,112 @@ import com.medic.model.Especialidade;
 import com.medic.service.ConnectionFactory;
 
 public class EspecialidadeDAO implements EspecialidadeInterface {
-    private ConnectionFactory connectionFactory;
 
-    public EspecialidadeDAO() {
-        connectionFactory = new ConnectionFactory();
-    }
-    /* Especialidade
-     * Inserir [OK Ta no testando e falta colocar oq ricardo pediu]
-     * consultar [86% ta dando erro numa coisa e vou dormir e tento depois]
-     * excluir[0k]
-     * editar[ok]
-     * listar[ok]
-     */
+	private Connection conn;
+	private ConnectionFactory cf = new ConnectionFactory();
 
-    @Override
-    public int inserir(Especialidade especialidade) {
-		int sorted = 0;
-		Connection conn = null;
-		PreparedStatement ps = null;
+	public EspecialidadeDAO() {
+		try {
+			conn = cf.getConexao();
+		} catch (ClassNotFoundException e) {
+			System.err.println(">>> " + e);
+		}
+	}
+
+	@Override
+	public void inserir(Especialidade especialidade) {
+
+		String sql = "INSERT INTO ESPECIALIDADE (NOME) VALUES (?);";
 
 		try {
-
-			conn = connectionFactory.getConexao();
-			String sql = "INSERT INTO especialidade(nome) VALUES (?)";
-			ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, especialidade.getNome());
-			ps.executeUpdate();
-
-			ResultSet random = ps.getGeneratedKeys();
-			
-			//serve pra fechar resultset
-			
-			if(!random.isClosed()) {
-				
-				if (random.next()) {
-					sorted = random.getInt(1);
-					System.out.println("inseriu");
-				
-				} else {
-				System.out.println("Result set fechado?!");
-			}
-				
-			}
-				
-
-			System.out.println("inseriu!!");
-
-		} catch (Exception error) {
-			System.out.println("erro ao inserir" + error.getMessage());
+			ps.execute();
+		} catch (SQLException e) {
+			System.err.println(">>> Erro ao inserir especialidade: " + e);
 		}
-		return sorted;
 
 	}
 
-    @Override
-    public List<Especialidade> listar() {
-        List<Especialidade> especialidades = new ArrayList<>();
-    
-        Connection conn = null;
-        PreparedStatement ps = null;
-        
-        try {
-        	
-            conn = connectionFactory.getConexao();
-            String sql = "SELECT * FROM especialidade;";
-             ps = conn.prepareStatement(sql);
-  
-            ResultSet rs = ps.executeQuery();
+	@Override
+	public Especialidade consultar(int id) {
 
-          
-            while(rs.next()){
+		String sql = "SELECT * FROM ESPECIALIDADE WHERE IDESPECIALIDADE=?;";
+		Especialidade especialidade = null;
 
-             
-                Especialidade especialidade = new Especialidade();
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				id = rs.getInt("IDESPECIALIDADE");
+				String nome = rs.getString("NOME");
+				especialidade = new Especialidade();
+				especialidade.setId(id);
+				especialidade.setNome(nome);
 
-              
-                especialidade.setIdEspecialidade(rs.getInt("idEspecialidade"));
-                especialidade.setNome(rs.getString("nome"));
+			}
+		} catch (SQLException e) {
+			System.err.println(">>> Erro ao consultar especialidade: " + e);
+		}
 
-                especialidades.add(especialidade);
+		return especialidade;
+	}
 
-            }
-        } catch (Exception e) {
-            System.out.println("[Erro ao listar especialidade: "+e.getMessage()+"]");
-        }
-        return especialidades;
-    }
+	@Override
+	public void editar(Especialidade especialidade) {
 
+		String sql = "UPDATE ESPECIALIDADE SET NOME=? WHERE IDESPECIALIDADE=?;";
 
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, especialidade.getNome());
+			ps.setInt(2, especialidade.getId());			
+			ps.execute();
+		} catch (SQLException e) {
+			System.err.println(">>> Erro ao editar especialidade: " + e);
+		}
 
-    @Override
-    public void excluir(Especialidade especialidade) {
-        Connection conn = null;
-        PreparedStatement ps = null;
+	}
 
-        try {
-            conn = connectionFactory.getConexao();
-            String sql = "DELETE FROM especialidade WHERE idEspecialidade = ?";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, especialidade.getIdEspecialidade());
-            int meuId = ps.executeUpdate();
+	@Override
+	public void excluir(int id) {
+		
+		String sql = "DELETE FROM ESPECIALIDADE WHERE IDESPECIALIDADE=?;";
 
-            if (meuId > 0) {
-                System.out.println("Especialidade excluída!!");
-            } else {
-                System.out.println("Nenhuma especialidade encontrada.");
-            }
-        } catch (Exception error) {
-            System.out.println("Erro ao excluir: " + error.getMessage());
-        } 
-    }
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);			
+			ps.execute();
+		} catch (SQLException e) {
+			System.err.println(">>> Erro ao excluir especialidade: " + e);
+		}
 
-    @Override
-    public void editar(Especialidade especialidade) {
-        Connection conn = null;
-        PreparedStatement ps = null;
+	}
 
-        try {
-            conn = connectionFactory.getConexao();
-            String sql = "UPDATE especialidade SET nome = ? WHERE idEspecialidade = ?";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, especialidade.getNome());
-            ps.setInt(2, especialidade.getIdEspecialidade());
-            ps.executeUpdate();
+	@Override
+	public List<Especialidade> lista() {
+		
+		String sql = "SELECT * FROM ESPECIALIDADE ORDER BY NOME ASC;";
+		List<Especialidade> lista = null;
 
-            System.out.println("Editado com sucesso!");
-        } catch (Exception erro) {
-            throw new RuntimeException("Erro ao editar: " + erro.getMessage());
-        } 
-    }
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			lista = new ArrayList<>();
+			while (rs.next()) {
+				int id = rs.getInt("IDESPECIALIDADE");
+				String nome = rs.getString("NOME");
+				Especialidade especialidade = new Especialidade();
+				especialidade.setId(id);
+				especialidade.setNome(nome);
+				lista.add(especialidade);
+			}
+		} catch (SQLException e) {
+			System.err.println(">>> Erro ao listar especialidades: " + e);
+		}
 
-    @Override
-    public Especialidade consultar(int IdEspecialidade) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-    Especialidade especialidade = null;
+		return lista;
+	}
 
-        try {
-            conn = connectionFactory.getConexao();
-            String sql = "SELECT * FROM especialidade WHERE idEspecialidade = ?";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, IdEspecialidade);
-           rs = ps.executeQuery();   		   
-
-            if (rs.next()) {
-                int id = rs.getInt("idEspecialidade");
-                String nome = rs.getString("nome");
-
-                especialidade = new Especialidade(id, nome);
-            } else {
-                especialidade = null;
-            }
-        } catch (Exception erro) {
-            throw new RuntimeException("Erro ao consultar: " + erro.getMessage());
-        } 
-
-        return especialidade; 
-    }
 }

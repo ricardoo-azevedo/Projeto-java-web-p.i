@@ -1,14 +1,16 @@
+<%@page import="com.medic.model.Familia"%>
+<%@page import="com.medic.dao.FamiliaDAO"%>
+<%@page import="com.medic.interfaces.FamiliaInterface"%>
+<%@page import="com.medic.auxiliar.Funcoes"%>
+<%@page import="javax.swing.JOptionPane"%>
+<%@page import="com.medic.model.Paciente"%>
+<%@page import="com.medic.interfaces.PacienteInterface"%>
+<%@page import="com.medic.dao.PacienteDAO"%>
+<%@page import="com.medic.interfaces.TelefoneInterface"%>
+<%@page import="com.medic.dao.TelefoneDAO"%>
 
-
-	
-	<%@page import="com.medic.dao.UnidadeSaudeDAO"%>
-<%@page import="com.medic.interfaces.UnidadeSaudeInterface"%>
-<%@page import="com.medic.model.UnidadeSaude"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -26,44 +28,44 @@
 <link href="css/estilo.css" rel="stylesheet" />
 </head>
 <body>
- <div class="d-flex" id="wrapper">
-        <!-- Sidebar-->
-        <div class="border-center coluna-esquerda bg-success" id="sidebar-wrapper">
-            <div class="sidebar-heading border-bottom bg-success text-center ">Paciente</div>
-            <div class="list-group list-group-flush">
-                
-
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="index.jsp">Painel</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-unidade-saude.jsp">Unidade de Saúde</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-paciente.jsp">Paciente</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="form-medico.jsp">Medico(a)</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="#!">Events</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="#!">Profile</a>
-                <a class="list-group-item list-group-item-action list-group-item-success p-3" href="../index.jsp">Sair</a>
-            </div>
-        </div>
+	<div class="d-flex" id="wrapper">
+		<!-- Sidebar-->
+		<div class="border-end coluna-esquerda" id="sidebar-wrapper">
+			<div class="sidebar-heading border-bottom">SISTEMA MEDIC</div>
+			<div class="list-group list-group-flush">
+				<%@ include file="menu.jsp" %>
+			</div>
+		</div>
 		<!-- Page content wrapper-->
-		  <div class="col" id="page-content-wrapper">
-            <!-- Top navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light  bg-Light border-bottom">
-                <div class="container-fluid">
-                    <button class="btn btn-success" id="sidebarToggle"><i class="bi bi-list"></i></button>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item active"><a class="nav-link" href="index.jsp">Home</a></li>
-                            <li class="nav-item dropdown">
-                                <a class=" icone nav-link dropdown-toggle text-success  fs-5  bi bi-person-circle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item " href="form-unidade-saude.jsp">Unidade de Saúde</a>
-                                    <a class="dropdown-item" href="form-paciente.jsp">Paciente</a>
-                                    <div class="dropdown-divider"></div>
-                                     <a class="dropdown-item" href="form-medico.jsp">Médico(a)</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+		<div id="page-content-wrapper">
+			<!-- Top navigation-->
+			<nav
+				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+				<div class="container-fluid">
+					<a class="btn btn-secondary" id="sidebarToggle"><i class="bi bi-list"></i></a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"	aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+							<li class="nav-item active">
+								<a class="nav-link" href="#!">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#!">Link</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="#!">Action</a>
+									<a class="dropdown-item" href="#!">Another action</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#!">Something else here</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</nav>
 			<!-- Page content-->
 			<div class="container-fluid fade-in-element">
@@ -72,138 +74,173 @@
 
 					<div class="col-md-7">
 					
+						<%
+						
+						if(request.getParameter("exibirAlertUS") != null){	
+							String nomeUS = request.getParameter("exibirAlertUS");
+							%>
+							
+							<div class="alert alert-success alert-dismissible fade show" role="alert" id="alertUS">
+							  Unidade de Saúde <%= nomeUS %> modificada!
+							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+							
+							<script>
+							    setTimeout(function(){
+							        window.location.href = 'form-unidade-saude.jsp';
+							    }, 3000);
+							</script>
+														
+							<%							
+						}
+						
+						%>						
+					
 						<h1 class="mt-4">Inserir Paciente</h1>
 					
-						<form action="controle.jsp?op=1" method="post">
+						<form action="controle.jsp?op=4" method="post" id="formulario">
 
 							<div class="row">
 
-								<div class="form-floating mb-3 col-md-8">
-									<input type="text" class="form-control" id="inputNome" name="inputNome" placeholder=" " required> 
-									<label for="inputNome" style="margin-left: 10px;">Nome</label>
-								</div>
-
 								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputTelefone" name="inputTelefone" placeholder=" " required>
-									<label for="inputTelefone" style="margin-left: 10px;">Telefone</label>
-								</div>
-								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputCpf" name="inputCpf" placeholder=" " required>
+									<input type="text" class="form-control" id="inputCpf" name="inputCpf" placeholder=" " required autocomplete="off"> 
 									<label for="inputCpf" style="margin-left: 10px;">CPF</label>
 								</div>
+
+								<div class="form-floating mb-3 col-md-4">
+									<input type="date" class="form-control" id="inputNascimento" name="inputNascimento" placeholder=" " required autocomplete="off"> 
+									<label for="inputNascimento" style="margin-left: 10px;">Data de Nascimento</label>
+								</div>
+
+								<div class="form-floating mb-3 col-md-4">
+									<input type="text" class="form-control" id="inputTelefone" name="inputTelefone" placeholder=" " required autocomplete="off">
+									<label for="inputTelefone" style="margin-left: 10px;">Telefone</label>
+								</div>
+
+							</div>
+							
+							<div class="row">
+
 								<div class="form-floating mb-3 col-md-8">
-									<input type="date" class="form-control " id="inputDate" name="inputDate" placeholder=" " required>
-									<label  for="inputDate" style="margin-left: 30px;">Data de nascimento</label>
-								</div> 
-
-							</div>
-
-							<div class="row">
-
-								<div class="form-floating mb-3 col-md-6">
-									<input type="text" class="form-control" id="inputLogradouro" name="inputLogradouro" placeholder=" " required>
-									<label for="inputLogradouro" style="margin-left: 10px;">Logradouro</label>
+									<input type="text" class="form-control" id="inputNome" name="inputNome" placeholder=" " required autocomplete="off"> 
+									<label for="inputNome" style="margin-left: 10px;">Nome</label>
 								</div>
-
-								<div class="form-floating mb-3 col-md-2">
-									<input type="text" class="form-control" id="inputNumero" name="inputNumero" placeholder=" " required>
-									<label for="inputNumero" style="margin-left: 10px;">Número</label>
-								</div>
-
+								
 								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputComplemento" name="inputComplemento" placeholder=" ">
-									<label for="inputComplemento" style="margin-left: 10px;">Complemento</label>
+									<select class="form-select" id="inputFamilia" name="inputFamilia" required>
+										<option value="" selected disabled>Selecione</option>
+										<%
+										
+										FamiliaInterface iFamilia = new FamiliaDAO();
+										List<Familia> listaFamilia = iFamilia.listar();
+										
+										for(int i = 0; i < listaFamilia.size(); i++) {
+										
+										%>
+										<option value="<%= listaFamilia.get(i).getId() %>"><%= "Número: "+listaFamilia.get(i).getId() %></option>
+										<%
+										}
+										%>
+										</select> <label for="familia" style="margin-left: 10px;">Família</label>
 								</div>
 
 							</div>
 
-							<div class="row">
-
-								<div class="form-floating mb-3 col-md-3">
-									<input type="text" class="form-control" id="inputBairro" name="inputBairro" placeholder=" " required>
-									<label for="inputBairro" style="margin-left: 10px;">Bairro</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputCidade" name="inputCidade" placeholder=" " required>
-									<label for="inputCidade" style="margin-left: 10px;">Cidade</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-3">
-									<select class="form-select" id="uf" name="inputUf" required>
-										<option value="" selected disabled>Selecione o estado</option>
-										<option value="AC">Acre</option>
-										<option value="AL">Alagoas</option>
-										<option value="AP">Amapá</option>
-										<option value="AM">Amazonas</option>
-										<option value="BA">Bahia</option>
-										<option value="CE">Ceará</option>
-										<option value="DF">Distrito Federal</option>
-										<option value="ES">Espírito Santo</option>
-										<option value="GO">Goiás</option>
-										<option value="MA">Maranhão</option>
-										<option value="MT">Mato Grosso</option>
-										<option value="MS">Mato Grosso do Sul</option>
-										<option value="MG">Minas Gerais</option>
-										<option value="PA">Pará</option>
-										<option value="PB">Paraíba</option>
-										<option value="PR">Paraná</option>
-										<option value="PE">Pernambuco</option>
-										<option value="PI">Piauí</option>
-										<option value="RJ">Rio de Janeiro</option>
-										<option value="RN">Rio Grande do Norte</option>
-										<option value="RS">Rio Grande do Sul</option>
-										<option value="RO">Rondônia</option>
-										<option value="RR">Roraima</option>
-										<option value="SC">Santa Catarina</option>
-										<option value="SP">São Paulo</option>
-										<option value="SE">Sergipe</option>
-										<option value="TO">Tocantins</option>
-									</select> <label for="uf" style="margin-left: 10px;">UF</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-2">
-									<input type="text" class="form-control" id="inputCep" name="inputCep" placeholder=" " required>
-									<label for="inputCep" style="margin-left: 10px;">CEP</label>
-								</div>
-
+							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">							
+								<a href="form-adicionar-paciente.jsp" class="btn btn-lg btn-primary">Adicionar Paciente (SEM USO)</a>
+								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
+								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
-
-							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
-								<button type="submit" class="btn btn-lg btn-success">Salvar</button>
-							</div>
-
-						</form>
-
-				
-					<%
-					// TEMP                	
-					UnidadeSaudeInterface iUnidadeSaude = new UnidadeSaudeDAO();
-					List<UnidadeSaude> lista = iUnidadeSaude.listarUnidadeSaude();
-
-					for (int i = 0; i < lista.size(); i++) {
-						out.println("ID: " + lista.get(i).getId());
-						out.println(" - NOME: " + lista.get(i).getNome() + "<br>");
-						out.println(lista.get(i).getEndereco() + "<br><br>");
-					}
-					%>	
-				
-				
+							
+							<input type="hidden" id="inputIdPaciente" name="inputIdPaciente">
+							<input type="hidden" id="inputIdFamilia" name="inputIdFamilia">
+							<input type="hidden" id="inputIdTelefone" name="inputIdTelefone">
+							
+						</form>		
+						
+						<div class="table-overflow mt-4">
+	                      <table class="table table-bordered table-light table-striped table-hover" style="border-radius: 8px;">
+						    <thead>
+						      <tr>
+						        <th scope="col" style="width: 7%; text-align: center;">#</th>
+						        <th scope="col">CPF</th>
+						        <th scope="col">NOME</th>
+						        <th scope="col">NASCIMENTO</th>
+						        <th colspan="2" scope="col" style="width: 20%; text-align: center;">AÇÕES</th>
+						      </tr>
+						    </thead>
+						    <tbody id="clientesTableBody">
+						      <%
+				              	
+								PacienteInterface iPaciente = new PacienteDAO();
+								List<Paciente> lista = iPaciente.listar();
+								TelefoneInterface iTelefone = new TelefoneDAO();
+								Funcoes f = new Funcoes();
+						      
+						      for(int i = 0; i < lista.size(); i++) {
+						    	  
+						      %>
+						      <tr>
+						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
+						        <td><%= lista.get(i).getCpf() %></td>
+						        <td><%= lista.get(i).getNome() %></td>
+						        <td><%= lista.get(i).getDataNascimento() %></td>
+						        <td style="text-align: center;">						          
+						          <a href="#" class="edit-paciente-btn" 
+								     data-idPaciente="<%= lista.get(i).getId() %>"
+								     data-idTelefone="<%= iTelefone.buscarPaciente(lista.get(i).getId()).getId() %>"
+								     data-idFamilia="<%= lista.get(i).getFamilia().getId() %>"
+								     data-cpf="<%= lista.get(i).getCpf() %>"
+								     data-nome="<%= lista.get(i).getNome() %>"
+								     data-nascimento="<%= lista.get(i).getDataNascimento() %>"
+								     data-telefone="<%= iTelefone.buscarPaciente(lista.get(i).getId()).getNumero() %>">
+								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
+								  </a>
+																  
+						        </td>
+						        <td style="text-align: center;">
+						          <a href="controle.jsp?op=6&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
+						        </td>
+						      </tr>
+						      <%
+						      }
+						      %>
+						    </tbody>
+						  </table>
+						</div>			
 					
 					</div>
 					
 					<div class="col-md-5 coluna-direita">
                         <!-- Conteúdo da coluna direita aqui -->
-                        
-                        
-                        
+                                        <div class="dashboard d-block">
+            <div class="card mt-3 p-3">
+                <i class="icon bi bi-hospital-fill text-primary text-center fs-3"> Unidade de saúde </i>
+                <div class="count text-primary text-center fs-1"><%= lista.size() %></div>
+            </div>
+            <div class="card mt-3 p-3  ">
+                <i class="icon bi bi-capsule text-danger text-center fs-3"> Pacientes</i>
+                <div class="count text-danger text-center fs-1"><%= lista.size() %></div>
+            </div>
+            <div class="card mt-3 p-3 ">
+                <i class="icon bi bi-people-fill text-warning text-center fs-3"> Familias</i>
+                <div class="count text-warning text-center fs-1"><%= lista.size() %></div>
+            </div>
+            <div class="card mt-3 p-3 ">
+                <i class="icon bi bi-capsule text-success text-center fs-3"> Médicos</i>
+                <div class="count text-success text-center fs-1"><%= lista.size() %></div>
+            </div>
+            
+      
+        
+							</div>						
+						</div>  
+                    
+							</div>						
+						</div>                        
                     </div>
-
-
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 	<!-- Bootstrap core JS-->
@@ -215,6 +252,29 @@
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 	<script>
+	
+	$(document).ready(function() {
+	    $('#inputCpf').on('input', function() {
+	        var cpf = $(this).val().replace(/\D/g, '');
+
+	        if (cpf.length > 11) {
+	            cpf = cpf.substring(0, 11);
+	        }
+	        
+	        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+	        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+	        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+	        $(this).val(cpf);
+
+	        // Validação de comprimento do CPF
+	        if ($(this).val().length < 14) {
+	            $(this).get(0).setCustomValidity("O CPF deve obedecer o formato BR 000.000.000-00.");
+	        } else {
+	            $(this).get(0).setCustomValidity("");
+	        }
+	    });
+	});
+	
 		$(document).ready(function() {
 			$('#inputTelefone').mask('(00) 00000-0000');
 			$('#inputTelefone').blur(function() {
@@ -226,6 +286,32 @@
 				}
 			});
 		});
+		
+	    setTimeout(function() {
+	        var alertElement = document.getElementById('alertUS');
+	        var alert = new bootstrap.Alert(alertElement);
+	        alert.close();
+	    }, 2000);
+	    	   
+	    document.querySelectorAll('.edit-paciente-btn').forEach(button => {
+	        button.addEventListener('click', function(event) {
+	            event.preventDefault();
+	           
+	            let btnSalvar = document.getElementById('btnSalvar');
+	            btnSalvar.innerText = 'Editar';
+	            
+	            document.getElementById('formulario').action = "controle.jsp?op=5";
+	        });
+	    });
+
+	    // Captura o evento de clique no botão de limpar
+	    document.getElementById('btnLimpar').addEventListener('click', function() {
+	        let btnSalvar = document.getElementById('btnSalvar');
+	        btnSalvar.innerText = 'Salvar';
+	        
+	        document.getElementById('formulario').action = "controle.jsp?op=4";
+	    });
+		
 	</script>
 
 </body>
