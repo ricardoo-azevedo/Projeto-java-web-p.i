@@ -155,6 +155,7 @@
 							<input type="hidden" id="inputIdPaciente" name="inputIdPaciente">
 							<input type="hidden" id="inputIdFamilia" name="inputIdFamilia">
 							<input type="hidden" id="inputIdTelefone" name="inputIdTelefone">
+							<input type="hidden" id="inputIdEndereco" name="inputIdEndereco">
 							
 						</form>		
 						
@@ -190,6 +191,7 @@
 								     data-idPaciente="<%= lista.get(i).getId() %>"
 								     data-idTelefone="<%= iTelefone.buscarPaciente(lista.get(i).getId()).getId() %>"
 								     data-idFamilia="<%= lista.get(i).getFamilia().getId() %>"
+								     data-idEndereco="<%= lista.get(i).getFamilia().getEndereco().getId() %>"							     
 								     data-cpf="<%= lista.get(i).getCpf() %>"
 								     data-nome="<%= lista.get(i).getNome() %>"
 								     data-nascimento="<%= lista.get(i).getDataNascimento() %>"

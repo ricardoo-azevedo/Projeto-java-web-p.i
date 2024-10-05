@@ -84,11 +84,32 @@
 				<div class="row justify-content-between">
 
 					<div class="col-md-7">
+					
+						<%
+						
+						if(request.getParameter("exibirAlert") != null){	
+							String nome = request.getParameter("exibirAlert");
+							%>
+							
+							<div class="alert alert-success alert-dismissible fade show" role="alert" id="alertMedico">
+							  Médico <%= nome %> modificado!
+							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+							
+							<script>
+							    setTimeout(function(){
+							        window.location.href = 'form-medico.jsp';
+							    }, 3000);
+							</script>
+														
+							<%							
+						}
+						
+						%>
 
 						<h1 class="mt-3">Cadastro do Médico(a)</h1>
 
-
-						<form action="controle.jsp?op=11" method="post">
+						<form action="controle.jsp?op=11" method="post" id="formulario">
 
 							<div class="row">
 
@@ -98,22 +119,18 @@
 										for="inputCrm" style="margin-left: 10px;">CRM</label>
 								</div>
 
-
 								<div class="form-floating mb-3 col-md-8">
 									<input type="text" class="form-control" id="inputNome"
 										name="inputNome" placeholder=" " required> <label
 										for="inputNome" style="margin-left: 10px;">Nome</label>
 								</div>
 
-
-
 							</div>
 
 							<div class="row">
 								<div class="form-floating mb-3 col-md-6">
-									<input type="text" class="form-control" id="inputTelefone"
-										name="inputTelefone" placeholder=" " required> <label
-										for="inputTelefone" style="margin-left: 10px;">Telefone</label>
+									<input type="text" class="form-control" id="inputTelefone" name="inputTelefone" placeholder=" " required>
+									<label for="inputTelefone" style="margin-left: 10px;">Telefone</label>
 								</div>
 
 								<div class="form-floating mb-3 col-md-6">
@@ -136,10 +153,13 @@
 								
 								 </div>
 
-							<div class="form-floating mb-3 col-md-12 justify-content-end"
-								style="text-align: right;">
-								<button type="submit" class="btn btn-lg btn-success">Salvar</button>
+							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
+								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
+								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
+							
+							<input type="hidden" id="inputIdTelefone" name="inputIdTelefone">
+							<input type="hidden" id="inputIdEspecialidade" name="inputIdEspecialidade">
 
 						</form>
 
@@ -169,10 +189,10 @@
 						      <tr>
 						      <th scope="row" style="text-align: center;"><%= i + 1 %></th>
 						      
-						    <td><%= lista.get(i).getCrm() != null ? lista.get(i).getCrm() : "Nao Definido" %></td>
-                            <td><%= lista.get(i).getNome() != null ? lista.get(i).getNome() : "Nao Definido" %></td>
-                             <td><%= iTelefone.buscarMedico(lista.get(i).getId()) != null ? iTelefone.buscarMedico(lista.get(i).getId()).getNumero() : "Não Definido" %></td>
-                             <td><%= lista.get(i).getEspecialidade() != null ? lista.get(i).getEspecialidade().getNome() : "Não Definido" %></td>
+						   		<td><%= lista.get(i).getCrm() %></td>
+                            	<td><%= lista.get(i).getNome() %></td>
+                         	    <td><%= iTelefone.buscarMedico(lista.get(i).getId()).getNumero() %></td>
+                         	    <td><%= lista.get(i).getEspecialidade().getNome() %></td>
 						    
 						        <td style="text-align: center;">	
 		          
@@ -180,8 +200,10 @@
 								     data-idMedico="<%= lista.get(i).getId() %>"
 								     data-CRM = "<%=  lista.get(i).getCrm() %>"
 								     data-nome = "<%= lista.get(i).getNome() %>"
-								     data-idTelefone="<%=  iTelefone.buscarMedico(lista.get(i).getId()).getNumero() %>"
-								     data-idEspecialidade="<%= lista.get(i).getEspecialidade().getNome() %>"
+								     data-idTelefone="<%=  iTelefone.buscarMedico(lista.get(i).getId()).getId() %>"
+								     data-telefone="<%=  iTelefone.buscarMedico(lista.get(i).getId()).getNumero() %>"
+								     data-idEspecialidade="<%= lista.get(i).getEspecialidade().getId() %>"
+								     data-nomeEspecialidade="<%= lista.get(i).getEspecialidade().getNome() %>"
 								     >
 								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
 								  </a>
@@ -236,7 +258,33 @@
 					$(this).mask('(00) 00000-0000');
 				}
 			});
-		});
+		});		
+
+	    setTimeout(function() {
+	        var alertElement = document.getElementById('alertMedico');
+	        var alert = new bootstrap.Alert(alertElement);
+	        alert.close();
+	    }, 2000);
+	    	   
+	    document.querySelectorAll('.edit-medico-btn').forEach(button => {
+	        button.addEventListener('click', function(event) {
+	            event.preventDefault();
+	           
+	            let btnSalvar = document.getElementById('btnSalvar');
+	            btnSalvar.innerText = 'Editar';
+	            
+	            document.getElementById('formulario').action = "controle.jsp?op=16";
+	        });
+	    });
+
+	    // Captura o evento de clique no botão de limpar
+	    document.getElementById('btnLimpar').addEventListener('click', function() {
+	        let btnSalvar = document.getElementById('btnSalvar');
+	        btnSalvar.innerText = 'Salvar';
+	        
+	        document.getElementById('formulario').action = "controle.jsp?op=11";
+	    });
+		
 	</script>
 
 </body>

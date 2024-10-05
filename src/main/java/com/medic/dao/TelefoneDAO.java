@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.medic.interfaces.TelefoneInterface;
-import com.medic.model.Especialidade;
 import com.medic.model.Telefone;
 import com.medic.service.ConnectionFactory;
 

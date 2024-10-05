@@ -161,17 +161,18 @@ case 4:{
 
 case 5:{
 	
-	int idFamilia = Integer.parseInt(request.getParameter("inputIdFamilia"));
+	int idFamilia = Integer.parseInt(request.getParameter("inputFamilia"));
 	Familia familia = new Familia();
-	familia.setId(idFamilia);
+	familia = iFamilia.consultar(idFamilia);	
 	iFamilia.editar(familia);
 	
 	int idPaciente = Integer.parseInt(request.getParameter("inputIdPaciente"));
 	String nome = request.getParameter("inputNome");
 	String cpf = request.getParameter("inputCpf");
 	String nascimento = request.getParameter("inputNascimento");
-	out.println(nascimento);
+		
 	Funcoes f = new Funcoes();	
+	
 	Paciente paciente = new Paciente();
 	paciente.setId(idPaciente);
 	paciente.setNome(nome);
@@ -180,7 +181,11 @@ case 5:{
 	paciente.setFamilia(familia);
 	iPaciente.editar(paciente);
 	paciente.setId(idPaciente);
+	
+	
+	
 	out.println(paciente);
+	out.println("<br>");
 	out.println("<br>");
 	
 	int idTelefone = Integer.parseInt(request.getParameter("inputIdTelefone"));
@@ -315,32 +320,27 @@ case 11:{
 	String ntelefone = request.getParameter("inputTelefone");
 	int idEspecialidade = Integer.parseInt(request.getParameter("inputEspecialidade"));
 	Especialidade especialidade = iEspecialidade.consultar(idEspecialidade);
+	
 	Medico medico = new Medico();
 	medico.setNome(nome);
 	medico.setCrm(crm);
 	medico.setEspecialidade(especialidade);
 	
-	//inserindo tudo de medico aqui
-	
     int idMedico =	iMedico.inserirMedico(medico);
- Medico medicor = iMedico.consultarMedico(idMedico);
-    medico.setId(idMedico);
-    medicor.setId(idMedico);
-   
   
-
-
+    medico.setId(idMedico);
 	Telefone telefone = new Telefone();
 	
 	telefone.setNumero(ntelefone);
 	telefone.setMedico(medico);
 	iTelefone.inserir(telefone);
-	
-	
+	iTelefone.editar(telefone);
 
-
-
-	
+	/* O QUE É ISSO? */
+	//int id = Integer.parseInt(request.getParameter("id"));
+	//iMedico.editarMedico(medico);
+	//response.sendRedirect("form-especialidade.jsp");
+	/* ??? */
 	
 	response.sendRedirect("form-medico.jsp");
 	
@@ -357,6 +357,7 @@ case 12:{
 
 case 13:{
 //resevado para editar especialidade.
+	out.println("NADA AINDA");
 	break;
 }
 case 14:{
@@ -374,6 +375,12 @@ case 15:{
 	response.sendRedirect("form-medico.jsp");
 	break;
 }
+
+case 16:{
+	//resevado para editar médico.
+	out.println("NADA AINDA");
+		break;
+	}
 
 default:{
 	

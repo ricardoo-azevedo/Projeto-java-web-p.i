@@ -97,7 +97,7 @@ public class PacienteDAO implements PacienteInterface {
 	        ps.setDate(3, paciente.getDataNascimento());
 	        ps.setInt(4, paciente.getFamilia().getId());
 	        ps.setInt(5, paciente.getId());	        
-            ps.executeUpdate();
+            ps.executeUpdate();            
 
         } catch (Exception e) {
             System.out.println("Erro ao editar paciente: "+e.getMessage());
