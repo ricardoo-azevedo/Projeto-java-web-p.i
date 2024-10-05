@@ -167,24 +167,28 @@
 						    	  
 						      %>
 						      <tr>
-						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
-						        <td><%= lista.get(i).getCrm() %></td>
-						        <td><%= lista.get(i).getNome() %></td>
-						        <td><%= iTelefone.buscarMedico(lista.get(i).getId()).getNumero() %></td>
-						         <td><%= lista.get(i).getEspecialidade().getNome() %></td>
+						      <th scope="row" style="text-align: center;"><%= i + 1 %></th>
+						      
+						    <td><%= lista.get(i).getCrm() != null ? lista.get(i).getCrm() : "Nao Definido" %></td>
+                            <td><%= lista.get(i).getNome() != null ? lista.get(i).getNome() : "Nao Definido" %></td>
+                             <td><%= iTelefone.buscarMedico(lista.get(i).getId()) != null ? iTelefone.buscarMedico(lista.get(i).getId()).getNumero() : "Não Definido" %></td>
+                             <td><%= lista.get(i).getEspecialidade() != null ? lista.get(i).getEspecialidade().getNome() : "Não Definido" %></td>
+						    
 						        <td style="text-align: center;">	
 		          
 						          <a href="#" class="edit-medico-btn" 
 								     data-idMedico="<%= lista.get(i).getId() %>"
-								     data-idTelefone="<%   %>"
-								     data-idEspecialidade="<%= lista.get(i).getEspecialidade().getId() %>"
+								     data-CRM = "<%=  lista.get(i).getCrm() %>"
+								     data-nome = "<%= lista.get(i).getNome() %>"
+								     data-idTelefone="<%=  iTelefone.buscarMedico(lista.get(i).getId()) %>"
+								     data-idEspecialidade="<%= lista.get(i).getEspecialidade().getNome() %>"
 								     >
 								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
 								  </a>
 																  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=6&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
+						          <a href="controle.jsp?op=15&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
 						      <%

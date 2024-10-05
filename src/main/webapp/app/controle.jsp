@@ -309,6 +309,7 @@ case 10:{
 }
 
 case 11:{
+
 	String crm = request.getParameter("inputCrm");
 	String nome = request.getParameter("inputNome");
 	String ntelefone = request.getParameter("inputTelefone");
@@ -318,12 +319,23 @@ case 11:{
 	medico.setNome(nome);
 	medico.setCrm(crm);
 	medico.setEspecialidade(especialidade);
+	
     int idMedico =	iMedico.inserirMedico(medico);
+  
     medico.setId(idMedico);
 	Telefone telefone = new Telefone();
+	
 	telefone.setNumero(ntelefone);
 	telefone.setMedico(medico);
 	iTelefone.inserir(telefone);
+	iTelefone.editar(telefone);
+
+int id = Integer.parseInt(request.getParameter("id"));
+iMedico.editarMedico(medico);
+response.sendRedirect("form-especialidade.jsp");
+
+	
+
 	
 	
 	response.sendRedirect("form-medico.jsp");
@@ -338,6 +350,7 @@ case 12:{
 	
 	break;
 }
+
 case 13:{
 //resevado para editar especialidade.
 	break;
@@ -346,6 +359,15 @@ case 14:{
 	int idEspecialidade = Integer.parseInt(request.getParameter("id"));
 	iEspecialidade.excluir(idEspecialidade);
 	response.sendRedirect("form-especialidade.jsp");
+	break;
+}
+
+case 15:{
+	 
+     //excluindo idMedico todo 
+	int idMedico = Integer.parseInt(request.getParameter("id"));
+	iMedico.excluirMedico(idMedico);
+	response.sendRedirect("form-medico.jsp");
 	break;
 }
 

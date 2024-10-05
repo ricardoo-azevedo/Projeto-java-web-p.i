@@ -96,7 +96,7 @@ public class EspecialidadeDAO implements EspecialidadeInterface {
 	}
 
 	@Override
-	public List<Especialidade> lista() {
+	public List<Especialidade> lista(){
 		
 		String sql = "SELECT * FROM ESPECIALIDADE ORDER BY NOME ASC;";
 		List<Especialidade> lista = null;
