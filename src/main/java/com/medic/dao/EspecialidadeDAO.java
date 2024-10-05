@@ -33,8 +33,8 @@ public class EspecialidadeDAO implements EspecialidadeInterface {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, especialidade.getNome());
 			ps.execute();
-		} catch (SQLException e) {
-			System.err.println(">>> Erro ao inserir especialidade: " + e);
+		} catch (Exception error) {
+			throw new RuntimeException("erro na inserção:" + error);
 		}
 
 	}
@@ -57,8 +57,8 @@ public class EspecialidadeDAO implements EspecialidadeInterface {
 				especialidade.setNome(nome);
 
 			}
-		} catch (SQLException e) {
-			System.err.println(">>> Erro ao consultar especialidade: " + e);
+		} catch (Exception error) {
+			throw new RuntimeException("erro na consulta:" + error);
 		}
 
 		return especialidade;
@@ -74,8 +74,8 @@ public class EspecialidadeDAO implements EspecialidadeInterface {
 			ps.setString(1, especialidade.getNome());
 			ps.setInt(2, especialidade.getId());			
 			ps.execute();
-		} catch (SQLException e) {
-			System.err.println(">>> Erro ao editar especialidade: " + e);
+		} catch (Exception error) {
+			throw new RuntimeException("erro em atualizar:" + error);
 		}
 
 	}
@@ -89,8 +89,8 @@ public class EspecialidadeDAO implements EspecialidadeInterface {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);			
 			ps.execute();
-		} catch (SQLException e) {
-			System.err.println(">>> Erro ao excluir especialidade: " + e);
+		} catch (Exception error) {
+			throw new RuntimeException("erro em excluir:" + error);
 		}
 
 	}
@@ -113,8 +113,8 @@ public class EspecialidadeDAO implements EspecialidadeInterface {
 				especialidade.setNome(nome);
 				lista.add(especialidade);
 			}
-		} catch (SQLException e) {
-			System.err.println(">>> Erro ao listar especialidades: " + e);
+		} catch (Exception error) {
+			throw new RuntimeException("erro em Listar:" + error);
 		}
 
 		return lista;

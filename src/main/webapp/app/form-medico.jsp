@@ -180,7 +180,7 @@
 								     data-idMedico="<%= lista.get(i).getId() %>"
 								     data-CRM = "<%=  lista.get(i).getCrm() %>"
 								     data-nome = "<%= lista.get(i).getNome() %>"
-								     data-idTelefone="<%=  iTelefone.buscarMedico(lista.get(i).getId()) %>"
+								     data-idTelefone="<%=  iTelefone.buscarMedico(lista.get(i).getId()).getNumero() %>"
 								     data-idEspecialidade="<%= lista.get(i).getEspecialidade().getNome() %>"
 								     >
 								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">

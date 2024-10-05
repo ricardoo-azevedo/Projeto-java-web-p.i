@@ -320,21 +320,25 @@ case 11:{
 	medico.setCrm(crm);
 	medico.setEspecialidade(especialidade);
 	
+	//inserindo tudo de medico aqui
+	
     int idMedico =	iMedico.inserirMedico(medico);
-  
+ Medico medicor = iMedico.consultarMedico(idMedico);
     medico.setId(idMedico);
+    medicor.setId(idMedico);
+   
+  
+
+
 	Telefone telefone = new Telefone();
 	
 	telefone.setNumero(ntelefone);
 	telefone.setMedico(medico);
 	iTelefone.inserir(telefone);
-	iTelefone.editar(telefone);
-
-int id = Integer.parseInt(request.getParameter("id"));
-iMedico.editarMedico(medico);
-response.sendRedirect("form-especialidade.jsp");
-
 	
+	
+
+
 
 	
 	
