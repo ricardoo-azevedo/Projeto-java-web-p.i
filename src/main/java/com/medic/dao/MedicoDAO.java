@@ -78,7 +78,7 @@ public class MedicoDAO implements MedicoInterface {
 
 	@Override
 	public void editarMedico(Medico medico) {
-		String sql = "UPDATE MEDICO SET NOME = ?, CRM = ?, IDESPECIALIDADE = ?, WHERE IDMEDICO = ?";
+		String sql = "UPDATE MEDICO SET NOME = ?, CRM = ?, IDESPECIALIDADE = ? WHERE IDMEDICO = ?";
 
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);

@@ -333,16 +333,9 @@ case 11:{
 	
 	telefone.setNumero(ntelefone);
 	telefone.setMedico(medico);
-	iTelefone.inserir(telefone);
-	iTelefone.editar(telefone);
-
-	/* O QUE É ISSO? */
-	//int id = Integer.parseInt(request.getParameter("id"));
-	//iMedico.editarMedico(medico);
-	//response.sendRedirect("form-especialidade.jsp");
-	/* ??? */
-	
+	iTelefone.inserir(telefone); 
 	response.sendRedirect("form-medico.jsp");
+
 	
 	break;
 }
@@ -369,18 +362,45 @@ case 14:{
 
 case 15:{
 	 
-     //excluindo idMedico todo 
+     //excluir okk tudo certo
 	int idMedico = Integer.parseInt(request.getParameter("id"));
 	iMedico.excluirMedico(idMedico);
 	response.sendRedirect("form-medico.jsp");
 	break;
 }
 
-case 16:{
-	//resevado para editar médico.
-	out.println("NADA AINDA");
-		break;
-	}
+
+	
+case 16: {
+
+
+	    int medicoId = Integer.parseInt(request.getParameter("idMedico"));
+	    String crm = request.getParameter("inputCrm");
+	    String nome = request.getParameter("inputNome");
+	    String telefoneNumero = request.getParameter("inputTelefone");
+	    int telefoneId = Integer.parseInt(request.getParameter("inputIdTelefone"));
+	    int especialidadeId = Integer.parseInt(request.getParameter("inputEspecialidade"));
+
+//aqui buscando pelo id   
+	    Medico medico = iMedico.consultarMedico(medicoId);
+	    Telefone telefone = iTelefone.consultar(telefoneId);
+	    Especialidade especialidade = iEspecialidade.consultar(especialidadeId);
+
+	   medico.setCrm(crm);
+	    medico.setNome(nome);
+	   medico.setEspecialidade(especialidade);
+	    telefone.setNumero(telefoneNumero);
+
+	  
+	iMedico.editarMedico(medico);
+	    iTelefone.editar(telefone);
+
+	  
+	    response.sendRedirect("form-medico.jsp?exibirAlert=Editado com sucesso");
+	
+}
+   
+	
 
 default:{
 	

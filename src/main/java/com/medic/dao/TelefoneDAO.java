@@ -208,11 +208,8 @@ public class TelefoneDAO implements TelefoneInterface{
 				String numero = rs.getString("NUMERO");
 				telefone = new Telefone();
 				telefone.setId(idTelefone);
-				telefone.setNumero(numero);
+				telefone.setNumero(numero);	
 				
-				if(numero != null) {
-					System.out.println("*** N/null *******");
-				}
 			}
 		} catch (SQLException e) {
 			System.err.println(">>> Erro ao consultar telefone: " + e);
