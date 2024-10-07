@@ -348,11 +348,22 @@ case 12:{
 	break;
 }
 
-case 13:{
-//resevado para editar especialidade.
-	out.println("NADA AINDA");
-	break;
+case 13: {
+    // Reservado para editar especialidade
+    String nome = request.getParameter("inputNome");
+    int idEspecialidade = Integer.parseInt(request.getParameter("inputId"));
+    
+    // Criar o objeto Especialidade com ID e nome
+    Especialidade especialidade = new Especialidade(idEspecialidade, nome);
+    
+    // Editar especialidade no banco de dados
+    iEspecialidade.editar(especialidade);
+    
+    // Redirecionar com mensagem de sucesso
+    response.sendRedirect("form-especialidade.jsp?exibirAlert=Especialidade " + nome + " editada com sucesso");
+    break;
 }
+
 case 14:{
 	int idEspecialidade = Integer.parseInt(request.getParameter("id"));
 	iEspecialidade.excluir(idEspecialidade);

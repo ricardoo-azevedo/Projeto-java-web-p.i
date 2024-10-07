@@ -7,9 +7,17 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 //mudem o password de vcs 
 	
-	private static final String URL = "jdbc:mysql://localhost:3306/bdmedic";
+	private static final String URL = "jdbc:mysql://localhost:3307/bdmedic";
 	private static final String USER = "root";
+<<<<<<< HEAD
 	private static final String PASSWORD = "123456789";
+=======
+<<<<<<< HEAD
+	private static final String PASSWORD = "";
+=======
+	private static final String PASSWORD = "2020";
+>>>>>>> cab4e97302ea866595e1255e2d67083d90f98896
+>>>>>>> dccf84eba84e9a1849c1f0b615a079d4b19955c5
 	
 	private Connection conexao;
 	
