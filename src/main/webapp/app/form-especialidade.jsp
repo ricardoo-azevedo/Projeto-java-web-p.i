@@ -110,7 +110,7 @@
 								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
 								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
-							<input type="hidden" id="inputIdUS" name="inputIdUS">
+							<input type="hidden" id="inputId" name="inputId">
 						
 						</form>		
 						
@@ -137,6 +137,7 @@
 						        <td><%= lista.get(i).getNome() %></td>
 						        <td style="text-align: center;">						          
 						          <a href="#" class="edit-especialidade-btn" 
+						        	 data-idEspecialidade="<%= lista.get(i).getId() %>"
 								     data-nome="<%= lista.get(i).getNome()%>">
 								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
 								  </a>

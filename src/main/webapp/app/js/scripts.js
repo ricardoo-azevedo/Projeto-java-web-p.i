@@ -164,3 +164,38 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.edit-medico-btn');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            // Pega os dados do botão de edição
+            const crm = this.getAttribute('data-crm');
+            const nome = this.getAttribute('data-nome');
+            const telefone = this.getAttribute('data-telefone');
+            const especialidade = this.getAttribute('data-idEspecialidade');
+  
+            // Preenche o formulário com os dados
+            document.getElementById('inputCrm').value = crm;
+            document.getElementById('inputNome').value = nome;
+            document.getElementById('inputTelefone').value = telefone;
+            document.getElementById('inputEspecialidade').value = especialidade;
+           
+            // IDs ocultos
+            const idEspecialidade = this.getAttribute('data-idEspecialidade');
+			document.getElementById('inputIdEspecialidade').value = idEspecialidade;
+			
+            const idTelefone = this.getAttribute('data-idTelefone');
+			document.getElementById('inputIdTelefone').value = idTelefone;
+			
+			
+        });
+    });
+});
+
+
+
+

@@ -12,11 +12,9 @@ input, select, option{
 	background-color: rgb(25, 41, 79);
 }
 
-/* parte dashboard  */
-
- 
-
-
+.coluna-direita{
+	
+}
 
 .table-overflow {
 	height: 3rem;
