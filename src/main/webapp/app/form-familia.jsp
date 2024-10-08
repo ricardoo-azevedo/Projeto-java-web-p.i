@@ -219,12 +219,12 @@
 								     data-cidade="<%= lista.get(i).getEndereco().getCidade() %>"
 								     data-uf="<%= lista.get(i).getEndereco().getUf() %>"
 								     data-cep="<%= lista.get(i).getEndereco().getCep() %>">
-								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
+								     <img src="./assets/editado.svg" alt="Editar" width="25" height="25">
 								  </a>
 																  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=10&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
+						          <a href="controle.jsp?op=10&id=<%= lista.get(i).getId() %>"><img src="./assets/lata.svg" alt="Excluir" width="25" height="25"></a>
 						        </td>
 						      </tr>
 						      <%
