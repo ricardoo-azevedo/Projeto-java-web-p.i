@@ -201,5 +201,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.edit-agendamento-btn');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+
+			// Pegar os valores dos atributos data-* do botão clicado		
+			const dataAgendamento = this.getAttribute('data-dataAgendamento');
+			const observacoes = this.getAttribute('data-observacoes');
+			const statusAgendamento = this.getAttribute('data-statusAgendamento');
+
+			// Preencher o formulário com os valores			
+			document.getElementById('inputDataAgendamento').value = dataAgendamento;
+			document.getElementById('inputObs').value = observacoes;
+			document.getElementById('inputStatus').value = statusAgendamento;
+			
+			// IDs ocultos
+            const idAgendamento = this.getAttribute('data-idAgendamento');
+			const idPaciente = this.getAttribute('data-idPaciente');
+			const idMedico = this.getAttribute('data-idMedico');
+			
+            document.getElementById('inputAgendamento').value = idAgendamento;
+			document.getElementById('inputIdMedico').value = idMedico;
+			document.getElementById('inputPaciente').value = idPaciente;
+			
+		});
+	});
+});
+
+
+
 
 

@@ -458,9 +458,26 @@ case 17:{
   
     out.println(agendamento);
     
-    //response.sendRedirect("form-agendamento.jsp?exibirAlertAgendamento=inserido com sucesso");
+    response.sendRedirect("form-agendamento.jsp?exibirAlert=Agendamento <b>"+agendamento.getId()+"</b> inserido com sucesso!");
     
     break;
+}
+
+case 18:{
+	/*Editar agendamento*/
+	
+	
+	break;
+}
+
+case 19:{
+	/*Excluir Agendamento*/
+	int idAgendamento = Integer.parseInt(request.getParameter("id"));
+	
+	iAgendamento.excluirAgendamento(idAgendamento);
+	
+	response.sendRedirect("form-agendamento.jsp?exibirAlert=excluido com sucesso");
+	break;
 }
 
 case 20:{

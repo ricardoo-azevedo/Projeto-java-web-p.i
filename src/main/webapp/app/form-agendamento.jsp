@@ -11,6 +11,9 @@
 <%@page import="com.medic.model.Paciente"%>
 <%@page import="com.medic.interfaces.PacienteInterface"%>
 <%@page import="com.medic.dao.PacienteDAO"%>
+<%@page import="com.medic.dao.AgendamentoDAO"%>
+<%@page import="com.medic.interfaces.AgendamentoInterface"%>
+<%@page import="com.medic.model.Agendamento"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -75,14 +78,36 @@
             
                 <div class="row justify-content-between">
                     <div class="col-md-7">
+                    	<%
+						
+						if(request.getParameter("exibirAlert") != null){	
+							String valor = request.getParameter("exibirAlert");
+							%>
+							
+							<div class="alert alert-success alert-dismissible fade show" role="alert" id="alert">
+							   <%= valor %>
+							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+							
+							<script>
+							    setTimeout(function(){
+							        window.location.href = 'form-agendamento.jsp';
+							    }, 3000);
+							</script>
+														
+							<%
+							
+						}
+						
+						%>
                         <h1 class="mt-3">Agendamento</h1>
 
-                        <form action="controle.jsp?op=17" method="post">
+                        <form action="controle.jsp?op=17" method="post" id="formulario">
                         
                         	<div class="row">
 
 								<div class="form-floating mb-3 col-md-12">
-									<select class="form-select" id="inputMedico" name="inputMedico" required>
+									<select class="form-select" id="inputIdMedico" name="inputIdMedico" required>
 										<option value="" selected disabled>Selecione</option>
 										<%
 										
@@ -126,7 +151,7 @@
                             <div class="row">
                                 
 								<div class="form-floating mb-3 col-md-4">
-								    <select class="form-control" id="inputDataInicio" name="inputData" required>
+								    <select class="form-control" id="inputData" name="inputData" required>
 								        <option value="" selected disabled>Selecione</option>
 								        <%
 								            /*_*/
@@ -156,10 +181,74 @@
                             </div>
 
                             <div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
-                                <button type="reset" class="btn btn-lg btn-success">Limpar</button>
-                                <button type="submit" class="btn btn-lg btn-success">Salvar</button>
+                                <button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
+                                <button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
                             </div>
+                            
+                            <input type="hidden" id="idMedico" name="idMedico">
+                            
                         </form>
+                        <div class="table-overflow mt-4">
+	                      <table class="table table-bordered table-light table-striped table-hover" style="border-radius: 8px;">
+						    <thead>
+						      <tr>
+						        <th scope="col" style="width: 7%; text-align: center;">#</th>
+						        <th scope="col">MEDICO</th>
+						        <th scope="col">PACIENTE</th>
+						        <th scope="col">DATA</th>
+						        <th scope="col">OBSERVACOES</th>
+						        <th scope="col">STATUS</th>
+						        <th colspan="2" scope="col" style="width: 20%; text-align: center;">AÇÕES</th>
+						      </tr>
+						    </thead>
+						    <tbody id="clientesTableBody">
+						       <%
+				              	
+								AgendamentoInterface iAgendamento = new AgendamentoDAO();
+								List<Agendamento> lista = iAgendamento.listarAgendamento();
+								
+								/*VER PRA MAIS TARDE*/
+						      for(int i = 0; i < lista.size(); i++) {
+						    	  /*String obs = null;
+						    	  if(lista.get(i).getObservacoes().isEmpty()){
+						    		  obs = "";  
+						    	  }*/
+						    	  						    	  
+						      %>
+						      <tr>
+						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
+						        <td><%= lista.get(i).getMedico().getNome()%></td>
+						        <td><%= lista.get(i).getPaciente().getNome()%></td>
+						        <td><%= lista.get(i).getDataAgendamento() %></td>
+						        <td><%= lista.get(i).getObservacoes()%></td>
+						        <td><%= lista.get(i).getStatusAgendamento() %></td>
+						        <td style="text-align: center;">						          
+						          <a href="#" class="edit-agendamento-btn" 
+								     data-idAgendamento="<%= lista.get(i).getId() %>"
+								     data-idMedico="<%= lista.get(i).getMedico().getId() %>"
+								     data-idPaciente="<%= lista.get(i).getPaciente().getId() %>"
+								     data-observacoes="<%= lista.get(i).getObservacoes() %>"
+								     data-statusAgendamento="<%= lista.get(i).getObservacoes() %>"
+								     data-dataAgendamento="<%= lista.get(i).getDataAgendamento() %>"
+								     
+		
+								     >
+								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
+								  </a>
+																  
+						        </td>
+						        <td style="text-align: center;">
+						          <a href="controle.jsp?op=19&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
+						        </td>
+						      </tr>
+						      <%
+						      }
+						      %>
+						    </tbody>
+						  </table>
+						</div>			
+					
+					</div>
                     </div>
 
                     <div class="col-md-5 coluna-direita">
@@ -190,7 +279,37 @@
                     $(this).mask('(00) 00000-0000');
                 }
             });
+            
         });
+        
+        
+        
+        setTimeout(function() {
+	        var alertElement = document.getElementById('alert');
+	        var alert = new bootstrap.Alert(alertElement);
+	        alert.close();
+	    }, 2000);
+        
+        document.querySelectorAll('.edit-agendamento-btn').forEach(button => {
+	        button.addEventListener('click', function(event) {
+	            event.preventDefault();
+	           
+	            let btnSalvar = document.getElementById('btnSalvar');
+	            btnSalvar.innerText = 'Editar';
+	            
+	            document.getElementById('formulario').action = "controle.jsp?op=18";
+	        });
+	    });
+
+        
+        
+	    // Captura o evento de clique no botão de limpar
+	    document.getElementById('btnLimpar').addEventListener('click', function() {
+	        let btnSalvar = document.getElementById('btnSalvar');
+	        btnSalvar.innerText = 'Salvar';
+	        
+	        document.getElementById('formulario').action = "controle.jsp?op=17";
+	    });
     </script>
 </body>
 </html>
