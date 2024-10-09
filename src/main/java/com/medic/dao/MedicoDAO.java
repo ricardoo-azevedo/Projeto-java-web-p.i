@@ -78,7 +78,7 @@ public class MedicoDAO implements MedicoInterface {
 
 	@Override
 	public void editarMedico(Medico medico) {
-		String sql = "UPDATE MEDICO SET NOME = ?, CRM = ?, IDESPECIALIDADE = ? WHERE IDMEDICO = ?";
+		String sql = "UPDATE MEDICO SET NOME = ?, CRM = ?, IDESPECIALIDADE = ? WHERE IDMEDICO = ?;";
 
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -133,6 +133,34 @@ public class MedicoDAO implements MedicoInterface {
 
 		} catch (Exception e) {
 			System.out.println("[Erro: ao listar Medico: " + e.getMessage() + "]");
+		}
+		return medicos;
+	}
+	
+	@Override
+	public List<Medico> listarPorEspecialidade(int idEspecialidade) {
+		List<Medico> medicos = new ArrayList<>();
+		String sql = "SELECT * FROM MEDICO WHERE IDESPECIALIDADE = ? ORDER BY NOME ASC;";
+
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, idEspecialidade);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Medico medico = new Medico();
+				medico.setId(rs.getInt("idMedico"));
+				medico.setNome(rs.getString("NOME"));
+				medico.setCrm(rs.getString("CRM"));	
+				
+				idEspecialidade = rs.getInt("idEspecialidade");
+				Especialidade especialidade = new EspecialidadeDAO().consultar(idEspecialidade);
+				medico.setEspecialidade(especialidade);
+				medicos.add(medico);
+			}
+
+		} catch (Exception e) {
+			System.out.println("[Erro: ao listarPorEspecialidade: " + e.getMessage() + "]");
 		}
 		return medicos;
 	}

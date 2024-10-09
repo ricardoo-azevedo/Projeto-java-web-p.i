@@ -167,7 +167,7 @@
 						        <th scope="col">CPF</th>
 						        <th scope="col">NOME</th>
 						        <th scope="col">NASCIMENTO</th>
-						        <th colspan="2" scope="col" style="width: 20%; text-align: center;">AÇÕES</th>
+						        <th colspan="2" scope="col" style="text-align: center;">AÇÕES</th>
 						      </tr>
 						    </thead>
 						    <tbody id="clientesTableBody">
@@ -196,12 +196,12 @@
 								     data-nome="<%= lista.get(i).getNome() %>"
 								     data-nascimento="<%= lista.get(i).getDataNascimento() %>"
 								     data-telefone="<%= iTelefone.buscarPaciente(lista.get(i).getId()).getNumero() %>">
-								     <img src="./assets/editado.svg" alt="Editar" width="25" height="25">
+								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
 								  </a>
 																  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=6&id=<%= lista.get(i).getId() %>"><img src="./assets/lata.svg" alt="Excluir" width="25" height="25"></a>
+						          <a href="controle.jsp?op=6&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
 						      <%

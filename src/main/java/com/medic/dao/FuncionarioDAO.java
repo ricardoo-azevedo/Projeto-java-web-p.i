@@ -7,11 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.medic.interfaces.FuncionarioInteface;
+import com.medic.interfaces.FuncionarioInterface;
 import com.medic.model.Funcionario;
 import com.medic.service.ConnectionFactory;
 
-public class FuncionarioDAO implements FuncionarioInteface {
+public class FuncionarioDAO implements FuncionarioInterface {
 
     private Connection connection;
     ConnectionFactory connectionFactory = new ConnectionFactory();

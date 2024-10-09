@@ -135,7 +135,7 @@
 
 								<div class="form-floating mb-3 col-md-6">
 									<select class="form-select" id="inputEspecialidade"	name="inputEspecialidade" required>
-									<option value="" selected disabled>Selecione</option>
+										<option value="" selected disabled>Selecione</option>
 										<%
 										
 										EspecialidadeInterface iEspecialidade = new EspecialidadeDAO();
@@ -157,9 +157,10 @@
 								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
 								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
-					 			<input type="hidden" id="idMedico" name="idMedico"> 
+							
+							<input type="hidden" id="inputIdMedico" name="inputIdMedico">
 							<input type="hidden" id="inputIdTelefone" name="inputIdTelefone">
-							 <input type="hidden" id="inputIdEspecialidade" name="inputIdEspecialidade">
+							<input type="hidden" id="inputIdEspecialidade" name="inputIdEspecialidade">
 
 						</form>
 
@@ -172,14 +173,14 @@
 						        <th scope="col">NOME</th>
 						        <th scope="col">TELEFONE</th>
 						        <th scope="col">ESPECIALIDADE</th>
-						        <th colspan="2" scope="col" style="width: 20%; text-align: center;">AÇÕES</th>
+						        <th colspan="2" scope="col" style="text-align: center;">AÇÕES</th>
 						      </tr>
 						    </thead>
 						    <tbody id="clientesTableBody">
 						      <%
 				              	
 								MedicoInterface iMedico = new MedicoDAO();
-					 			List<Medico> lista = iMedico.listarMedico(); 	
+								List<Medico> lista = iMedico.listarMedico(); 	
 								TelefoneInterface iTelefone = new TelefoneDAO(); 
 								
 								
@@ -205,12 +206,12 @@
 								     data-idEspecialidade="<%= lista.get(i).getEspecialidade().getId() %>"
 								     data-nomeEspecialidade="<%= lista.get(i).getEspecialidade().getNome() %>"
 								     >
-								     <img src="./assets/editado.svg" alt="Editar" width="25" height="25">
+								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
 								  </a>
 																  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=15&id=<%= lista.get(i).getId() %>"><img src="./assets/lata.svg" alt="Excluir" width="25" height="25"></a>
+						          <a href="controle.jsp?op=15&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
 						      <%
@@ -244,8 +245,7 @@
 	<script src="js/scripts.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -269,25 +269,13 @@
 	    document.querySelectorAll('.edit-medico-btn').forEach(button => {
 	        button.addEventListener('click', function(event) {
 	            event.preventDefault();
-
-	          
+	           
 	            let btnSalvar = document.getElementById('btnSalvar');
 	            btnSalvar.innerText = 'Editar';
-
-	        
-	            document.getElementById('idMedico').value = button.getAttribute('data-idMedico');
-	            document.getElementById('inputCrm').value = button.getAttribute('data-CRM');
-	            document.getElementById('inputNome').value = button.getAttribute('data-nome');
-	            document.getElementById('inputIdTelefone').value = button.getAttribute('data-idTelefone');
-	            document.getElementById('inputTelefone').value = button.getAttribute('data-telefone');
-	            document.getElementById('inputIdEspecialidade').value = button.getAttribute('data-idEspecialidade');
-	            document.getElementById('inputEspecialidade').value = button.getAttribute('data-idEspecialidade');
-
-	           
+	            
 	            document.getElementById('formulario').action = "controle.jsp?op=16";
 	        });
 	    });
-
 
 	    // Captura o evento de clique no botão de limpar
 	    document.getElementById('btnLimpar').addEventListener('click', function() {

@@ -1,3 +1,4 @@
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="com.medic.model.Especialidade"%>
 <%@page import="com.medic.dao.EspecialidadeDAO"%>
 <%@page import="com.medic.interfaces.EspecialidadeInterface"%>
@@ -98,19 +99,16 @@
 								<div class="form-floating mb-3 col-md-12">
 									<input type="text" class="form-control" id="inputNome" name="inputNome" placeholder=" " required autocomplete="off"> 
 									<label for="inputNome" style="margin-left: 10px;">Nome</label>
-								</div>
+								</div>								
 
-								
+							</div>							
 
-							</div>
-
-							
-
-							<div class="form-floating mb-3 col-md-4 justify-content-end" style="text-align: right;">
+							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
 								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
 								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
-							<input type="hidden" id="inputId" name="inputId">
+							
+							<input type="hidden" id="inputIdEspecialidade" name="inputIdEspecialidade">
 						
 						</form>		
 						
@@ -130,21 +128,21 @@
 								List<Especialidade> lista = iEspecialidade.lista();
 								
 						      for(int i = 0; i < lista.size(); i++) {
-						    	  
+						    	  						    	  
 						      %>
 						      <tr>
 						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
 						        <td><%= lista.get(i).getNome() %></td>
 						        <td style="text-align: center;">						          
 						          <a href="#" class="edit-especialidade-btn" 
-						        	 data-idEspecialidade="<%= lista.get(i).getId() %>"
-								     data-nome="<%= lista.get(i).getNome()%>">
-								     <img src="./assets/editado.svg" alt="Editar" width="25" height="25">
+								     data-idEspecialidade="<%= lista.get(i).getId() %>"
+								     data-nome="<%= lista.get(i).getNome() %>">
+								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
 								  </a>
 																  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=14&id=<%= lista.get(i).getId() %>"><img src="./assets/lata.svg" alt="Excluir" width="25" height="25"></a>
+						          <a href="controle.jsp?op=14&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
 						      <%
@@ -229,8 +227,9 @@
 	        let btnSalvar = document.getElementById('btnSalvar');
 	        btnSalvar.innerText = 'Salvar';
 	        
-	        document.getElementById('formulario').action = "controle.jsp?op=12";
+	        document.getElementById('formulario').action = "controle.jsp?op=14";
 	    });
+		
 		
 	</script>
 

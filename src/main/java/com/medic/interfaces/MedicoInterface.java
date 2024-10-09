@@ -12,4 +12,6 @@ public interface MedicoInterface {
     void excluirMedico(int idMedico);
     List<Medico> listarMedico();
     
+    List<Medico> listarPorEspecialidade(int idEspecialidade);
+    
 }

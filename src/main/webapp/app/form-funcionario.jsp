@@ -1,8 +1,7 @@
-<%@page import="com.medic.interfaces.TelefoneInterface"%>
-<%@page import="com.medic.dao.TelefoneDAO"%>
-<%@page import="com.medic.dao.UnidadeSaudeDAO"%>
-<%@page import="com.medic.interfaces.UnidadeSaudeInterface"%>
-<%@page import="com.medic.model.UnidadeSaude"%>
+<%@page import="javax.swing.JOptionPane"%>
+<%@page import="com.medic.model.Especialidade"%>
+<%@page import="com.medic.dao.EspecialidadeDAO"%>
+<%@page import="com.medic.interfaces.EspecialidadeInterface"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
@@ -70,18 +69,18 @@
 					
 						<%
 						
-						if(request.getParameter("exibirAlertUS") != null){	
-							String nomeUS = request.getParameter("exibirAlertUS");
+						if(request.getParameter("exibirAlert") != null){	
+							String nome = request.getParameter("exibirAlert");
 							%>
 							
-							<div class="alert alert-success alert-dismissible fade show" role="alert" id="alertUS">
-							  Unidade de Saúde <%= nomeUS %> modificada!
+							<div class="alert alert-success alert-dismissible fade show" role="alert" id="alertEpecialidade">
+							  Especialidade <%= nome %> modificada!
 							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 							</div>
 							
 							<script>
 							    setTimeout(function(){
-							        window.location.href = 'form-unidade-saude.jsp';
+							        window.location.href = 'form-especialidade.jsp';
 							    }, 3000);
 							</script>
 														
@@ -89,107 +88,32 @@
 							
 						}
 						
-						%>						
+						%>			
 					
-						<h1 class="mt-4">Inserir Unidade de Saúde</h1>
+						<h1 class="mt-4">Funcionários</h1>
 					
-						<form action="controle.jsp?op=1" method="post" id="formulario">
+						<form action="controle.jsp?op=12" method="post" id="formulario">
 
 							<div class="row">
 
 								<div class="form-floating mb-3 col-md-8">
 									<input type="text" class="form-control" id="inputNome" name="inputNome" placeholder=" " required autocomplete="off"> 
 									<label for="inputNome" style="margin-left: 10px;">Nome</label>
-								</div>
-
+								</div>								
 								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputTelefone" name="inputTelefone" placeholder=" " required autocomplete="off">
-									<label for="inputTelefone" style="margin-left: 10px;">Telefone</label>
-								</div>
+									<input type="password" class="form-control" id="inputSenha" name="inputSenha" placeholder=" " required autocomplete="off"> 
+									<label for="inputSenha" style="margin-left: 10px;">Senha</label>
+								</div>								
 
-							</div>
-
-							<div class="row">
-
-								<div class="form-floating mb-3 col-md-6">
-									<input type="text" class="form-control" id="inputLogradouro" name="inputLogradouro" placeholder=" " required autocomplete="off">
-									<label for="inputLogradouro" style="margin-left: 10px;">Logradouro</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-2">
-									<input type="text" class="form-control" id="inputNumero" name="inputNumero" placeholder=" " required autocomplete="off">
-									<label for="inputNumero" style="margin-left: 10px;">Número</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputComplemento" name="inputComplemento" placeholder=" " autocomplete="off">
-									<label for="inputComplemento" style="margin-left: 10px;">Complemento</label>
-								</div>
-
-							</div>
-
-							<div class="row">
-
-								<div class="form-floating mb-3 col-md-3">
-									<input type="text" class="form-control" id="inputBairro" name="inputBairro" placeholder=" " required autocomplete="off">
-									<label for="inputBairro" style="margin-left: 10px;">Bairro</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputCidade" name="inputCidade" placeholder=" " required autocomplete="off">
-									<label for="inputCidade" style="margin-left: 10px;">Cidade</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-3">
-									<select class="form-select" id="uf" name="inputUf" required>
-										<option value="" selected disabled>Selecione o estado</option>
-										<option value="AC">Acre</option>
-										<option value="AL">Alagoas</option>
-										<option value="AP">Amapá</option>
-										<option value="AM">Amazonas</option>
-										<option value="BA">Bahia</option>
-										<option value="CE">Ceará</option>
-										<option value="DF">Distrito Federal</option>
-										<option value="ES">Espírito Santo</option>
-										<option value="GO">Goiás</option>
-										<option value="MA">Maranhão</option>
-										<option value="MT">Mato Grosso</option>
-										<option value="MS">Mato Grosso do Sul</option>
-										<option value="MG">Minas Gerais</option>
-										<option value="PA">Pará</option>
-										<option value="PB">Paraíba</option>
-										<option value="PR">Paraná</option>
-										<option value="PE">Pernambuco</option>
-										<option value="PI">Piauí</option>
-										<option value="RJ">Rio de Janeiro</option>
-										<option value="RN">Rio Grande do Norte</option>
-										<option value="RS">Rio Grande do Sul</option>
-										<option value="RO">Rondônia</option>
-										<option value="RR">Roraima</option>
-										<option value="SC">Santa Catarina</option>
-										<option value="SP">São Paulo</option>
-										<option value="SE">Sergipe</option>
-										<option value="TO">Tocantins</option>
-									</select> <label for="uf" style="margin-left: 10px;">UF</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-2">
-									<input type="text" class="form-control" id="inputCep" name="inputCep" placeholder=" " required autocomplete="off">
-									<label for="inputCep" style="margin-left: 10px;">CEP</label>
-								</div>
-
-							</div>
+							</div>							
 
 							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
 								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
 								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
 							
-							<input type="hidden" id="inputIdUS" name="inputIdUS">
-							<input type="hidden" id="inputIdEndereco" name="inputIdEndereco">
-							<input type="hidden" id="inputIdTelefone" name="inputIdTelefone">
-							
-							
+							<input type="hidden" id="inputIdEspecialidade" name="inputIdEspecialidade">
+						
 						</form>		
 						
 						<div class="table-overflow mt-4">
@@ -202,38 +126,27 @@
 						      </tr>
 						    </thead>
 						    <tbody id="clientesTableBody">
-						      <%
+						       <%
 				              	
-								UnidadeSaudeInterface iUnidadeSaude = new UnidadeSaudeDAO();
-								List<UnidadeSaude> lista = iUnidadeSaude.listar();
-								TelefoneInterface iTelefone = new TelefoneDAO();
-						      
+								EspecialidadeInterface iEspecialidade = new EspecialidadeDAO();
+								List<Especialidade> lista = iEspecialidade.lista();
+								
 						      for(int i = 0; i < lista.size(); i++) {
-						    	  
+						    	  						    	  
 						      %>
 						      <tr>
 						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
 						        <td><%= lista.get(i).getNome() %></td>
 						        <td style="text-align: center;">						          
-						          <a href="#" class="edit-us-btn" 
-									   data-idUnidadeSaude="<%= lista.get(i).getId() %>"
-									   data-nome="<%= lista.get(i).getNome() %>"
-									   data-idTelefone="<%= iTelefone.buscarUnidadeSaude(lista.get(i).getId()).getId() %>"
-									   data-telefone="<%= iTelefone.buscarUnidadeSaude(lista.get(i).getId()).getNumero() %>"
-									   data-idEndereco="<%= lista.get(i).getEndereco().getId() %>"
-									   data-logradouro="<%= lista.get(i).getEndereco().getLogradouro() %>"
-									   data-numero="<%= lista.get(i).getEndereco().getNumero() %>"
-									   data-complemento="<%= lista.get(i).getEndereco().getComplemento() %>"
-									   data-bairro="<%= lista.get(i).getEndereco().getBairro() %>"
-									   data-cidade="<%= lista.get(i).getEndereco().getCidade() %>"
-									   data-uf="<%= lista.get(i).getEndereco().getUf() %>"
-									   data-cep="<%= lista.get(i).getEndereco().getCep() %>">
-									   <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
-									</a>
-															  
+						          <a href="#" class="edit-especialidade-btn" 
+								     data-idEspecialidade="<%= lista.get(i).getId() %>"
+								     data-nome="<%= lista.get(i).getNome() %>">
+								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
+								  </a>
+																  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=3&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
+						          <a href="controle.jsp?op=14&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
 						      <%
@@ -251,19 +164,19 @@
                        <div class="dashboard d-block">
             <div class="card mt-3 p-3">
                 <i class="icon bi bi-hospital-fill text-primary text-center fs-3"> Unidade de saúde </i>
-                <div class="count text-primary text-center fs-1"><%= lista.size() %></div>
+                <div class="count text-primary text-center fs-1"></div>
             </div>
             <div class="card mt-3 p-3  ">
                 <i class="icon bi bi-capsule text-danger text-center fs-3"> Pacientes</i>
-                <div class="count text-danger text-center fs-1"><%= lista.size() %></div>
+                <div class="count text-danger text-center fs-1"></div>
             </div>
             <div class="card mt-3 p-3 ">
                 <i class="icon bi bi-people-fill text-warning text-center fs-3"> Familias</i>
-                <div class="count text-warning text-center fs-1"><%= lista.size() %></div>
+                <div class="count text-warning text-center fs-1"></div>
             </div>
             <div class="card mt-3 p-3 ">
                 <i class="icon bi bi-capsule text-success text-center fs-3"> Médicos</i>
-                <div class="count text-success text-center fs-1"><%= lista.size() %></div>
+                <div class="count text-success text-center fs-1"></div>
             </div>
             
       
@@ -297,19 +210,19 @@
 		});
 		
 	    setTimeout(function() {
-	        var alertElement = document.getElementById('alertUS');
+	        var alertElement = document.getElementById('alertEspecialidade');
 	        var alert = new bootstrap.Alert(alertElement);
 	        alert.close();
 	    }, 2000);
 	    	   
-	    document.querySelectorAll('.edit-us-btn').forEach(button => {
+	    document.querySelectorAll('.edit-especialidade-btn').forEach(button => {
 	        button.addEventListener('click', function(event) {
 	            event.preventDefault();
 	           
 	            let btnSalvar = document.getElementById('btnSalvar');
 	            btnSalvar.innerText = 'Editar';
 	            
-	            document.getElementById('formulario').action = "controle.jsp?op=2";
+	            document.getElementById('formulario').action = "controle.jsp?op=13";
 	        });
 	    });
 
@@ -318,8 +231,9 @@
 	        let btnSalvar = document.getElementById('btnSalvar');
 	        btnSalvar.innerText = 'Salvar';
 	        
-	        document.getElementById('formulario').action = "controle.jsp?op=1";
+	        document.getElementById('formulario').action = "controle.jsp?op=14";
 	    });
+		
 		
 	</script>
 

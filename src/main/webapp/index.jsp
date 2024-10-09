@@ -94,22 +94,22 @@
 												<a class="page-scroll active" href="#home">Home</a>
 											</li>
 											<li class="nav-item">
-												<a class="page-scroll" href="#about">About</a>
+												<a class="page-scroll" href="#about">Sobre</a>
 											</li>
 											<li class="nav-item">
-												<a class="page-scroll" href="#services">Service</a>
+												<a class="page-scroll" href="#services">Serviços</a>
 											</li>
 											<li class="nav-item">
-												<a class="page-scroll" href="#team">Doctor</a>
+												<a class="page-scroll" href="#team">Médicos</a>
 											</li>
 											<li class="nav-item">
 												<a class="page-scroll" href="#blog">Blog</a>
 											</li>
 											<li class="nav-item">
-												<a class="page-scroll" href="#contact">Contact</a>
+												<a class="page-scroll" href="#contact">Contato</a>
 											</li>
 											<li class="nav-item">
-												<a href="./app/index.jsp">iMedic</a>
+												<a href="./app/index.jsp">Sistema iMedic</a>
 											</li>
 										</ul>
 									</div> <!-- navbar collapse -->
@@ -129,14 +129,13 @@
 							<div class="row">
 								<div class="col-xl-7 col-lg-8 col-md-10">
 									<div class="slider-content">
-										<h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">Complete Healthcare Solution
+										<h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">Solução Completa de Saúde
 										</h1>
-										<p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">Lorem ipsum
-											dolor sit amet, consetetur sadipscing elitr, sed dinonumy eirmod tempor invidunt
-											ut labore et dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur
-											sadipscing elitr.</p>
+										<p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">Cuidamos de você em todas as etapas, 
+										com tecnologia avançada, profissionais capacitados e um atendimento humanizado, 
+										garantindo o bem-estar e a qualidade de vida que você merece.</p>
 										<a href="#about" class="btn theme-btn page-scroll" data-animation="fadeInUp" data-duration="1.5s"
-											data-delay=".9s">Learn More</a>
+											data-delay=".9s">Ler mais</a>
 									</div>
 								</div>
 							</div>
@@ -147,15 +146,13 @@
 							<div class="row">
 								<div class="col-xl-7 col-lg-8 col-md-10">
 									<div class="slider-content">
-										<h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">Best Doctors and Equipments in Town
+										<h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">Melhores Médicos e Equipamentos da Cidade
 										</h1>
-										<p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">Lorem ipsum
-											dolor sit amet, consetetur sadipscing elitr, sed dinonumy eirmod tempor invidunt
-											ut labore et dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur
-											sadipscing elitr.</p>
+										<p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">Contamos com os melhores médicos e 
+										equipamentos de última geração para garantir a você e sua família o atendimento de saúde mais completo e 
+										eficaz da cidade."</p>
 										<a href="#contact" class="btn theme-btn page-scroll" data-animation="fadeInUp" data-duration="1.5s"
-											data-delay=".9s">Make
-											Appoinment</a>
+											data-delay=".9s">Agendar Consulta</a>
 									</div>
 								</div>
 							</div>
@@ -166,14 +163,13 @@
 							<div class="row">
 								<div class="col-xl-7 col-lg-8 col-md-10">
 									<div class="slider-content">
-										<h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">Your Health is Our Top Priority
+										<h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">Sua Saúde é Nossa Prioridade
 										</h1>
-										<p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">Lorem ipsum
-											dolor sit amet, consetetur sadipscing elitr, sed dinonumy eirmod tempor invidunt
-											ut labore et dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur
-											sadipscing elitr.</p>
+										<p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">Na nossa unidade de saúde, sua prioridade é o 
+										cuidado com você. Comprometidos em oferecer atendimento de excelência, trabalhamos todos os dias para 
+										garantir o seu bem-estar e uma vida mais saudável.</p>
 										<a href="#services" class="btn theme-btn page-scroll" data-animation="fadeInUp" data-duration="1.5s"
-											data-delay=".9s">Our Services</a>
+											data-delay=".9s">Nossos Serviços</a>
 									</div>
 								</div>
 							</div>

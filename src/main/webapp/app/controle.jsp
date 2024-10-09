@@ -1,3 +1,14 @@
+<%@page import="com.medic.model.Funcionario"%>
+<%@page import="com.medic.interfaces.FuncionarioInterface"%>
+<%@page import="com.medic.dao.FuncionarioDAO"%>
+<%@page import="java.time.format.DateTimeParseException"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.util.List"%>
+<%@page import="com.medic.model.Agendamento"%>
+<%@page import="com.medic.dao.AgendamentoDAO"%>
+<%@page import="com.medic.interfaces.AgendamentoInterface"%>
 <%@page import="com.medic.model.Medico"%>
 <%@page import="com.medic.model.Especialidade"%>
 <%@page import="com.medic.dao.MedicoDAO"%>
@@ -22,13 +33,6 @@
 <%@page import="com.medic.model.Endereco"%>
 <%@page import="com.medic.dao.EnderecoDAO"%>
 <%@page import="com.medic.interfaces.EnderecoInterface"%>
-<%@page import="com.medic.interfaces.AgendamentoInterface"%>
-<%@page import="com.medic.dao.AgendamentoDAO"%>
-<%@page import="com.medic.model.Agendamento"%>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.LocalDateTime" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="java.time.format.DateTimeParseException" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -41,8 +45,8 @@ FamiliaInterface iFamilia = new FamiliaDAO();
 PacienteInterface iPaciente = new PacienteDAO();
 EspecialidadeInterface iEspecialidade = new EspecialidadeDAO();
 MedicoInterface iMedico = new MedicoDAO();
-AgendamentoInterface iAgendamento = new AgendamentoDAO();
-
+FuncionarioInterface iFuncionario = new FuncionarioDAO();
+AgendamentoInterface iAgendamento = new AgendamentoDAO(); 
 
 switch(op){
 
@@ -144,7 +148,7 @@ case 4:{
 	String nome = request.getParameter("inputNome");
 	String cpf = request.getParameter("inputCpf");
 	String nascimento = request.getParameter("inputNascimento");
-	out.println(nascimento);
+	
 	Funcoes f = new Funcoes();	
 	Paciente paciente = new Paciente();
 	paciente.setNome(nome);
@@ -160,8 +164,7 @@ case 4:{
 	telefone.setPaciente(paciente);	
 	int idTelefone = iTelefone.inserir(telefone);
 	telefone.setId(idTelefone);
-	out.println(telefone);
-	
+		
 	response.sendRedirect("form-paciente.jsp?exibirAlertPaciente="+paciente.getNome());
 
 	break;
@@ -190,12 +193,6 @@ case 5:{
 	iPaciente.editar(paciente);
 	paciente.setId(idPaciente);
 	
-	
-	
-	out.println(paciente);
-	out.println("<br>");
-	out.println("<br>");
-	
 	int idTelefone = Integer.parseInt(request.getParameter("inputIdTelefone"));
 	String nTelefone = request.getParameter("inputTelefone");	
 	Telefone telefone = new Telefone();
@@ -203,8 +200,7 @@ case 5:{
 	telefone.setNumero(nTelefone);
 	telefone.setPaciente(paciente);	
 	iTelefone.editar(telefone);
-	out.println(telefone);
-	
+		
 	response.sendRedirect("form-paciente.jsp?exibirAlertPaciente="+paciente.getNome());
 	
 	break;
@@ -341,9 +337,16 @@ case 11:{
 	
 	telefone.setNumero(ntelefone);
 	telefone.setMedico(medico);
-	iTelefone.inserir(telefone); 
-	response.sendRedirect("form-medico.jsp");
+	iTelefone.inserir(telefone);
+	iTelefone.editar(telefone);
 
+	/* O QUE É ISSO? */
+	//int id = Integer.parseInt(request.getParameter("id"));
+	//iMedico.editarMedico(medico);
+	//response.sendRedirect("form-especialidade.jsp");
+	/* ??? */
+	
+	response.sendRedirect("form-medico.jsp");
 	
 	break;
 }
@@ -356,22 +359,20 @@ case 12:{
 	break;
 }
 
-case 13: {
-    // Reservado para editar especialidade
-    String nome = request.getParameter("inputNome");
-    int idEspecialidade = Integer.parseInt(request.getParameter("inputId"));
-    
-    // Criar o objeto Especialidade com ID e nome
-    Especialidade especialidade = new Especialidade(idEspecialidade, nome);
-    
-    // Editar especialidade no banco de dados
-    iEspecialidade.editar(especialidade);
-    
-    // Redirecionar com mensagem de sucesso
-    response.sendRedirect("form-especialidade.jsp?exibirAlert=Especialidade " + nome + " editada com sucesso");
-    break;
-}
+case 13:{
+//resevado para editar especialidade.
+	
+	int idEspecialidade = Integer.parseInt(request.getParameter("inputIdEspecialidade"));
+	String nome = request.getParameter("inputNome");
+	Especialidade especialidade = new Especialidade();
+	especialidade.setId(idEspecialidade);
+	especialidade.setNome(nome);
+	out.println(especialidade);
+	iEspecialidade.editar(especialidade);
+	response.sendRedirect("form-especialidade.jsp?exibirAlert="+especialidade.getNome());
 
+	break;
+}
 case 14:{
 	int idEspecialidade = Integer.parseInt(request.getParameter("id"));
 	iEspecialidade.excluir(idEspecialidade);
@@ -381,42 +382,39 @@ case 14:{
 
 case 15:{
 	 
-     //excluir okk tudo certo
+     //excluindo idMedico todo 
 	int idMedico = Integer.parseInt(request.getParameter("id"));
 	iMedico.excluirMedico(idMedico);
 	response.sendRedirect("form-medico.jsp");
 	break;
 }
 
-
+case 16:{
+	//resevado para editar médico.
 	
-case 16: {
-
-
-	    int medicoId = Integer.parseInt(request.getParameter("idMedico"));
-	    String crm = request.getParameter("inputCrm");
-	    String nome = request.getParameter("inputNome");
-	    String telefoneNumero = request.getParameter("inputTelefone");
-	    int telefoneId = Integer.parseInt(request.getParameter("inputIdTelefone"));
-	    int especialidadeId = Integer.parseInt(request.getParameter("inputEspecialidade"));
-
-//aqui buscando pelo id   
-	    Medico medico = iMedico.consultarMedico(medicoId);
-	    Telefone telefone = iTelefone.consultar(telefoneId);
-	    Especialidade especialidade = iEspecialidade.consultar(especialidadeId);
-
-	   medico.setCrm(crm);
-	    medico.setNome(nome);
-	   medico.setEspecialidade(especialidade);
-	    telefone.setNumero(telefoneNumero);
-
-	  
+	int idMedico = Integer.parseInt(request.getParameter("inputIdMedico"));	
+	String crm = request.getParameter("inputCrm");
+	String nome = request.getParameter("inputNome");
+	int idEspecialidade = Integer.parseInt(request.getParameter("inputEspecialidade"));
+	String nTelefone = request.getParameter("inputTelefone");	
+	
+	Especialidade especialidade = iEspecialidade.consultar(idEspecialidade);
+	iEspecialidade.editar(especialidade);
+		
+	Medico medico = new Medico();
+	medico.setId(idMedico);
+	medico.setCrm(crm);
+	medico.setNome(nome);
+	medico.setEspecialidade(especialidade);
 	iMedico.editarMedico(medico);
-	    iTelefone.editar(telefone);
-
-	  
-	    response.sendRedirect("form-medico.jsp?exibirAlert=Editado com sucesso");
+		
+	Telefone telefone = iTelefone.buscarMedico(idMedico);
+	telefone.setNumero(nTelefone);
+	iTelefone.editar(telefone);
 	
+	response.sendRedirect("form-medico.jsp?exibirAlert="+medico.getNome());
+	
+	break;
 }
 
 case 17:{
@@ -428,47 +426,51 @@ case 17:{
 	int idPaciente = Integer.parseInt(request.getParameter("inputPaciente"));
 	Paciente paciente = iPaciente.consultar(idPaciente);
 	
+	int idFuncionario = 1; // simulando que sempre será id = 1
+	Funcionario funcionario = iFuncionario.consultaFuncionario(idFuncionario);
+	
 	String dataAgendamento = request.getParameter("inputData");
 	
-	LocalDateTime data = null;
+	LocalDate data = null;
 	
 	try{
-		DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		LocalDate localDate = LocalDate.parse(dataAgendamento, formater);
+		DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		data = LocalDate.parse(dataAgendamento, formater);
 	}catch(DateTimeParseException e){
 		e.printStackTrace();
 	    response.sendRedirect("form-agendamento.jsp?exibirAlertAgendamento=Formato de data inválido");
 	    return;
 	}
 	
-	String observacoes = request.getParameter("inputObservacoes");
+	String observacoes = request.getParameter("inputObs");
 	
 	Agendamento agendamento = new Agendamento();
 	
 	agendamento.setMedico(medico);
 	agendamento.setPaciente(paciente);
-	agendamento.setDataHora(data);
+	agendamento.setFuncionario(funcionario);
+	agendamento.setDataAgendamento(data);
 	agendamento.setObservacoes(observacoes);
+	agendamento.setStatusAgendamento("CONFIRMADO");
 	
 	int idAgendamento = iAgendamento.inserirAgendamento(agendamento);
-    agendamento.setId(idAgendamento); 
-
+    agendamento.setId(idAgendamento);
   
-    response.sendRedirect("form-agendamento.jsp?exibirAlertAgendamento=inserido com sucesso");
+    out.println(agendamento);
+    
+    //response.sendRedirect("form-agendamento.jsp?exibirAlertAgendamento=inserido com sucesso");
     
     break;
-
-	
-	
-	
-	
-	
-	
-	
 }
-   
-	
 
+case 20:{
+    
+	int idEspecialidade = Integer.parseInt(request.getParameter("inputEspecialidade"));
+    
+    List<Medico> listaMedico = iMedico.listarPorEspecialidade(idEspecialidade);
+    
+    break;
+}
 default:{
 	
 

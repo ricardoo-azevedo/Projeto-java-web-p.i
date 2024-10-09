@@ -25,6 +25,15 @@ input, select, option{
 	background-color: #ededed;
 }
 
+.table-overflow-accordion {
+	height: 6rem;
+	overflow: hidden;
+	overflow-y: scroll;
+	min-height: 50vh;
+	text-align: center;
+	background-color: #ededed;
+}
+
 .sidebar-heading {
 	color: #fff;
 	font-weight: 400;

@@ -165,7 +165,7 @@
 								</div>
 
 								<div class="form-floating mb-3 col-md-2">
-									<input type="text" class="form-control" id="inputCep" name="inputCep" placeholder=" " required autocomplete="off">
+									<input type="text" class="form-control" id="inputCep" maxlength="9" name="inputCep" placeholder=" " required autocomplete="off">
 									<label for="inputCep" style="margin-left: 10px;">CEP</label>
 								</div>
 
@@ -185,12 +185,13 @@
 	                      <table class="table table-bordered table-light table-striped table-hover" style="border-radius: 8px;">
 						    <thead>
 						      <tr>
-						        <th scope="col" style="width: 7%; text-align: center;">#</th>
+						        <th scope="col" style="width: 7%; text-align: center;">#</th>						        
+						        <th scope="col">ID</th>
 						        <th scope="col">LOGRADOURO</th>
 						        <th scope="col">NÚMERO</th>
 						        <th scope="col">CIDADE</th>
 						        <th scope="col">UF</th>
-						        <th colspan="2" scope="col" style="width: 20%; text-align: center;">AÇÕES</th>
+						        <th colspan="2" scope="col" style="text-align: center;">AÇÕES</th>
 						      </tr>
 						    </thead>
 						    <tbody id="clientesTableBody">
@@ -204,6 +205,7 @@
 						      %>
 						      <tr>
 						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
+						        <td><%= lista.get(i).getId() %></td>
 						        <td><%= lista.get(i).getEndereco().getLogradouro() %></td>
 						        <td><%= lista.get(i).getEndereco().getNumero() %></td>
 						        <td><%= lista.get(i).getEndereco().getCidade() %></td>
@@ -219,12 +221,12 @@
 								     data-cidade="<%= lista.get(i).getEndereco().getCidade() %>"
 								     data-uf="<%= lista.get(i).getEndereco().getUf() %>"
 								     data-cep="<%= lista.get(i).getEndereco().getCep() %>">
-								     <img src="./assets/editado.svg" alt="Editar" width="25" height="25">
+								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
 								  </a>
 																  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=10&id=<%= lista.get(i).getId() %>"><img src="./assets/lata.svg" alt="Excluir" width="25" height="25"></a>
+						          <a href="controle.jsp?op=10&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
 						      <%
@@ -312,6 +314,16 @@
 				}
 			});
 		});
+		
+		$(document).ready(function() {
+            $('#inputCep').on('input', function() {
+                let cep = $(this).val().replace(/\D/g, ''); // Remove tudo que não é dígito
+                if (cep.length > 5) {
+                    cep = cep.replace(/^(\d{5})(\d)/, '$1-$2'); // Aplica o traço no meio
+                }
+                $(this).val(cep);
+            });
+        });
 		
 	    setTimeout(function() {
 	        var alertElement = document.getElementById('alertUS');

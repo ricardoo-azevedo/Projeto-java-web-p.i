@@ -105,64 +105,9 @@
 						
 						%>						
 					
-						<h1 class="mt-4">Inserir Paciente na Família</h1>
-					
-						<form action="controle.jsp?op=7" method="post" id="formulario">
-
-							<div class="row">
-
-								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputCpf" name="inputCpf" placeholder=" " required autocomplete="off"> 
-									<label for="inputCpf" style="margin-left: 10px;">CPF</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-4">
-									<input type="date" class="form-control" id="inputNascimento" name="inputNascimento" placeholder=" " required autocomplete="off"> 
-									<label for="inputNascimento" style="margin-left: 10px;">Data de Nascimento</label>
-								</div>
-
-								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputTelefone" name="inputTelefone" placeholder=" " required autocomplete="off">
-									<label for="inputTelefone" style="margin-left: 10px;">Telefone</label>
-								</div>
-
-							</div>
-							
-							<div class="row">
-
-								<div class="form-floating mb-3 col-md-8">
-									<input type="text" class="form-control" id="inputNome" name="inputNome" placeholder=" " required autocomplete="off"> 
-									<label for="inputNome" style="margin-left: 10px;">Nome</label>
-								</div>
-								
-								<div class="form-floating mb-3 col-md-4">
-									<select class="form-select" id="uf" name="inputFamilia" required>
-										<option value="" selected disabled>Selecione</option>
-										<%
-										
-										FamiliaInterface iFamilia = new FamiliaDAO();
-										List<Familia> listaFamilia = iFamilia.listar();
-										
-										for(int i = 0; i < listaFamilia.size(); i++) {
-										
-										%>
-										<option value="<%= listaFamilia.get(i).getId() %>"><%= "Número: "+listaFamilia.get(i).getId() %></option>
-										<%
-										}
-										%>
-										</select> <label for="familia" style="margin-left: 10px;">Família</label>
-								</div>
-
-							</div>
-							
-							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
-								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
-								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
-							</div>
-							
-						</form>		
+						<h1 class="mt-4">Paciente - Família</h1>
 						
-						<div class="mt-4">
+						<div class="mt-4 table-overflow-accordion">
 						
 							<div class="accordion accordion-flush" id="accordionFlushExample">
 							
@@ -172,8 +117,8 @@
 								Funcoes f = new Funcoes();
 								List<Paciente> lista = iPaciente.listar();
 						      
-								iFamilia = new FamiliaDAO();
-								listaFamilia = iFamilia.listarFamiliaPaciente();
+								FamiliaInterface iFamilia = new FamiliaDAO();
+								List<Familia >listaFamilia = iFamilia.listarFamiliaPaciente();
 						     	for(int i = 0; i < listaFamilia.size(); i++) {
 							%>
 							

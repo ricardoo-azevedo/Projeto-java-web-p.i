@@ -1,25 +1,38 @@
 package com.medic.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Agendamento {
 
 	private int id;
 	private Paciente paciente;
 	private Medico medico;
-	LocalDateTime dataHora;
-	String statusAgendamento;
-	String observacoes;
-
+	private Funcionario funcionario;
+	private LocalDate dataAgendamento;
+	private String statusAgendamento;
+	private String observacoes;
+	
 	public Agendamento() {
 
 	}
 
-	public Agendamento(int id, Paciente paciente, Medico medico, LocalDateTime dataHora, String statusAgendamento, String observacoes) {
+	public Agendamento(Paciente paciente, Medico medico, Funcionario funcionario, LocalDate dataAgendamento,
+			String statusAgendamento, String observacoes) {
+		this.paciente = paciente;
+		this.medico = medico;
+		this.funcionario = funcionario;
+		this.dataAgendamento = dataAgendamento;
+		this.statusAgendamento = statusAgendamento;
+		this.observacoes = observacoes;
+	}
+
+	public Agendamento(int id, Paciente paciente, Medico medico, Funcionario funcionario, LocalDate dataAgendamento,
+			String statusAgendamento, String observacoes) {
 		this.id = id;
 		this.paciente = paciente;
 		this.medico = medico;
-		this.dataHora = dataHora;
+		this.funcionario = funcionario;
+		this.dataAgendamento = dataAgendamento;
 		this.statusAgendamento = statusAgendamento;
 		this.observacoes = observacoes;
 	}
@@ -48,12 +61,20 @@ public class Agendamento {
 		this.medico = medico;
 	}
 
-	public LocalDateTime getDataHora() {
-		return dataHora;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
-	public void setDataHora(LocalDateTime dataHora) {
-		this.dataHora = dataHora;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public LocalDate getDataAgendamento() {
+		return dataAgendamento;
+	}
+
+	public void setDataAgendamento(LocalDate dataAgendamento) {
+		this.dataAgendamento = dataAgendamento;
 	}
 
 	public String getStatusAgendamento() {
@@ -74,9 +95,10 @@ public class Agendamento {
 
 	@Override
 	public String toString() {
-		return "[Id: " + this.id + " | Paciente: " + this.paciente + " | Medico: " + this.medico + " | Data e Hora: "
-				+ this.dataHora + " | Status Agendamento: " + this.statusAgendamento + " | Obsercações: "
-				+ this.observacoes + "]";
+		return "Agendamento [id=" + id + ", paciente=" + paciente + ", medico=" + medico + ", funcionario="
+				+ funcionario + ", dataAgendamento=" + dataAgendamento + ", statusAgendamento=" + statusAgendamento
+				+ ", observacoes=" + observacoes + "]";
 	}
+	
 
 }

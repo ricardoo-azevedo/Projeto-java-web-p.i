@@ -8,14 +8,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.medic.interfaces.MedicoInterface;
+import com.medic.interfaces.PacienteInterface;
 import com.medic.interfaces.TelefoneInterface;
+import com.medic.interfaces.UnidadeSaudeInterface;
+import com.medic.model.Medico;
+import com.medic.model.Paciente;
 import com.medic.model.Telefone;
+import com.medic.model.UnidadeSaude;
 import com.medic.service.ConnectionFactory;
 
 public class TelefoneDAO implements TelefoneInterface{
 
 	private Connection connection;
 	private ConnectionFactory connectionFactory = new ConnectionFactory();
+	private MedicoInterface iMedico = new MedicoDAO();
+	private UnidadeSaudeInterface iUnidadeSaude = new UnidadeSaudeDAO();
+	private PacienteInterface iPaciente = new PacienteDAO();
 
 	public TelefoneDAO() {
 		try {
@@ -157,9 +166,12 @@ public class TelefoneDAO implements TelefoneInterface{
 			if (rs.next()) {
 				int idTelefone = rs.getInt("IDTELEFONE");
 				String numero = rs.getString("NUMERO");
+				idUnidadeSaude = rs.getInt("IDUNIDADESAUDE");
+				UnidadeSaude us = iUnidadeSaude.consultar(idUnidadeSaude);
 				telefone = new Telefone();
 				telefone.setId(idTelefone);
 				telefone.setNumero(numero);
+				telefone.setUnidadeSaude(us);
 			}
 		} catch (SQLException e) {
 			System.err.println(">>> Erro ao consultar telefone: " + e);
@@ -181,9 +193,12 @@ public class TelefoneDAO implements TelefoneInterface{
 			if (rs.next()) {
 				int idTelefone = rs.getInt("IDTELEFONE");
 				String numero = rs.getString("NUMERO");
+				idPaciente = rs.getInt("IDPACIENTE");
+				Paciente paciente = iPaciente.consultar(idPaciente);
 				telefone = new Telefone();
 				telefone.setId(idTelefone);
 				telefone.setNumero(numero);
+				telefone.setPaciente(paciente);
 			}
 		} catch (SQLException e) {
 			System.err.println(">>> Erro ao consultar telefone: " + e);
@@ -206,10 +221,12 @@ public class TelefoneDAO implements TelefoneInterface{
 			if (rs.next()) {
 				int idTelefone = rs.getInt("IDTELEFONE");
 				String numero = rs.getString("NUMERO");
+				idMedico = rs.getInt("IDMEDICO");
+				Medico medico = iMedico.consultarMedico(idMedico);
 				telefone = new Telefone();
 				telefone.setId(idTelefone);
-				telefone.setNumero(numero);	
-				
+				telefone.setNumero(numero);
+				telefone.setMedico(medico);				
 			}
 		} catch (SQLException e) {
 			System.err.println(">>> Erro ao consultar telefone: " + e);
