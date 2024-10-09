@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.medic.model.Funcionario;
 
-public interface FuncionarioInteface {
+public interface FuncionarioInterface {
     int inserirFuncionario(Funcionario funcionario);
     Funcionario consultaFuncionario(int idFuncionario);
     void editarFuncionario(Funcionario funcionario);    

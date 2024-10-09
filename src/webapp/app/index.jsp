@@ -17,7 +17,7 @@
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
-        <div class="border-end coluna-esquerda" id="sidebar-wrapper">
+        <div class="border-end coluna-esquerda bg-success" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom">SISTEMA MEDIC</div>
             <div class="list-group list-group-flush">
                <%@ include file="menu.jsp" %>

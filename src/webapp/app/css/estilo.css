@@ -1,0 +1,81 @@
+form{
+	padding: 10px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	border-radius: 4px;
+}
+
+input, select, option{
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.coluna-esquerda{
+	background-color: rgb(25, 41, 79);
+}
+
+.coluna-direita{
+	
+}
+
+.table-overflow {
+	height: 3rem;
+	overflow: hidden;
+	overflow-y: scroll;
+	min-height: 50vh;
+	text-align: center;
+	background-color: #ededed;
+}
+
+.table-overflow-accordion {
+	height: 6rem;
+	overflow: hidden;
+	overflow-y: scroll;
+	min-height: 50vh;
+	text-align: center;
+	background-color: #ededed;
+}
+
+.sidebar-heading {
+	color: #fff;
+	font-weight: 400;
+}
+
+.card2{
+	width: 20rem; 
+	margin-left: 5px; 
+	margin-bottom: 5px; 
+}
+
+/* fade nos elementos */
+.fade-in-element {
+	animation: fadeIn 0.5s;
+	-webkit-animation: fadeIn 0.5s;
+	-moz-animation: fadeIn 0.5s;
+	-o-animation: fadeIn 0.5s;
+	-ms-animation: fadeIn 0.5s;
+}
+			
+@keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@-moz-keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@-o-keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@-ms-keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+/* fim fade nos elementos */
