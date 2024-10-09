@@ -22,6 +22,13 @@
 <%@page import="com.medic.model.Endereco"%>
 <%@page import="com.medic.dao.EnderecoDAO"%>
 <%@page import="com.medic.interfaces.EnderecoInterface"%>
+<%@page import="com.medic.interfaces.AgendamentoInterface"%>
+<%@page import="com.medic.dao.AgendamentoDAO"%>
+<%@page import="com.medic.model.Agendamento"%>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.format.DateTimeParseException" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -34,6 +41,7 @@ FamiliaInterface iFamilia = new FamiliaDAO();
 PacienteInterface iPaciente = new PacienteDAO();
 EspecialidadeInterface iEspecialidade = new EspecialidadeDAO();
 MedicoInterface iMedico = new MedicoDAO();
+AgendamentoInterface iAgendamento = new AgendamentoDAO();
 
 
 switch(op){
@@ -408,6 +416,54 @@ case 16: {
 
 	  
 	    response.sendRedirect("form-medico.jsp?exibirAlert=Editado com sucesso");
+	
+}
+
+case 17:{
+	/*inserir Agendamento*/
+	
+	int idMedico = Integer.parseInt(request.getParameter("inputMedico"));
+	Medico medico = iMedico.consultarMedico(idMedico);
+	
+	int idPaciente = Integer.parseInt(request.getParameter("inputPaciente"));
+	Paciente paciente = iPaciente.consultar(idPaciente);
+	
+	String dataAgendamento = request.getParameter("inputData");
+	
+	LocalDateTime data = null;
+	
+	try{
+		DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate localDate = LocalDate.parse(dataAgendamento, formater);
+	}catch(DateTimeParseException e){
+		e.printStackTrace();
+	    response.sendRedirect("form-agendamento.jsp?exibirAlertAgendamento=Formato de data inválido");
+	    return;
+	}
+	
+	String observacoes = request.getParameter("inputObservacoes");
+	
+	Agendamento agendamento = new Agendamento();
+	
+	agendamento.setMedico(medico);
+	agendamento.setPaciente(paciente);
+	agendamento.setDataHora(data);
+	agendamento.setObservacoes(observacoes);
+	
+	int idAgendamento = iAgendamento.inserirAgendamento(agendamento);
+    agendamento.setId(idAgendamento); 
+
+  
+    response.sendRedirect("form-agendamento.jsp?exibirAlertAgendamento=inserido com sucesso");
+    
+    break;
+
+	
+	
+	
+	
+	
+	
 	
 }
    

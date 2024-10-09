@@ -1,3 +1,16 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="com.medic.auxiliar.Funcoes"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.medic.model.Medico"%>
+<%@page import="com.medic.dao.MedicoDAO"%>
+<%@page import="com.medic.interfaces.MedicoInterface"%>
+<%@page import="com.medic.model.Paciente"%>
+<%@page import="com.medic.interfaces.PacienteInterface"%>
+<%@page import="com.medic.dao.PacienteDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -59,21 +72,91 @@
             </nav>
             <!-- Page content -->
             <div class="container-fluid fade-in-element">
+            
                 <div class="row justify-content-between">
                     <div class="col-md-7">
-                        <h1 class="mt-3">Agendamento de Consulta</h1>
+                        <h1 class="mt-3">Agendamento</h1>
 
-                        <form action="controle.jsp?op=4" method="post">
+                        <form action="controle.jsp?op=" method="post">
+                        
+                        	<div class="row">
+
+								<div class="form-floating mb-3 col-md-12">
+									<select class="form-select" id="inputMedico" name="inputMedico" required>
+										<option value="" selected disabled>Selecione</option>
+										<%
+										
+										MedicoInterface iMedico = new MedicoDAO();
+										List<Medico> listaMedico = iMedico.listarMedico();
+										
+										for(int i = 0; i < listaMedico.size(); i++) {
+										
+										%>
+										<option value="<%= listaMedico.get(i).getId() %>"><%= listaMedico.get(i).getEspecialidade().getNome()+" | "+listaMedico.get(i).getCrm()+" :: "+listaMedico.get(i).getNome() %></option>
+										<%
+										}
+										%>
+										</select> <label for="familia" style="margin-left: 10px;">Médico</label>
+								</div>
+
+							</div>
+                        
+                        	<div class="row">
+
+								<div class="form-floating mb-3 col-md-12">
+									<select class="form-select" id="inputPaciente" name="inputPaciente" required>
+										<option value="" selected disabled>Selecione</option>
+										<%
+										
+										PacienteInterface iPaciente = new PacienteDAO();
+										List<Paciente> listaPaciente = iPaciente.listar();
+										
+										for(int i = 0; i < listaPaciente.size(); i++) {
+										
+										%>
+										<option value="<%= listaPaciente.get(i).getId() %>"><%= listaPaciente.get(i).getCpf()+" :: "+listaPaciente.get(i).getNome() %></option>
+										<%
+										}
+										%>
+										</select> <label for="familia" style="margin-left: 10px;">Paciente</label>
+								</div>
+
+							</div>
+                        
                             <div class="row">
-                                <div class="form-floating mb-3 col-md-12">
-                                    
-                                    <label for="observacoes">Obs:</label>
-                                    <textarea id="observacoes" name="observacoes" class="form-control"></textarea>
-                                    <br><br>
+                                
+								<div class="form-floating mb-3 col-md-4">
+								    <select class="form-control" id="inputDataInicio" name="inputData" required>
+								        <option value="" selected disabled>Selecione</option>
+								        <%
+								            /*_*/
+								            Funcoes f = new Funcoes();
+								            
+								            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+								    		LocalDate now = LocalDate.now();
+								            
+								            int limiteDias = 14;
+								            for (int i = 0; i <= limiteDias; i += 3) {
+								            									                
+								                out.println("<option value='" +dtf.format(now.plusDays(i))+ "'>" + dtf.format(now.plusDays(i)) +" - "+dtf.format(now.plusDays(i+2)) + "</option>");								               
+								            }
+								            
+								        %>
+								    </select>
+								    <label for="inputData" style="margin-left: 10px;">Data do Agendamento</label>
+								     
+								</div>
+
+								
+								<div class="form-floating mb-3 col-md-8">                                    
+                                    <textarea id="inputObs" class="form-control"></textarea>
+                                    <label for="inputObs" style="margin-left: 10px;">Observações</label>                                  
                                 </div>
+
                             </div>
 
                             <div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
+                                <button type="reset" class="btn btn-lg btn-success">Limpar</button>
                                 <button type="submit" class="btn btn-lg btn-success">Salvar</button>
                             </div>
                         </form>
@@ -81,8 +164,7 @@
 
                     <div class="col-md-5 coluna-direita">
                         <!-- Conteúdo da coluna direita -->
-                        <iframe style="width: 100%; height: 90vh;"
-                            src="https://cnes2.datasus.gov.br/Lista_Es_Municipio.asp?VEstado=26&VCodMunicipio=260890&NomeEstado="></iframe>
+                        
                     </div>
                 </div>
             </div>
