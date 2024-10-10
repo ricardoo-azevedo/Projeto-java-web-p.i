@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPasswordLogin" placeholder="Senha" name="senha" aria-label="Senha" required>
+                 <input type="password" class="form-control" id="floatingPasswordLogin" placeholder="Senha" name="senha" aria-label="Senha" required>
                 <label for="floatingPasswordLogin">Senha</label>
             </div>
 

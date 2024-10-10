@@ -1,3 +1,6 @@
+<%@page import="com.medic.model.Funcionario"%>
+<%@page import="com.medic.dao.FuncionarioDAO"%>
+<%@page import="com.medic.interfaces.FuncionarioInterface"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@page import="com.medic.model.Especialidade"%>
 <%@page import="com.medic.dao.EspecialidadeDAO"%>
@@ -71,10 +74,12 @@
 						
 						if(request.getParameter("exibirAlert") != null){	
 							String nome = request.getParameter("exibirAlert");
+							String senha = request.getParameter("exibirAlert");
 							%>
 							
 							<div class="alert alert-success alert-dismissible fade show" role="alert" id="alertEpecialidade">
-							  Especialidade <%= nome %> modificada!
+							  Funcionario <%= nome %> modificado!
+							   Funcionario <%= senha %> modificado!
 							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 							</div>
 							
@@ -92,15 +97,15 @@
 					
 						<h1 class="mt-4">Funcionários</h1>
 					
-						<form action="controle.jsp?op=12" method="post" id="formulario">
-
+						<form action="controle.jsp?op=22" method="post" id="formulario">
+ 
 							<div class="row">
 
 								<div class="form-floating mb-3 col-md-8">
 									<input type="text" class="form-control" id="inputNome" name="inputNome" placeholder=" " required autocomplete="off"> 
 									<label for="inputNome" style="margin-left: 10px;">Nome</label>
 								</div>								
-								<div class="form-floating mb-3 col-md-4">
+						 		<div class="form-floating mb-3 col-md-4">
 									<input type="password" class="form-control" id="inputSenha" name="inputSenha" placeholder=" " required autocomplete="off"> 
 									<label for="inputSenha" style="margin-left: 10px;">Senha</label>
 								</div>								
@@ -112,7 +117,7 @@
 								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
 							
-							<input type="hidden" id="inputIdEspecialidade" name="inputIdEspecialidade">
+							<input type="hidden" id="inputIdFuncionario" name="inputIdFuncionario">
 						
 						</form>		
 						
@@ -122,14 +127,15 @@
 						      <tr>
 						        <th scope="col" style="width: 7%; text-align: center;">#</th>
 						        <th scope="col">NOME</th>
+						        <th scope="col">SENHA</th>
 						        <th colspan="2" scope="col" style="width: 20%; text-align: center;">AÇÕES</th>
 						      </tr>
 						    </thead>
 						    <tbody id="clientesTableBody">
 						       <%
 				              	
-								EspecialidadeInterface iEspecialidade = new EspecialidadeDAO();
-								List<Especialidade> lista = iEspecialidade.lista();
+								FuncionarioInterface iFuncionario = new FuncionarioDAO();
+								List<Funcionario> lista = iFuncionario.listarFuncionario();
 								
 						      for(int i = 0; i < lista.size(); i++) {
 						    	  						    	  
@@ -137,10 +143,16 @@
 						      <tr>
 						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
 						        <td><%= lista.get(i).getNome() %></td>
+						        <td><%= lista.get(i).getSenha() %></td>
 						        <td style="text-align: center;">						          
 						          <a href="#" class="edit-especialidade-btn" 
-								     data-idEspecialidade="<%= lista.get(i).getId() %>"
-								     data-nome="<%= lista.get(i).getNome() %>">
+								     data-idFuncionario="<%= lista.get(i).getId() %>"
+								     data-nome="<%= lista.get(i).getNome() %>"
+								     data-senha="<%= lista.get(i).getSenha() %>"
+								     
+								     >
+								     
+								     
 								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
 								  </a>
 																  

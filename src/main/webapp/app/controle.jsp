@@ -49,6 +49,7 @@ MedicoInterface iMedico = new MedicoDAO();
 FuncionarioInterface iFuncionario = new FuncionarioDAO();
 AgendamentoInterface iAgendamento = new AgendamentoDAO(); 
 
+
 switch(op){
 
 case 1:{
@@ -352,6 +353,7 @@ case 11:{
 	break;
 }
 case 12:{
+	
 	String nome = request.getParameter("inputNome");
 	Especialidade especialidade = new Especialidade(nome);
 	iEspecialidade.inserir(especialidade);
@@ -504,6 +506,31 @@ case 21: {
   
     break;
 }
+
+//inserir funcionario
+case 22:{
+	
+
+String nome = request.getParameter("inputNome");
+String senha = request.getParameter("inputSenha");
+Funcionario funcionario = new Funcionario();
+funcionario.setNome(nome);
+funcionario.setSenha(senha);
+iFuncionario.inserirFuncionario(funcionario);
+
+
+
+
+
+response.sendRedirect("form-funcionario.jsp");
+
+
+
+	
+	break;
+}
+
+
 default:{
 	
 
