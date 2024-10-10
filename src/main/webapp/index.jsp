@@ -109,7 +109,7 @@
 												<a class="page-scroll" href="#contact">Contato</a>
 											</li>
 											<li class="nav-item">
-												<a href="./app/index.jsp">Sistema iMedic</a>
+												<a href="./app/autentica.jsp">Sistema iMedic</a>
 											</li>
 										</ul>
 									</div> <!-- navbar collapse -->

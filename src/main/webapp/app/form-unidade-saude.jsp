@@ -22,7 +22,7 @@
 <link href="css/estilo.css" rel="stylesheet" />
 </head>
 <body>
-	<div class="d-flex" id="wrapper">
+	<div class="d-flex fundo" id="wrapper">
 		<!-- Sidebar-->
 		<div class="border-end coluna-esquerda" id="sidebar-wrapper">
 			<div class="sidebar-heading border-bottom">SISTEMA MEDIC</div>
@@ -91,7 +91,7 @@
 						
 						%>						
 					
-						<h1 class="mt-4">Inserir Unidade de Saúde</h1>
+						<h1 class="mt-4">Unidades de Saúde</h1>
 					
 						<form action="controle.jsp?op=1" method="post" id="formulario">
 
@@ -246,29 +246,8 @@
 					</div>
 					
 					<div class="col-md-5 coluna-direita">
-                        <!-- Conteúdo da coluna direita aqui -->
-                        
-                       <div class="dashboard d-block">
-            <div class="card mt-3 p-3">
-                <i class="icon bi bi-hospital-fill text-primary text-center fs-3"> Unidade de saúde </i>
-                <div class="count text-primary text-center fs-1"><%= lista.size() %></div>
-            </div>
-            <div class="card mt-3 p-3  ">
-                <i class="icon bi bi-capsule text-danger text-center fs-3"> Pacientes</i>
-                <div class="count text-danger text-center fs-1"><%= lista.size() %></div>
-            </div>
-            <div class="card mt-3 p-3 ">
-                <i class="icon bi bi-people-fill text-warning text-center fs-3"> Familias</i>
-                <div class="count text-warning text-center fs-1"><%= lista.size() %></div>
-            </div>
-            <div class="card mt-3 p-3 ">
-                <i class="icon bi bi-capsule text-success text-center fs-3"> Médicos</i>
-                <div class="count text-success text-center fs-1"><%= lista.size() %></div>
-            </div>
-            
-      
-        
-							</div>						
+                        <!-- Conteúdo da coluna direita aqui -->                        
+                       <%@ include file="indicadores.jsp" %>					
 						</div>                        
                     </div>
 				</div>

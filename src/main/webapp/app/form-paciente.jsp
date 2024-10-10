@@ -28,7 +28,7 @@
 <link href="css/estilo.css" rel="stylesheet" />
 </head>
 <body>
-	<div class="d-flex" id="wrapper">
+	<div class="d-flex fundo" id="wrapper">
 		<!-- Sidebar-->
 		<div class="border-end coluna-esquerda" id="sidebar-wrapper">
 			<div class="sidebar-heading border-bottom">SISTEMA MEDIC</div>
@@ -96,7 +96,7 @@
 						
 						%>						
 					
-						<h1 class="mt-4">Inserir Paciente</h1>
+						<h1 class="mt-4">Pacientes</h1>
 					
 						<form action="controle.jsp?op=4" method="post" id="formulario">
 
@@ -147,7 +147,7 @@
 							</div>
 
 							<div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">							
-								<a href="form-adicionar-paciente.jsp" class="btn btn-lg btn-primary">Adicionar Paciente (SEM USO)</a>
+								<a href="form-adicionar-paciente.jsp" class="btn btn-lg btn-primary">Exibir Famílias</a>
 								<button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
 								<button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
 							</div>
@@ -215,36 +215,13 @@
 					
 					<div class="col-md-5 coluna-direita">
                         <!-- Conteúdo da coluna direita aqui -->
-                                        <div class="dashboard d-block">
-            <div class="card mt-3 p-3">
-                <i class="icon bi bi-hospital-fill text-primary text-center fs-3"> Unidade de saúde </i>
-                <div class="count text-primary text-center fs-1"><%= lista.size() %></div>
-            </div>
-            <div class="card mt-3 p-3  ">
-                <i class="icon bi bi-capsule text-danger text-center fs-3"> Pacientes</i>
-                <div class="count text-danger text-center fs-1"><%= lista.size() %></div>
-            </div>
-            <div class="card mt-3 p-3 ">
-                <i class="icon bi bi-people-fill text-warning text-center fs-3"> Familias</i>
-                <div class="count text-warning text-center fs-1"><%= lista.size() %></div>
-            </div>
-            <div class="card mt-3 p-3 ">
-                <i class="icon bi bi-capsule text-success text-center fs-3"> Médicos</i>
-                <div class="count text-success text-center fs-1"><%= lista.size() %></div>
-            </div>
-            
-      
-        
-							</div>						
-						</div>  
-                    
-							</div>						
-						</div>                        
+                    	<%@ include file="indicadores.jsp" %>						
+					</div>  
                     </div>
-				</div>
-			</div>
-		</div>
-	</div>
+				</div>						
+			</div>                        
+        </div>
+			
 	<!-- Bootstrap core JS-->
 	<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	<!-- Core theme JS-->

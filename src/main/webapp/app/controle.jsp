@@ -1,3 +1,4 @@
+
 <%@page import="com.medic.model.Funcionario"%>
 <%@page import="com.medic.interfaces.FuncionarioInterface"%>
 <%@page import="com.medic.dao.FuncionarioDAO"%>
@@ -420,10 +421,10 @@ case 16:{
 case 17:{
 	/*inserir Agendamento*/
 	
-	int idMedico = Integer.parseInt(request.getParameter("inputMedico"));
+	int idMedico = Integer.parseInt(request.getParameter("inputIdMedico"));
 	Medico medico = iMedico.consultarMedico(idMedico);
 	
-	int idPaciente = Integer.parseInt(request.getParameter("inputPaciente"));
+	int idPaciente = Integer.parseInt(request.getParameter("inputIdPaciente"));
 	Paciente paciente = iPaciente.consultar(idPaciente);
 	
 	int idFuncionario = 1; // simulando que sempre será id = 1

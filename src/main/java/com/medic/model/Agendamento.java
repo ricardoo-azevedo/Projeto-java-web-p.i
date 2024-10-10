@@ -7,7 +7,7 @@ public class Agendamento {
 	private int id;
 	private Paciente paciente;
 	private Medico medico;
-	private Funcionario funcionario; 
+	private Funcionario funcionario;
 	private LocalDate dataAgendamento;
 	private String statusAgendamento;
 	private String observacoes;

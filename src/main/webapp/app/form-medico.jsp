@@ -22,58 +22,47 @@
 <title>iMEDIC</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
+<link rel="stylesheet"	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link href="css/styles.css" rel="stylesheet" />
 <link href="css/estilo.css" rel="stylesheet" />
 </head>
 <body>
-	<div class="d-flex" id="wrapper">
+	<div class="d-flex fundo" id="wrapper">
 		<!-- Sidebar-->
-		<div class="border-center coluna-esquerda bg-success"
-			id="sidebar-wrapper">
-			<div class="sidebar-heading border-bottom bg-success text-center ">Médico</div>
+		<div class="border-end coluna-esquerda" id="sidebar-wrapper">
+			<div class="sidebar-heading border-bottom">SISTEMA MEDIC</div>
 			<div class="list-group list-group-flush">
-				<%@ include file="menu.jsp"%>
+				<%@ include file="menu.jsp" %>
 			</div>
 		</div>
 		<!-- Page content wrapper-->
-		<div class="col" id="page-content-wrapper">
+		<div id="page-content-wrapper">
 			<!-- Top navigation-->
 			<nav
-				class="navbar navbar-expand-lg navbar-light  bg-Light border-bottom">
+				class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
 				<div class="container-fluid">
-					<button class="btn btn-success" id="sidebarToggle">
-						<i class="bi bi-list"></i>
-					</button>
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
+					<a class="btn btn-secondary" id="sidebarToggle"><i class="bi bi-list"></i></a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"	aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-							<li class="nav-item active"><a class="nav-link"
-								href="index.jsp">Home</a></li>
-
-							<li class="nav-item dropdown"><a
-								class=" icone nav-link dropdown-toggle text-success  fs-5  bi bi-person-circle"
-								id="navbarDropdown" href="#" role="button"
-								data-bs-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false"></a>
-								<div class="dropdown-menu dropdown-menu-end"
-									aria-labelledby="navbarDropdown">
-									<a class="dropdown-item " href="form-unidade-saude.jsp">Unidade
-										de Saúde</a> <a class="dropdown-item" href="form-paciente.jsp">Paciente</a>
+							<li class="nav-item active">
+								<a class="nav-link" href="#!">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#!">Link</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="#!">Action</a>
+									<a class="dropdown-item" href="#!">Another action</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="form-medico.jsp">Médico(a)</a>
-								</div></li>
+									<a class="dropdown-item" href="#!">Something else here</a>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -107,22 +96,20 @@
 						
 						%>
 
-						<h1 class="mt-3">Cadastro do Médico(a)</h1>
+						<h1 class="mt-3">Médicos</h1>
 
 						<form action="controle.jsp?op=11" method="post" id="formulario">
 
 							<div class="row">
 
 								<div class="form-floating mb-3 col-md-4">
-									<input type="text" class="form-control" id="inputCrm"
-										name="inputCrm" placeholder=" " required> <label
-										for="inputCrm" style="margin-left: 10px;">CRM</label>
+									<input type="text" class="form-control" id="inputCrm" name="inputCrm" placeholder=" " required> 
+									<label	for="inputCrm" style="margin-left: 10px;">CRM</label>
 								</div>
 
 								<div class="form-floating mb-3 col-md-8">
-									<input type="text" class="form-control" id="inputNome"
-										name="inputNome" placeholder=" " required> <label
-										for="inputNome" style="margin-left: 10px;">Nome</label>
+									<input type="text" class="form-control" id="inputNome"	name="inputNome" placeholder=" " required> 
+									<label	for="inputNome" style="margin-left: 10px;">Nome</label>
 								</div>
 
 							</div>
@@ -224,9 +211,8 @@
 					</div>
 
 					<div class="col-md-5 coluna-direita">
-						<!-- Conteúdo da coluna direita aqui -->
-						
-						
+                        <!-- Conteúdo da coluna direita aqui -->
+                    	<%@ include file="indicadores.jsp" %>						
 					</div>
 
 

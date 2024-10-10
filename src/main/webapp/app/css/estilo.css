@@ -1,3 +1,13 @@
+.fundo{
+	background-color: #ededed !important;
+}
+
+.texto{
+	padding: 10px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	border-radius: 4px;
+}
+
 form{
 	padding: 10px;
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -22,11 +32,10 @@ input, select, option{
 	overflow-y: scroll;
 	min-height: 50vh;
 	text-align: center;
-	background-color: #ededed;
 }
 
 .table-overflow-accordion {
-	height: 6rem;
+	height: 4rem;
 	overflow: hidden;
 	overflow-y: scroll;
 	min-height: 50vh;
