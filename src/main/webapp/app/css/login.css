@@ -1,0 +1,56 @@
+@charset "UTF-8";
+html, body {
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(135deg, #e0f7fa, #fff);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            max-width: 600px; /* Formulário maior */
+            padding: 3rem; /* Mais espaçamento interno */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4B0082;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .form-floating .form-control {
+            padding: 1.2rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .form-floating .form-control:focus {
+            border-color: #4B0082;
+            box-shadow: 0 0 5px rgba(75, 0, 130, 0.5);
+        }
+
+        .btn-primary {
+            background-color: #4B0082;
+            border: none;
+            padding: 0.8rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #5D3FD3;
+        }
+
+        .credits {
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 1.5rem;
+        }

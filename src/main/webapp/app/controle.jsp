@@ -489,6 +489,21 @@ case 20:{
     
     break;
 }
+case 21: {
+    
+        int idFuncionario = Integer.parseInt(request.getParameter("idFuncionario"));
+        String senha = request.getParameter("senha");
+
+        Funcionario funcionario = iFuncionario.autenticacaoFuncionario(idFuncionario, senha);
+        if (funcionario != null) {
+            session.setAttribute("funcionarioAutenticado", funcionario);
+            response.sendRedirect("index.jsp");
+        } else {
+            response.sendRedirect("erro.jsp?msg=login_incorreto");
+        }
+  
+    break;
+}
 default:{
 	
 

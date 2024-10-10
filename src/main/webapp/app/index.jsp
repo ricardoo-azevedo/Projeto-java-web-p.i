@@ -21,6 +21,11 @@
 <%@page import="com.medic.interfaces.FamiliaInterface"%>
 <%@page import="com.medic.interfaces.UnidadeSaudeInterface"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% 
+if(session.getAttribute("funcionarioAutenticado") == null){
+	response.sendRedirect("autentica.jsp");
+}
+%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
