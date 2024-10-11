@@ -26,13 +26,12 @@ public class FuncionarioDAO implements FuncionarioInterface {
 
     @Override
     public int inserirFuncionario(Funcionario funcionario) {
-        String sql = "Insert into funcionario (nome, cpf, senha) values (?, ?, ?)"; //mudar caso o nome do atributo seja diferente no bd
+        String sql = "Insert into funcionario (nome, senha) values (?, ?)"; 
         int id = 0;
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, funcionario.getNome());
-            ps.setString(2, funcionario.getCpf());
-            ps.setString(3, funcionario.getSenha());
+            ps.setString(2, funcionario.getSenha());
             ps.execute();
             ResultSet idAuto = ps.getGeneratedKeys();
             if (idAuto.next()) {
@@ -55,9 +54,8 @@ public class FuncionarioDAO implements FuncionarioInterface {
             while (rs.next()) {
                 int id = rs.getInt("idFuncionario");
                 String nome = rs.getString("Nome");
-                String cpf = rs.getString("cpf"); //mudar caso o nome do atributo cpf funcionario for diferente no bd
                 String senha = rs.getString("senha");
-                funcionario = new Funcionario(id, nome, cpf, senha);
+                funcionario = new Funcionario(id, nome, senha);
             }
         } catch (Exception e) {
             System.out.println("[Erro ao consultar Funcionario: " + e.getMessage() + "]");
@@ -67,13 +65,12 @@ public class FuncionarioDAO implements FuncionarioInterface {
 
     @Override
     public void editarFuncionario(Funcionario funcionario) {
-        String sql = "Update Funcionario set nome = ?, cpf = ?, senha = ? where idFuncionario = ?";//mudar caso o nome do atributo cpf funcionario for diferente no bd
+        String sql = "Update Funcionario set nome = ?, senha = ? where idFuncionario = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, funcionario.getNome());
-            ps.setString(2, funcionario.getCpf());
-            ps.setString(3, funcionario.getSenha());
-            ps.setInt(4, funcionario.getId());
+            ps.setString(2, funcionario.getSenha());
+            ps.setInt(3, funcionario.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("[Erro ao editar Funcionario: " + e.getMessage() + "]");
@@ -103,7 +100,6 @@ public class FuncionarioDAO implements FuncionarioInterface {
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId(rs.getInt("idFuncionario"));
                 funcionario.setNome(rs.getString("Nome"));
-                funcionario.setCpf(rs.getString("cpf"));//mudar caso o nome do atributo cpf funcionario for diferente no bd
                 funcionario.setSenha(rs.getString("senha"));
                 funcionarios.add(funcionario);
             }
@@ -114,20 +110,19 @@ public class FuncionarioDAO implements FuncionarioInterface {
     }
 
     @Override
-    public Funcionario autenticacaoFuncionario(String cpf, String senha) {
-        String sql = "Select * from Funcionario where cpf = ? and senha = ?";//mudar caso o nome do atributo cpf funcionario for diferente no bd
+    public Funcionario autenticacaoFuncionario(int idFuncionarioLogin, String senha) {
+        String sql = "Select * from Funcionario where idFuncionario = ? and senha = ?";
         Funcionario funcionario = null;
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, cpf);
+            ps.setInt(1, idFuncionarioLogin);
             ps.setString(2, senha);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("idFuncionario");
                 String nome = rs.getString("nome");
-                String cpff = rs.getString("cpf");//mudar caso o nome do atributo cpf funcionario for diferente no bd
                 String senhaf = rs.getString("senha");
-                funcionario = new Funcionario(id, nome, cpff, senhaf);
+                funcionario = new Funcionario(id, nome, senhaf);
             }
         } catch (Exception e) {
             System.out.println("[Erro ao autenticar Funcionario: " + e.getMessage() + "]");
