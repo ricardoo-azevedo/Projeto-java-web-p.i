@@ -10,5 +10,5 @@ public interface FuncionarioInterface {
     void editarFuncionario(Funcionario funcionario);    
     void excluirFuncionario(int idFuncionario);
     List<Funcionario> listarFuncionario();
-    Funcionario autenticacaoFuncionario(int idFuncionario, String senha);
+    Funcionario autenticacaoFuncionario(String cpf, String senha);
 }
