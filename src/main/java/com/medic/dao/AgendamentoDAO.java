@@ -90,7 +90,7 @@ public class AgendamentoDAO implements AgendamentoInterface {
 
     @Override
     public void editarAgendamento(Agendamento agendamento) {
-        String sql = "UPDATE AGENDAMENTO SET IDPACIENTE = ?, IDMEDICO = ?, DATA_HORA = ?, STATUS_AGENDAMENTO = ?, OBSERVACOES = ? WHERE IDAGENDAMENTO = ?";
+        String sql = "UPDATE AGENDAMENTO SET IDPACIENTE = ?, IDMEDICO = ?, DATA_AGENDAMENTO = ?, STATUS_AGENDAMENTO = ?, OBSERVACOES = ? WHERE IDAGENDAMENTO = ?";
         try {
             PreparedStatement ps  = connection.prepareStatement(sql);
             ps.setInt(1, agendamento.getPaciente().getId());
@@ -145,8 +145,4 @@ public class AgendamentoDAO implements AgendamentoInterface {
         }
         return lista;
     }
-    
-    
-
-	
 }
