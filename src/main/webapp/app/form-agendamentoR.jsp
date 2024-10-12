@@ -1,3 +1,4 @@
+<%@page import="com.medic.model.Funcionario"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -13,7 +14,14 @@
 <%@page import="com.medic.dao.PacienteDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% 
+if(session.getAttribute("funcionarioAutenticado") == null){
+	response.sendRedirect("autentica.jsp");
+}
+Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
 
+
+%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -41,34 +49,33 @@
         <!-- Page content wrapper -->
         <div class="col" id="page-content-wrapper">
             <!-- Top navigation -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-Light border-bottom">
-                <div class="container-fluid">
-                    <button class="btn btn-success" id="sidebarToggle">
-                        <i class="bi bi-list"></i>
-                    </button>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="index.jsp">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="icone nav-link dropdown-toggle text-success fs-5 bi bi-person-circle" id="navbarDropdown" href="#"
-                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="form-unidade-saude.jsp">Unidade de Saúde</a>
-                                    <a class="dropdown-item" href="form-paciente.jsp">Paciente</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="form-medico.jsp">Médico(a)</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+    <div class="container-fluid">
+        <!-- Botão do sidebar com estilo mais moderno -->
+        <button class="btn btn-outline-primary" id="sidebarToggle" aria-label="Toggle Sidebar">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <!-- Botão de alternância para dispositivos móveis -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links da barra de navegação -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                <% if(session.getAttribute("funcionarioAutenticado") != null){ 
+                    String nomeFuncionario = funcionario.getNome();
+                %>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold text-primary" style="font-size: 18px;">Seja Bem-vindo, <%= nomeFuncionario %>!</a>
+                    </li>
+                <% } %>
+            	</ul>
+        		</div>
+   	 		</div>
+		</nav>
             <!-- Page content -->
             <div class="container-fluid fade-in-element">
             
