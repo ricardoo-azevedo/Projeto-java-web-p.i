@@ -56,20 +56,33 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
         <!-- Page content wrapper-->
         <div class="col" id="page-content-wrapper">
             <!-- Top navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <div class="container-fluid">
-                    <button class="btn btn-secondary" id="sidebarToggle"><i class="bi bi-list"></i></button>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item active"><a class="nav-link"><%= " Seja Bem vindo:" +" " + funcionario.getNome() %></a></li>
-                        
-                         
-                     
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+    <div class="container-fluid">
+        <!-- Botão do sidebar com estilo mais moderno -->
+        <button class="btn btn-outline-primary" id="sidebarToggle" aria-label="Toggle Sidebar">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <!-- Botão de alternância para dispositivos móveis -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links da barra de navegação -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                <% if(session.getAttribute("funcionarioAutenticado") != null){ 
+                    String nomeFuncionario = funcionario.getNome();
+                %>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold text-primary" style="font-size: 18px;">Seja Bem-vindo, <%= nomeFuncionario %>!</a>
+                    </li>
+                <% } %>
+            	</ul>
+        		</div>
+   	 		</div>
+		</nav>
             <!-- Page content-->
             <div class="container-fluid">
             	

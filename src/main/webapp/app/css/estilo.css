@@ -1,3 +1,32 @@
+    /* Cor de fundo com transição suave */
+    nav.navbar {
+        background-color: #f8f9fa;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    /* Sombra e efeito de hover nos botões */
+    #sidebarToggle, .navbar-toggler {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    #sidebarToggle:hover, .navbar-toggler:hover {
+        transform: scale(1.1);
+    }
+
+    /* Destaque para o nome do usuário */
+    .nav-link {
+        transition: color 0.3s ease-in-out;
+    }
+
+    .nav-link:hover {
+        color: #007bff;
+    }
+
+    /* Sombra suave para toda a navbar */
+    .navbar {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 .fundo{
 	background-color: #ededed !important;
 }
