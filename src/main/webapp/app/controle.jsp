@@ -528,7 +528,7 @@ case 21: {
         Funcionario funcionario = iFuncionario.autenticacaoFuncionario(idFuncionario, senha);
         if (funcionario != null) {
             session.setAttribute("funcionarioAutenticado", funcionario);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("form-funcionario.jsp?idFuncionario=" + funcionario.getId());
         } else {
             response.sendRedirect("erro.jsp?msg=login_incorreto");
         }
@@ -540,15 +540,14 @@ case 21: {
 case 22:{
 	
 
+
 String nome = request.getParameter("inputNome");
 String senha = request.getParameter("inputSenha");
+
 Funcionario funcionario = new Funcionario();
 funcionario.setNome(nome);
 funcionario.setSenha(senha);
 iFuncionario.inserirFuncionario(funcionario);
-
-
-
 
 
 response.sendRedirect("form-funcionario.jsp");
@@ -557,6 +556,39 @@ response.sendRedirect("form-funcionario.jsp");
 
 	
 	break;
+}
+
+
+case 23:{
+	int idFuncionario = Integer.parseInt(request.getParameter("id"));
+	iFuncionario.excluirFuncionario(idFuncionario);
+	response.sendRedirect("form-funcionario.jsp");
+	
+	break;
+}
+
+
+case 24: {
+    
+    int idFuncionario = Integer.parseInt(request.getParameter("inputIdFuncionario"));
+    String nome = request.getParameter("inputNome");
+    String senha = request.getParameter("inputSenha");
+    
+
+    Funcionario funcionario = iFuncionario.consultaFuncionario(idFuncionario);
+
+ 
+       
+        funcionario.setNome(nome);
+        funcionario.setSenha(senha);
+
+   
+        iFuncionario.editarFuncionario(funcionario);
+
+      
+        response.sendRedirect("form-funcionario.jsp");
+ 
+    break;
 }
 
 

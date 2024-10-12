@@ -145,7 +145,7 @@
 						        <td><%= lista.get(i).getNome() %></td>
 						        <td><%= lista.get(i).getSenha() %></td>
 						        <td style="text-align: center;">						          
-						          <a href="#" class="edit-especialidade-btn" 
+						          <a href="#" class="edit-funcionario-btn" 
 								     data-idFuncionario="<%= lista.get(i).getId() %>"
 								     data-nome="<%= lista.get(i).getNome() %>"
 								     data-senha="<%= lista.get(i).getSenha() %>"
@@ -158,7 +158,7 @@
 																  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=14&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
+						          <a href="controle.jsp?op=23&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
 						      <%
@@ -206,14 +206,25 @@
 	        alert.close();
 	    }, 2000);
 	    	   
-	    document.querySelectorAll('.edit-especialidade-btn').forEach(button => {
+	    document.querySelectorAll('.edit-funcionario-btn').forEach(button => {
 	        button.addEventListener('click', function(event) {
 	            event.preventDefault();
+	            
+	            let idFuncionario = this.getAttribute('data-idFuncionario');
+	            let nome = this.getAttribute('data-nome');
+	            let senha = this.getAttribute('data-senha');
+	            
+	       
+	            document.getElementById('inputIdFuncionario').value = idFuncionario;
+	            document.getElementById('inputNome').value = nome;
+	            document.getElementById('inputSenha').value = senha;
+	            
 	           
 	            let btnSalvar = document.getElementById('btnSalvar');
 	            btnSalvar.innerText = 'Editar';
 	            
-	            document.getElementById('formulario').action = "controle.jsp?op=13";
+	    
+	            document.getElementById('formulario').action = "controle.jsp?op=24";
 	        });
 	    });
 

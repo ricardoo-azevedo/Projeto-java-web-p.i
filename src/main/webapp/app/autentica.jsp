@@ -19,19 +19,19 @@
             <div class="form-floating mb-3">
             
                 <input type="text" class="form-control" id="floatingEmailLogin" placeholder="idFuncionario" name="idFuncionario" aria-label="idFuncionario" required>
-                <label for="floatingEmailLogin">Id</label>
+                <label for="floatingEmailLogin">LOGIN</label>
             </div>
 
             <div class="form-floating mb-3">
                  <input type="password" class="form-control" id="floatingPasswordLogin" placeholder="Senha" name="senha" aria-label="Senha" required>
-                <label for="floatingPasswordLogin">Senha</label>
+                <label for="floatingPasswordLogin">SENHA</label>
             </div>
 
             <div class="form-check text-start my-3">
                 <input type="checkbox" class="form-check-input" id="mostrarSenha" onclick="togglePasswordVisibility()">
                 <label class="form-check-label" for="mostrarSenha">Mostrar senha</label>
             </div>
-
+	         <input type="hidden" id="inputIdFuncionario" name="inputIdFuncionario">
             <button class="btn btn-primary w-100" type="submit">Entrar</button>
 
             <p class="credits">© 2024. Todos os direitos reservados.</p>
@@ -44,9 +44,9 @@
             const checkbox = document.getElementById('mostrarSenha');
             
             if (checkbox.checked) {
-                passwordInput.type = 'text';  // Mostrar senha
+                passwordInput.type = 'text';  
             } else {
-                passwordInput.type = 'password';  // Ocultar senha
+                passwordInput.type = 'password';  
             }
         }
     </script>
