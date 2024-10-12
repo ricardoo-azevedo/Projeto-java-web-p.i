@@ -428,11 +428,9 @@ case 17:{
 	
 	int idPaciente = Integer.parseInt(request.getParameter("inputIdPaciente"));
 	Paciente paciente = iPaciente.consultar(idPaciente);
-	
-	/*int idFuncionario = Integer.parseInt(request.getParameter("inputIdFuncionario"));*/
-	int idFuncionario = 1001; // simulando que sempre será id = 1
-	Funcionario funcionario = iFuncionario.consultaFuncionario(idFuncionario);
-	
+	Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
+	int idUnidadeSaude = Integer.parseInt(request.getParameter("inputIdUS"));
+	UnidadeSaude unidadeSaude = iUnidadeSaude.consultar(idUnidadeSaude);
 	String dataAgendamento = request.getParameter("inputData");
 	
 	LocalDate data = null;
@@ -469,17 +467,8 @@ case 17:{
 
 case 18:{
 	/*Editar agendamento*/
-	int idMedico = Integer.parseInt(request.getParameter("inputIdMedico"));
-	Medico medico = iMedico.consultarMedico(idMedico);
-	int idPaciente = Integer.parseInt(request.getParameter("inputIdPaciente"));
-	Paciente paciente = iPaciente.consultar(idPaciente);
-
-	/*int idFuncionario = Integer.parseInt(request.getParameter("inputIdFuncionario"));*/
-	int idFuncionario = 1001;
-	Funcionario funcionario = iFuncionario.consultaFuncionario(idFuncionario);
-	
+	Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
 	String obs = request.getParameter("inputObs");
-	
 	String dataAgendamento = request.getParameter("inputData");
 	LocalDate data = null;
 	try{
@@ -490,8 +479,6 @@ case 18:{
 	    response.sendRedirect("form-agendamento.jsp?exibirAlertAgendamento=Formato de data inválido");
 	}
 	Agendamento agendamento = new Agendamento();
-	agendamento.setMedico(medico);
-	agendamento.setPaciente(paciente);
 	agendamento.setFuncionario(funcionario);
 	agendamento.setObservacoes(obs);
 	agendamento.setDataAgendamento(data);

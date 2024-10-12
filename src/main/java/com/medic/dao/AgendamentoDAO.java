@@ -13,10 +13,12 @@ import com.medic.interfaces.AgendamentoInterface;
 import com.medic.interfaces.FuncionarioInterface;
 import com.medic.interfaces.MedicoInterface;
 import com.medic.interfaces.PacienteInterface;
+import com.medic.interfaces.UnidadeSaudeInterface;
 import com.medic.model.Agendamento;
 import com.medic.model.Funcionario;
 import com.medic.model.Medico;
 import com.medic.model.Paciente;
+import com.medic.model.UnidadeSaude;
 import com.medic.service.ConnectionFactory;
 
 public class AgendamentoDAO implements AgendamentoInterface {
@@ -26,6 +28,7 @@ public class AgendamentoDAO implements AgendamentoInterface {
     private FuncionarioInterface iFuncionario = new FuncionarioDAO();
     private MedicoInterface iMedico = new MedicoDAO();
     private PacienteInterface iPaciente = new PacienteDAO();
+    private UnidadeSaudeInterface iUnidadeSaude = new UnidadeSaudeDAO();
     
     
     public AgendamentoDAO(){
@@ -38,18 +41,19 @@ public class AgendamentoDAO implements AgendamentoInterface {
 
     @Override
     public int inserirAgendamento(Agendamento agendamento) {
-    	String sql = "INSERT INTO AGENDAMENTO (idPaciente, idMedico, idFuncionario, data_agendamento, status_agendamento, observacoes) VALUES (?, ?, ?, ?, ?, ?)";
+    	String sql = "INSERT INTO AGENDAMENTO (idPaciente, idMedico, idFuncionario, idUnidadeSaude, data_agendamento, status_agendamento, observacoes) VALUES (?, ?, ?, ?, ?, ?, ?)";
         int id = 0;
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, agendamento.getPaciente().getId());
             ps.setInt(2, agendamento.getMedico().getId());
             ps.setInt(3, agendamento.getFuncionario().getId());
+            ps.setInt(4, agendamento.getUnidadeSaude().getId());
             LocalDate localDate = agendamento.getDataAgendamento();
             Date sqlDate = Date.valueOf(localDate);
-            ps.setDate(4, sqlDate);
-            ps.setString(5, agendamento.getStatusAgendamento());
-            ps.setString(6, agendamento.getObservacoes());
+            ps.setDate(5, sqlDate);
+            ps.setString(6, agendamento.getStatusAgendamento());
+            ps.setString(7, agendamento.getObservacoes());
             ps.execute();
             ResultSet idAuto = ps.getGeneratedKeys();
             if(idAuto.next()){
@@ -77,10 +81,12 @@ public class AgendamentoDAO implements AgendamentoInterface {
                 Medico medico = iMedico.consultarMedico(idMedico);
                 int idFuncionario = rs.getInt("IDFUNCIONARIO");
                 Funcionario funcionario = iFuncionario.consultaFuncionario(idFuncionario);
+                int idUnidadeSaude = rs.getInt("idUnidadeSaude");
+                UnidadeSaude unidadeSaude = iUnidadeSaude.consultar(idUnidadeSaude);
                 LocalDate localDate = rs.getDate("data_agendamento").toLocalDate();
                 String statusAgendamento = rs.getString("STATUS_AGENDAMENTO");
                 String observacoes = rs.getString("OBSERVACOES");
-                agendamento = new Agendamento(idAgendamento, paciente, medico, funcionario, localDate, statusAgendamento, observacoes);
+                agendamento = new Agendamento(idAgendamento, paciente, medico, funcionario, unidadeSaude, localDate, statusAgendamento, observacoes);
             }
         } catch (Exception e) {
             System.out.println("[Erro ao consultar Agendamento: "+e.getMessage()+"]");
@@ -90,17 +96,16 @@ public class AgendamentoDAO implements AgendamentoInterface {
 
     @Override
     public void editarAgendamento(Agendamento agendamento) {
-        String sql = "UPDATE AGENDAMENTO SET IDPACIENTE = ?, IDMEDICO = ?, DATA_AGENDAMENTO = ?, STATUS_AGENDAMENTO = ?, OBSERVACOES = ? WHERE IDAGENDAMENTO = ?";
+        String sql = "UPDATE AGENDAMENTO SET idFuncionario = ?, DATA_AGENDAMENTO = ?, STATUS_AGENDAMENTO = ?, OBSERVACOES = ? WHERE IDAGENDAMENTO = ?";
         try {
             PreparedStatement ps  = connection.prepareStatement(sql);
-            ps.setInt(1, agendamento.getPaciente().getId());
-            ps.setInt(2, agendamento.getMedico().getId());
             LocalDate localDate = agendamento.getDataAgendamento();
             Date sqlDate = Date.valueOf(localDate);
-            ps.setDate(3, sqlDate);
-            ps.setString(4, agendamento.getStatusAgendamento());
-            ps.setString(5, agendamento.getObservacoes());
-            ps.setInt(6, agendamento.getId());
+            ps.setDate(1, sqlDate);
+            ps.setInt(2, agendamento.getFuncionario().getId());
+            ps.setString(3, agendamento.getStatusAgendamento());
+            ps.setString(4, agendamento.getObservacoes());
+            ps.setInt(5, agendamento.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("[Erro ao editar Agendamento: "+e.getMessage()+"]");
@@ -134,10 +139,12 @@ public class AgendamentoDAO implements AgendamentoInterface {
                 Medico medico = iMedico.consultarMedico(idMedico);
                 int idFuncionario = rs.getInt("IDFUNCIONARIO");
                 Funcionario funcionario = iFuncionario.consultaFuncionario(idFuncionario);
+                int idUnidadeSaude = rs.getInt("idUnidadeSaude");
+                UnidadeSaude unidadeSaude = iUnidadeSaude.consultar(idUnidadeSaude);
                 LocalDate localDate = rs.getDate("data_agendamento").toLocalDate();
                 String statusAgendamento = rs.getString("STATUS_AGENDAMENTO");
                 String observacoes = rs.getString("OBSERVACOES");
-                Agendamento agendamento = new Agendamento(idAgendamento, paciente, medico, funcionario, localDate, statusAgendamento, observacoes);
+                Agendamento agendamento = new Agendamento(idAgendamento, paciente, medico, funcionario, unidadeSaude, localDate, statusAgendamento, observacoes);
                 lista.add(agendamento);
             }
         } catch (Exception e) {
