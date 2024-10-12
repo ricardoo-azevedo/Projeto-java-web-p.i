@@ -18,7 +18,7 @@
             
             <div class="form-floating mb-3">
             
-                <input type="text" class="form-control" id="floatingEmailLogin" placeholder="idFuncionario" name="idFuncionario" aria-label="idFuncionario" required>
+                <input type="number" class="form-control" id="floatingEmailLogin" placeholder="idFuncionario" name="idFuncionario" aria-label="idFuncionario" required>
                 <label for="floatingEmailLogin">LOGIN</label>
             </div>
 
@@ -34,7 +34,7 @@
 	         <input type="hidden" id="inputIdFuncionario" name="inputIdFuncionario">
             <button class="btn btn-primary w-100" type="submit">Entrar</button>
 
-            <p class="credits">© 2024. Todos os direitos reservados.</p>
+            <p class="credits">© 2024. Todos os direitos reservados iMedic.</p>
         </form>
     </main>
 

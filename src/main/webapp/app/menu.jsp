@@ -6,4 +6,4 @@
 <a class="list-group-item list-group-item-action list-group-item-light p-3"	href="form-funcionario.jsp">Funcionário</a>
 <a class="list-group-item list-group-item-action list-group-item-light p-3"	href="form-especialidade.jsp">Especialidade</a>
 <a class="list-group-item list-group-item-action list-group-item-light p-3"	href="form-agendamento.jsp">Agendamentos</a>
-<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="../index.jsp">Sair</a>
+<a class="list-group-item list-group-item-action list-group-item-light p-3"	href="controle.jsp?op=25">Sair</a>

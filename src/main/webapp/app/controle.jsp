@@ -528,7 +528,7 @@ case 21: {
         Funcionario funcionario = iFuncionario.autenticacaoFuncionario(idFuncionario, senha);
         if (funcionario != null) {
             session.setAttribute("funcionarioAutenticado", funcionario);
-            response.sendRedirect("form-funcionario.jsp?idFuncionario=" + funcionario.getId());
+            response.sendRedirect("index.jsp");
         } else {
             response.sendRedirect("erro.jsp?msg=login_incorreto");
         }
@@ -591,6 +591,15 @@ case 24: {
     break;
 }
 
+case 25:{
+	
+	session.invalidate();
+	
+	response.sendRedirect("../index.jsp");
+	
+	
+	break;
+}
 
 default:{
 	

@@ -127,7 +127,7 @@
 						      <tr>
 						        <th scope="col" style="width: 7%; text-align: center;">#</th>
 						        <th scope="col">NOME</th>
-						        <th scope="col">SENHA</th>
+						        <th scope="col">LOGIN</th>
 						        <th colspan="2" scope="col" style="width: 20%; text-align: center;">AÇÕES</th>
 						      </tr>
 						    </thead>
@@ -143,7 +143,7 @@
 						      <tr>
 						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
 						        <td><%= lista.get(i).getNome() %></td>
-						        <td><%= lista.get(i).getSenha() %></td>
+						        <td><%= lista.get(i).getId() %></td>
 						        <td style="text-align: center;">						          
 						          <a href="#" class="edit-funcionario-btn" 
 								     data-idFuncionario="<%= lista.get(i).getId() %>"
