@@ -447,6 +447,10 @@ case 17:{
 	String observacoes = request.getParameter("inputObs");
 	
 	Agendamento agendamento = new Agendamento();
+	if(!iAgendamento.verificarAgendamento(idPaciente, idMedico, dataAgendamento)){
+		throw new IllegalArgumentException("Não sera possivel cadastrar esse agendamento!");
+    
+	}
 	
 	agendamento.setMedico(medico);
 	agendamento.setPaciente(paciente);
