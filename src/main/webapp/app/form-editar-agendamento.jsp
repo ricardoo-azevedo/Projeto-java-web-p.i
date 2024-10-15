@@ -1,3 +1,4 @@
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="com.medic.model.Funcionario"%>
 <%@page import="com.medic.dao.AgendamentoDAO"%>
 <%@page import="com.medic.model.Agendamento"%>
@@ -105,28 +106,20 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 						%>						
 					
 						<h1 class="mt-3">Agendamentos</h1>
+						
+						<%
+						int idAgendamento = Integer.parseInt(request.getParameter("id"));
+						AgendamentoInterface iAgendamento = new AgendamentoDAO();
+						Agendamento agendamento = iAgendamento.consultarAgendamento(idAgendamento);						
+						%>
 					
 						<form action="controle.jsp?op=17" method="post" id="formulario">
                         
                         	<div class="row">
 
 								<div class="form-floating mb-3 col-md-12">
-									<select class="form-select" id="inputIdUnidadeSaude" name="inputIdUnidadeSaude" required>
-										<option value="" selected disabled>Selecione</option>
-										<%
-										
-										UnidadeSaudeInterface iUnidade = new UnidadeSaudeDAO();
-										List<UnidadeSaude> listaUnidade = iUnidade.listar();
-										
-										for(int i = 0; i < listaUnidade.size(); i++) {
-										
-										%>
-										<option value="<%= listaUnidade.get(i).getId() %>"><%= listaUnidade.get(i).getNome() %></option>
-										<%
-										}
-										%>
-										</select> 
-										<label for="inputIdUnidadeSaude" style="margin-left: 10px;">Unidade de Saude</label>
+									<input type="text" class="form-control" placeholder=" " value="<%= agendamento.getUnidadeSaude().getNome() %>" readonly="readonly"> 
+									<label for="inputNome" style="margin-left: 10px;">Unidade de Saúde</label>
 								</div>
 
 							</div>

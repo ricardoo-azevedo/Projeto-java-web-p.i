@@ -80,7 +80,7 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 
 				<div class="row justify-content-between">
 
-					<div class="col-md-7">
+					<div class="col-md-12">
 					
 						<%
 						
@@ -95,7 +95,7 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 							
 							<script>
 							    setTimeout(function(){
-							        window.location.href = 'form-agendamento.jsp';
+							        window.location.href = 'form-lista-agendamento.jsp';
 							    }, 3000);
 							</script>
 														
@@ -106,127 +106,62 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 					
 						<h1 class="mt-3">Agendamentos</h1>
 					
-						<form action="controle.jsp?op=17" method="post" id="formulario">
-                        
-                        	<div class="row">
-
-								<div class="form-floating mb-3 col-md-12">
-									<select class="form-select" id="inputIdUnidadeSaude" name="inputIdUnidadeSaude" required>
-										<option value="" selected disabled>Selecione</option>
-										<%
-										
-										UnidadeSaudeInterface iUnidade = new UnidadeSaudeDAO();
-										List<UnidadeSaude> listaUnidade = iUnidade.listar();
-										
-										for(int i = 0; i < listaUnidade.size(); i++) {
-										
-										%>
-										<option value="<%= listaUnidade.get(i).getId() %>"><%= listaUnidade.get(i).getNome() %></option>
-										<%
-										}
-										%>
-										</select> 
-										<label for="inputIdUnidadeSaude" style="margin-left: 10px;">Unidade de Saude</label>
-								</div>
-
-							</div>
 							
-							<div class="row">
-
-								<div class="form-floating mb-3 col-md-12">
-									<select class="form-select" id="inputIdMedico" name="inputIdMedico" required>
-										<option value="" selected disabled>Selecione</option>
-										<%
-										
-										MedicoInterface iMedico = new MedicoDAO();
-										List<Medico> listaMedico = iMedico.listarMedico();
-										
-										for(int i = 0; i < listaMedico.size(); i++) {
-										
-										%>
-										<option value="<%= listaMedico.get(i).getId() %>"><%= listaMedico.get(i).getEspecialidade().getNome()+" | "+listaMedico.get(i).getCrm()+" :: "+listaMedico.get(i).getNome() %></option>
-										<%
-										}
-										%>
-										</select> 
-										<label for="inputIdMedico" style="margin-left: 10px;">Médico</label>
-								</div>
-
-							</div>
-                        
-                        	<div class="row">
-
-								<div class="form-floating mb-3 col-md-12">
-									<select class="form-select" id="inputIdPaciente" name="inputIdPaciente" required>
-										<option value="" selected disabled>Selecione</option>
-										<%
-										
-										PacienteInterface iPaciente = new PacienteDAO();
-										List<Paciente> listaPaciente = iPaciente.listar();
-										
-										for(int i = 0; i < listaPaciente.size(); i++) {
-										
-										%>
-										<option value="<%= listaPaciente.get(i).getId() %>"><%= listaPaciente.get(i).getCpf()+" :: "+listaPaciente.get(i).getNome() %></option>
-										<%
-										}
-										%>
-										</select>
-										<label for="inputIdPaciente" style="margin-left: 10px;">Paciente</label>
-								</div>
-
-							</div>
-                        
-                            <div class="row">
-                                
-								<div class="form-floating mb-3 col-md-4">
-								    <select class="form-control" id="inputData" name="inputData" required>
-								        <option value="" selected disabled>Selecione</option>
-								        <%
-								            /*_*/
-								            Funcoes f = new Funcoes();
-								            
-								            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-								    		LocalDate now = LocalDate.now();
-								            
-								            int limiteDias = 14;
-								            for (int i = 0; i <= limiteDias; i += 3) {
-								            									                
-								                out.println("<option value='" +dtf.format(now.plusDays(i))+ "'>" + dtf.format(now.plusDays(i)) +" - "+dtf.format(now.plusDays(i+2)) + "</option>");								               
-								            }
-								            
-								        %>
-								    </select>
-								    <label for="inputData" style="margin-left: 10px;">Data do Agendamento</label>
-								     
-								</div>
-								
-								<div class="form-floating mb-3 col-md-8">                                    
-                                    <textarea id="inputObs" name="inputObs" class="form-control"></textarea>
-                                    <label for="inputObs" style="margin-left: 10px;">Observações</label>                                  
-                                </div>
-
-                            </div>
-
-                            <div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
-                                <a href="form-lista-agendamento.jsp" class="btn btn-lg btn-dark">Listar</a>
-                                <button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
-                                <button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
-                            </div>
-                            
-                            <input type="hidden" id="idAgendamento" name="idAgendamento">
-                            <input type="hidden" id="idPaciente" name="idPaciente">
-                            <input type="hidden" id="idMedico" name="idMedico">
-                            
-                        </form>	
 						
-						</div>		
-					
-					<div class="col-md-5 coluna-direita">
-                        <!-- Conteúdo da coluna direita -->
-                        <%@ include file="indicadores.jsp" %>
-                    </div>
-                    
+						<div class="table-overflow mt-4">
+	                      <table class="table table-bordered table-light table-striped table-hover" style="border-radius: 8px;">
+						    <thead>
+						      <tr>
+						        <th scope="col" style="text-align: center;">#</th>
+
+						        <th scope="col">Codigo</th>
+						        <th scope="col">MÉDICO</th>
+						        <th scope="col">PACIENTE</th>
+						        <th scope="col">DATA</th>
+						        <th scope="col">OBSERVAÇÕES</th>
+						        <th scope="col">STATUS</th>
+						        <th colspan="2" scope="col" style="text-align: center;">AÇÕES</th>
+						      </tr>
+						    </thead>
+						    <tbody id="clientesTableBody">
+						      <%
+						      Funcoes f = new Funcoes();
+					            
+					            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					    		LocalDate now = LocalDate.now();
+								AgendamentoInterface iAgendamento = new AgendamentoDAO();
+								List<Agendamento> lista = iAgendamento.listarAgendamento();
+						      
+						      for(int i = 0; i < lista.size(); i++) {
+						    	  
+						      %>
+						      <tr>
+						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
+						        <td><%= lista.get(i).getId() %></td>
+						        <td><%= lista.get(i).getMedico().getNome() %></td>
+						        <td><%= lista.get(i).getPaciente().getNome() %></td>
+						        <td><%= dtf.format(lista.get(i).getDataAgendamento()) %></td>
+						        <td><%= lista.get(i).getObservacoes() != null ? lista.get(i).getObservacoes() : "" %></td>
+						        <td><%= lista.get(i).getStatusAgendamento() %></td>
+						        
+						        <td style="text-align: center;">						          
+						          <a href="form-editar-agendamento.jsp?id=<%= lista.get(i).getId() %>">
+								     <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
+								  </a>
+																  
+						        </td>
+						        <td style="text-align: center;">
+						          <a href="controle.jsp?op=19&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
+						        </td>
+						      </tr>
+						      <%
+						      }
+						      %>
+						    </tbody>
+						  </table>
+						</div>	
+						
+						</div>
                
             </div>
         </div>

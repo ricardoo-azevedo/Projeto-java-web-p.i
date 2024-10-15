@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import com.medic.interfaces.AgendamentoInterface;
 import com.medic.interfaces.FuncionarioInterface;
 import com.medic.interfaces.MedicoInterface;
@@ -54,6 +56,7 @@ public class AgendamentoDAO implements AgendamentoInterface {
             ps.setString(6, agendamento.getStatusAgendamento());
             ps.setString(7, agendamento.getObservacoes());
             ps.execute();
+            System.out.println(ps);
             ResultSet idAuto = ps.getGeneratedKeys();
             if (idAuto.next()) {
                 id = idAuto.getInt(1);
@@ -73,7 +76,7 @@ public class AgendamentoDAO implements AgendamentoInterface {
             ps.setInt(1, idAgendamento);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                idAgendamento = rs.getInt(idAgendamento);
+                idAgendamento = rs.getInt("idAgendamento");
                 int idPaciente = rs.getInt("IDPACIENTE");
                 Paciente paciente = iPaciente.consultar(idPaciente);
                 int idMedico = rs.getInt("IDMEDICO");

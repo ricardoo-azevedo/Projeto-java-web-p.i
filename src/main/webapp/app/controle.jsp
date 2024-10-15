@@ -422,6 +422,8 @@ case 16:{
 
 case 17:{
 	/*inserir Agendamento*/
+	int idUnidadeSaude = Integer.parseInt(request.getParameter("inputIdUnidadeSaude"));
+	UnidadeSaude unidadeSaude = iUnidadeSaude.consultar(idUnidadeSaude);
 	
 	int idMedico = Integer.parseInt(request.getParameter("inputIdMedico"));
 	Medico medico = iMedico.consultarMedico(idMedico);
@@ -429,8 +431,7 @@ case 17:{
 	int idPaciente = Integer.parseInt(request.getParameter("inputIdPaciente"));
 	Paciente paciente = iPaciente.consultar(idPaciente);
 	Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
-	int idUnidadeSaude = Integer.parseInt(request.getParameter("inputIdUS"));
-	UnidadeSaude unidadeSaude = iUnidadeSaude.consultar(idUnidadeSaude);
+	
 	String dataAgendamento = request.getParameter("inputData");
 	
 	LocalDate data = null;
@@ -447,11 +448,12 @@ case 17:{
 	String observacoes = request.getParameter("inputObs");
 	
 	Agendamento agendamento = new Agendamento();
-	if(!iAgendamento.verificarAgendamento(idPaciente, idMedico, dataAgendamento)){
+	/*if(!iAgendamento.verificarAgendamento(idPaciente, idMedico, dataAgendamento)){
 		throw new IllegalArgumentException("Não sera possivel cadastrar esse agendamento!");
     
 	}
-	
+	*/
+	agendamento.setUnidadeSaude(unidadeSaude);
 	agendamento.setMedico(medico);
 	agendamento.setPaciente(paciente);
 	agendamento.setFuncionario(funcionario);
@@ -464,7 +466,7 @@ case 17:{
   
     out.println(agendamento);
     
-    response.sendRedirect("form-agendamento.jsp?exibirAlert=Agendamento <b>"+agendamento.getId()+"</b> inserido com sucesso!");
+    response.sendRedirect("form-lista-agendamento.jsp?exibirAlert=Agendamento <b>"+agendamento.getId()+"</b> inserido com sucesso!");
     
     break;
 }
@@ -499,7 +501,7 @@ case 19:{
 	
 	iAgendamento.excluirAgendamento(idAgendamento);
 	
-	response.sendRedirect("form-agendamento.jsp?exibirAlert=excluido com sucesso");
+	response.sendRedirect("form-lista-agendamento.jsp?exibirAlert=excluido com sucesso");
 	break;
 }
 
