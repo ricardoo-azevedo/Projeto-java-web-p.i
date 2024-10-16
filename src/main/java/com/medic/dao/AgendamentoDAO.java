@@ -158,14 +158,16 @@ public class AgendamentoDAO implements AgendamentoInterface {
     }
 
     @Override
-    public boolean verificarAgendamento(int idPaciente, int idMedico, Date dataAgendamento) {
+    public boolean verificarAgendamento(int idPaciente, int idMedico, LocalDate dataAgendamento) {
         String sql = "SELECT idAgendamento, idPaciente, idMedico, data_agendamento FROM agendamento WHERE idPaciente = ? AND idMedico = ? AND data_agendamento = ?";
         boolean inserir = true;
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, idPaciente);
             ps.setInt(2, idMedico);
-            ps.setDate(3, dataAgendamento);
+            //ps.setDate(3, dataAgendamento);
+            Date date = java.sql.Date.valueOf(dataAgendamento);
+            ps.setDate(3, date);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 inserir = false;
