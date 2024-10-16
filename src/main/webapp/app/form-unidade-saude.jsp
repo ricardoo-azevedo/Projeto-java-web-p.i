@@ -229,18 +229,18 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 									   data-telefone="<%= iTelefone.buscarUnidadeSaude(lista.get(i).getId()).getNumero() %>"
 									   data-idEndereco="<%= lista.get(i).getEndereco().getId() %>"
 									   data-logradouro="<%= lista.get(i).getEndereco().getLogradouro() %>"
-									   data-numero="<%= lista.get(i).getEndereco().getNumero() %>"
+			 						   data-numero="<%= lista.get(i).getEndereco().getNumero() %>" 
 									   data-complemento="<%= lista.get(i).getEndereco().getComplemento() %>"
 									   data-bairro="<%= lista.get(i).getEndereco().getBairro() %>"
 									   data-cidade="<%= lista.get(i).getEndereco().getCidade() %>"
 									   data-uf="<%= lista.get(i).getEndereco().getUf() %>"
 									   data-cep="<%= lista.get(i).getEndereco().getCep() %>">
-									   <img src="./assets/edit.svg" alt="Editar" width="20" height="20">
-									</a>
+									   <img src="./assets/editado.svg" alt="Editar" width="25" height="25">
+									</a> 
 															  
 						        </td>
 						        <td style="text-align: center;">
-						          <a href="controle.jsp?op=3&id=<%= lista.get(i).getId() %>"><img src="./assets/trash.svg" alt="Excluir" width="20" height="20"></a>
+						          <a href="controle.jsp?op=3&id=<%= lista.get(i).getId() %>"><img src="./assets/lata.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
 						      <%

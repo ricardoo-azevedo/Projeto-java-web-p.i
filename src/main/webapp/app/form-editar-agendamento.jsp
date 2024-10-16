@@ -137,7 +137,7 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 										for(int i = 0; i < listaMedico.size(); i++) {
 										
 										%>
-										<option value="<%= listaMedico.get(i).getId() %>"><%= listaMedico.get(i).getEspecialidade().getNome()+" | "+listaMedico.get(i).getCrm()+" :: "+listaMedico.get(i).getNome() %></option>
+										<option  disabled="disabled"  value="<%= listaMedico.get(i).getId() %>"><%= listaMedico.get(i).getEspecialidade().getNome()+" | "+listaMedico.get(i).getCrm()+" :: "+listaMedico.get(i).getNome() %></option>
 										<%
 										}
 										%>
@@ -160,8 +160,8 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 										for(int i = 0; i < listaPaciente.size(); i++) {
 										
 										%>
-										<option value="<%= listaPaciente.get(i).getId() %>"><%= listaPaciente.get(i).getCpf()+" :: "+listaPaciente.get(i).getNome() %></option>
-										<%
+										<option  disabled="disabled"  value="<%= listaPaciente.get(i).getId() %>"><%= listaPaciente.get(i).getCpf()+" :: "+listaPaciente.get(i).getNome() %></option>
+							 			<%
 										}
 										%>
 										</select>

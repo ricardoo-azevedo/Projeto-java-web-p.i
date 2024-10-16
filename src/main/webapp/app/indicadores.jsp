@@ -51,7 +51,7 @@
        </div>
        <div class="col-md-6">
            <div class="card mt-3 p-3">
-               <i class="icon bi bi-capsule text-success text-center fs-3"> Agendamentos</i>
+               <i class="icon bi bi-clipboard-fill text-success text-center fs-3"> Agendamentos</i>
                <div class="count text-success text-center fs-1"><%= listaAgendamentoI.size() %></div>
            </div>
        </div>						        
