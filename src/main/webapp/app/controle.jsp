@@ -137,7 +137,7 @@ case 3:{
 	UnidadeSaude unidadeSaude = iUnidadeSaude.consultar(idUnidadeSaude);
 	iEndereco.excluir(unidadeSaude.getEndereco().getId());
 	iUnidadeSaude.excluir(idUnidadeSaude);
-	
+	 
 	response.sendRedirect("form-unidade-saude.jsp");
 	
 	break;
@@ -345,7 +345,7 @@ case 11:{
 	/* O QUE É ISSO? */
 	//int id = Integer.parseInt(request.getParameter("id"));
 	//iMedico.editarMedico(medico);
-	//response.sendRedirect("form-especialidade.jsp");
+	//response.sendRedirect("form-especialidade.jsp")
 	/* ??? */
 	
 	response.sendRedirect("form-medico.jsp");

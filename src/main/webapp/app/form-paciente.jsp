@@ -164,6 +164,8 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 							<input type="hidden" id="inputIdTelefone" name="inputIdTelefone">
 							<input type="hidden" id="inputIdEndereco" name="inputIdEndereco">
 							
+					
+							  
 						</form>		
 						
 						<div class="table-overflow mt-4">
@@ -211,9 +213,15 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 						          <a href="controle.jsp?op=6&id=<%= lista.get(i).getId() %>"><img src="./assets/lata.svg" alt="Excluir" width="20" height="20"></a>
 						        </td>
 						      </tr>
+						     
 						      <%
 						      }
 						      %>
+						      
+						  
+						      
+						     
+						      
 						    </tbody>
 						  </table>
 						</div>			
@@ -297,6 +305,10 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 	        
 	        document.getElementById('formulario').action = "controle.jsp?op=4";
 	    });
+	    
+		  <!--  parte de dar um alerta em campos como o cpf ou iguais, teste no cpf com js: -->
+		  
+		  
 		
 	</script>
 

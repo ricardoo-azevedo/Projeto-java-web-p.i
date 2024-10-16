@@ -221,7 +221,7 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 						      <tr>
 						        <th scope="row" style="text-align: center;"><%= i + 1 %></th>
 						        <td><%= lista.get(i).getNome() %></td>
-						        <td style="text-align: center;">						          
+						        <td style="text-align: center;">						           
 						          <a href="#" class="edit-us-btn" 
 									   data-idUnidadeSaude="<%= lista.get(i).getId() %>"
 									   data-nome="<%= lista.get(i).getNome() %>"
@@ -231,7 +231,7 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 									   data-logradouro="<%= lista.get(i).getEndereco().getLogradouro() %>"
 			 						   data-numero="<%= lista.get(i).getEndereco().getNumero() %>" 
 									   data-complemento="<%= lista.get(i).getEndereco().getComplemento() %>"
-									   data-bairro="<%= lista.get(i).getEndereco().getBairro() %>"
+							 		   data-bairro="<%= lista.get(i).getEndereco().getBairro() %>"
 									   data-cidade="<%= lista.get(i).getEndereco().getCidade() %>"
 									   data-uf="<%= lista.get(i).getEndereco().getUf() %>"
 									   data-cep="<%= lista.get(i).getEndereco().getCep() %>">

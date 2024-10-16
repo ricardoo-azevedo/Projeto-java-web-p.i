@@ -1,3 +1,6 @@
+<%@page import="com.medic.model.UnidadeSaude"%>
+<%@page import="com.medic.dao.UnidadeSaudeDAO"%>
+<%@page import="com.medic.interfaces.UnidadeSaudeInterface"%>
 <%@page import="com.medic.model.Funcionario"%>
 <%@page import="com.medic.dao.AgendamentoDAO"%>
 <%@page import="com.medic.model.Agendamento"%>
