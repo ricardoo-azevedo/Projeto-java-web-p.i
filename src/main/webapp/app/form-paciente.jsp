@@ -83,18 +83,18 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 					
 						<%
 						
-						if(request.getParameter("exibirAlertUS") != null){	
-							String nomeUS = request.getParameter("exibirAlertUS");
+						if(request.getParameter("exibirAlertPaciente") != null){	
+							String nomePaciente = request.getParameter("exibirAlertPaciente");
 							%>
 							
 							<div class="alert alert-success alert-dismissible fade show" role="alert" id="alertUS">
-							  Unidade de Saúde <%= nomeUS %> modificada!
+							  Paciente <%= nomePaciente %> modificada!
 							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 							</div>
 							
 							<script>
 							    setTimeout(function(){
-							        window.location.href = 'form-unidade-saude.jsp';
+							        window.location.href = 'form-paciente.jsp';
 							    }, 3000);
 							</script>
 														
