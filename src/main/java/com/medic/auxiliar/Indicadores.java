@@ -50,6 +50,11 @@ public class Indicadores {
 				sql = "SELECT count(idpaciente) as 'qtd' FROM paciente; ";
 				break;
 			}
+			case 7: {
+				sql = "SELECT count(idFuncionario) as 'qtd' FROM funcionario;";
+				break;
+			}
+			
 			default:{
 				break;
 			}

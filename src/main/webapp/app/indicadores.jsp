@@ -7,8 +7,14 @@
                     
 <div class="dashboard d-block">
 	
-	<h1 class="mt-4 texto fade-in-element bg-light-subtle">Indicadores</h1>
+	<h1 class="mt-4 texto fade-in-element bg-light-subtle text-center ">Indicadores</h1>
 
+               <div class="col-md-12">
+           <div class="card mt-3 p-3">
+               <i class="icon bi bi-person-workspace text-secondary text-center fs-3"> Funcionários</i>
+               <div class="count text-secondary text-center fs-1"><%= qual.indicador(7) %></div>
+            </div>
+        </div>
    <div class="row">
        <div class="col-md-6">
            <div class="card mt-2 p-3">
@@ -50,6 +56,8 @@
                <i class="icon bi bi-list-check text-secondary text-center fs-3"> Especialidades</i>
                <div class="count text-secondary text-center fs-1"><%= qual.indicador(4) %></div>
             </div>
-        </div>						        
+        </div>
+
+          						        
     </div>
 </div>

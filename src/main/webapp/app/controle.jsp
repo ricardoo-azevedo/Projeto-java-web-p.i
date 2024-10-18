@@ -143,7 +143,7 @@ case 3:{
 	break;
 }
 case 4:{
-	
+	// nao insere Paciente.
 	int idFamilia = Integer.parseInt(request.getParameter("inputFamilia"));
 	Familia familia = iFamilia.consultar(idFamilia);
 	
@@ -159,14 +159,14 @@ case 4:{
 	paciente.setFamilia(familia);
 	int idPaciente = iPaciente.inserir(paciente);
 	paciente.setId(idPaciente);
-		
+	iPaciente.inserir(paciente);	
 	String nTelefone = request.getParameter("inputTelefone");	
 	Telefone telefone = new Telefone();
 	telefone.setNumero(nTelefone);
 	telefone.setPaciente(paciente);	
 	int idTelefone = iTelefone.inserir(telefone);
 	telefone.setId(idTelefone);
-		
+	iTelefone.inserir(telefone);	
 	response.sendRedirect("form-paciente.jsp?exibirAlertPaciente="+paciente.getNome());
 
 	break;
