@@ -178,5 +178,22 @@ public class PacienteDAO implements PacienteInterface {
 		}
 		return lista;
 	}
+
+	@Override
+	public boolean verificarPaciente(String cpf) {
+		boolean inserir = true;
+		String sql = "select idPaciente, cpf from Paciente where cpf = ?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, cpf);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				inserir = false;
+			}
+		} catch (Exception e) {
+			System.out.println("[Erro ao verificar Paciente: "+e.getMessage()+"]");
+		}
+		return inserir;
+	}
 	
 }

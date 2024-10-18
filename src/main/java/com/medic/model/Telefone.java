@@ -1,4 +1,4 @@
-package com.medic.model;
+	package com.medic.model;
 
 public class Telefone {
 

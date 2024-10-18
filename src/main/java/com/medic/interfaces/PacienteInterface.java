@@ -11,6 +11,7 @@ public interface PacienteInterface {
     void editar(Paciente paciente );
     void excluir(int id);
 	List<Paciente> listar();
-	
 	List<Paciente> listarPacientesFamilia(int idFamilia);
+	boolean verificarPaciente(String cpf);
+
 }

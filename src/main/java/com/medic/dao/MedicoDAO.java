@@ -165,4 +165,24 @@ public class MedicoDAO implements MedicoInterface {
 		return medicos;
 	}
 
+	@Override
+	public boolean verificarMedico(String crm, String telefone) {
+		boolean inserir = true;
+		String sql = "SELECT 1 FROM medico m "
+	               + "JOIN telefone t ON m.idMedico = t.idMedico "
+	               + "WHERE m.CRM = ? OR t.numero = ?";
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, crm);
+			ps.setString(2, telefone);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				inserir = false;
+			}
+		}catch (Exception e) {
+			System.out.println("Erro ao verificar Medico: "+e.getMessage()+"]");
+		}
+		return inserir;
+	}
+
 }

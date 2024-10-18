@@ -143,6 +143,7 @@ case 3:{
 	break;
 }
 case 4:{
+	/*inserir paciente*/
 	
 	int idFamilia = Integer.parseInt(request.getParameter("inputFamilia"));
 	Familia familia = iFamilia.consultar(idFamilia);
@@ -153,6 +154,13 @@ case 4:{
 	
 	Funcoes f = new Funcoes();	
 	Paciente paciente = new Paciente();
+	
+	 if(!iPaciente.verificarPaciente(cpf)){
+		 response.sendRedirect("form-paciente.jsp?exibirAlertPaciente=Duplicado");
+		 return;
+		
+	}
+	
 	paciente.setNome(nome);
 	paciente.setCpf(cpf);
 	paciente.setDataNascimento(f.converterDateStringSQL(nascimento));
@@ -163,7 +171,7 @@ case 4:{
 	String nTelefone = request.getParameter("inputTelefone");	
 	Telefone telefone = new Telefone();
 	telefone.setNumero(nTelefone);
-	telefone.setPaciente(paciente);	
+	telefone.setPaciente(paciente);		
 	int idTelefone = iTelefone.inserir(telefone);
 	telefone.setId(idTelefone);
 		
@@ -320,6 +328,7 @@ case 10:{
 }
 
 case 11:{
+	//inserir medico @-@
 
 	String crm = request.getParameter("inputCrm");
 	String nome = request.getParameter("inputNome");
@@ -328,6 +337,10 @@ case 11:{
 	Especialidade especialidade = iEspecialidade.consultar(idEspecialidade);
 	
 	Medico medico = new Medico();
+	if(!iMedico.verificarMedico(crm, ntelefone)){
+		response.sendRedirect("form-medico.jsp?exibirAlert=Duplicado nada!");
+		return;
+	}
 	medico.setNome(nome);
 	medico.setCrm(crm);
 	medico.setEspecialidade(especialidade);
@@ -451,7 +464,7 @@ case 17:{
 	
 	if(!iAgendamento.verificarAgendamento(idPaciente, idMedico, data)){
 		
-		throw new IllegalArgumentException("Não sera possivel cadastrar esse agendamento!");
+		response.sendRedirect("form-agendamento.jsp?exibirAlert=Agendamento Duplicado!");
 		
 	}
 	

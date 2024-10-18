@@ -11,7 +11,7 @@ public interface MedicoInterface {
     void editarMedico(Medico medico);
     void excluirMedico(int idMedico);
     List<Medico> listarMedico();
-    
     List<Medico> listarPorEspecialidade(int idEspecialidade);
+    boolean verificarMedico(String crm, String telefone);
     
 }
