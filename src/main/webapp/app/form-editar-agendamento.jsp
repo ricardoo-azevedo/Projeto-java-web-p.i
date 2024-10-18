@@ -113,11 +113,12 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 						Agendamento agendamento = iAgendamento.consultarAgendamento(idAgendamento);						
 						%>
 					
-						<form action="controle.jsp?op=17" method="post" id="formulario">
+						<form action="controle.jsp?op=18" method="post" id="formulario">
                         
                         	<div class="row">
 
 								<div class="form-floating mb-3 col-md-12">
+									<input type="hidden" id="inputUnidadeSaude" name="inputUnidadeSaude" value="<%= agendamento.getUnidadeSaude().getId() %>">
 									<input type="text" class="form-control" placeholder=" " value="<%= agendamento.getUnidadeSaude().getNome() %>" readonly="readonly"> 
 									<label for="inputNome" style="margin-left: 10px;">Unidade de Saúde</label>
 								</div>
@@ -127,21 +128,8 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 							<div class="row">
 
 								<div class="form-floating mb-3 col-md-12">
-									<select class="form-select" id="inputIdMedico" name="inputIdMedico" required>
-										<option value="" selected disabled>Selecione</option>
-										<%
-										
-										MedicoInterface iMedico = new MedicoDAO();
-										List<Medico> listaMedico = iMedico.listarMedico();
-										
-										for(int i = 0; i < listaMedico.size(); i++) {
-										
-										%>
-										<option  disabled="disabled"  value="<%= listaMedico.get(i).getId() %>"><%= listaMedico.get(i).getEspecialidade().getNome()+" | "+listaMedico.get(i).getCrm()+" :: "+listaMedico.get(i).getNome() %></option>
-										<%
-										}
-										%>
-										</select> 
+									<input type="hidden" id="inputIdMedico" name="inputIdMedico" value="<%= agendamento.getMedico().getId() %>">
+									<input type="text" class="form-control" placeholder=" " value="<%= agendamento.getMedico().getNome() %>" readonly="readonly">
 										<label for="inputIdMedico" style="margin-left: 10px;">Médico</label>
 								</div>
 
@@ -150,21 +138,8 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
                         	<div class="row">
 
 								<div class="form-floating mb-3 col-md-12">
-									<select class="form-select" id="inputIdPaciente" name="inputIdPaciente" required>
-										<option value="" selected disabled>Selecione</option>
-										<%
-										
-										PacienteInterface iPaciente = new PacienteDAO();
-										List<Paciente> listaPaciente = iPaciente.listar();
-										
-										for(int i = 0; i < listaPaciente.size(); i++) {
-										
-										%>
-										<option  disabled="disabled"  value="<%= listaPaciente.get(i).getId() %>"><%= listaPaciente.get(i).getCpf()+" :: "+listaPaciente.get(i).getNome() %></option>
-							 			<%
-										}
-										%>
-										</select>
+									<input type="hidden" id="inputIdPaciente" name="inputIdPaciente" value="<%= agendamento.getPaciente().getId() %>">
+									<input type="text" class="form-control" placeholder=" " value="<%= agendamento.getPaciente().getNome() %>" readonly="readonly">
 										<label for="inputIdPaciente" style="margin-left: 10px;">Paciente</label>
 								</div>
 
@@ -194,23 +169,31 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 								     
 								</div>
 								
-								<div class="form-floating mb-3 col-md-8">                                    
+								<div class="form-floating mb-3 col-md-2">                                    
+                                    <select class="form-control " id="inputStatus" name="inputStatus" required>
+												<option id="cor" value="Confirmado">
+													Confirmado</option>
+												<option value="Cancelado">
+													Cancelado</option>
+												<option value="NaoCompareceu">
+													Não Compareceu</option>
+
+										</select>
+                                    <label for="inputObs" style="margin-left: 10px;">sttatus</label>                                  
+                                </div>
+								<div class="form-floating mb-3 col-md-6">                                    
                                     <textarea id="inputObs" name="inputObs" class="form-control"></textarea>
                                     <label for="inputObs" style="margin-left: 10px;">Observações</label>                                  
                                 </div>
-
                             </div>
+
 
                             <div class="form-floating mb-3 col-md-12 justify-content-end" style="text-align: right;">
                                 <a href="form-lista-agendamento.jsp" class="btn btn-lg btn-dark">Listar</a>
                                 <button type="reset" id="btnLimpar" class="btn btn-lg btn-success">Limpar</button>
                                 <button type="submit" id="btnSalvar" class="btn btn-lg btn-success">Salvar</button>
                             </div>
-                            
-                            <input type="hidden" id="idAgendamento" name="idAgendamento">
-                            <input type="hidden" id="idPaciente" name="idPaciente">
-                            <input type="hidden" id="idMedico" name="idMedico">
-                            
+                            <input type="hidden" id="inputAgendamento" name="inputAgendamento" value="<%= agendamento.getId() %>">       
                         </form>	
 						
 						</div>		
@@ -234,34 +217,6 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
-	<script>
-		
-	    setTimeout(function() {
-	        var alertElement = document.getElementById('alert');
-	        var alert = new bootstrap.Alert(alertElement);
-	        alert.close();
-	    }, 2000);
-	    	   
-	    document.querySelectorAll('.edit-agendamento-btn').forEach(button => {
-	        button.addEventListener('click', function(event) {
-	            event.preventDefault();
-	           
-	            let btnSalvar = document.getElementById('btnSalvar');
-	            btnSalvar.innerText = 'Editar';
-	            
-	            document.getElementById('formulario').action = "controle.jsp?op=18";
-	        });
-	    });
-
-	    // Captura o evento de clique no botão de limpar
-	    document.getElementById('btnLimpar').addEventListener('click', function() {
-	        let btnSalvar = document.getElementById('btnSalvar');
-	        btnSalvar.innerText = 'Salvar';
-	        
-	        document.getElementById('formulario').action = "controle.jsp?op=17";
-	    });
-		
-	</script>
 
 </body>
 </html>
