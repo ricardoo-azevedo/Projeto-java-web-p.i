@@ -9,11 +9,9 @@ public class ConnectionFactory {
 	
 	private static final String URL = "jdbc:mysql://localhost:3306/bdmedic";
 	private static final String USER = "root";
-<<<<<<< HEAD
+
 	private static final String PASSWORD = "2301";
-=======
-	private static final String PASSWORD = "2020";
->>>>>>> 57451d7ed4528ca874a80dc3c7dbd60f200419ad
+
 	
 	private Connection conexao;
 	

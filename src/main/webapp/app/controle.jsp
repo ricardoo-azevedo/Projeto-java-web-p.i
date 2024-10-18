@@ -143,12 +143,7 @@ case 3:{
 	break;
 }
 case 4:{
-<<<<<<< HEAD
-	/*inserir paciente*/
-	
-=======
-	// nao insere Paciente.
->>>>>>> 57451d7ed4528ca874a80dc3c7dbd60f200419ad
+
 	int idFamilia = Integer.parseInt(request.getParameter("inputFamilia"));
 	Familia familia = iFamilia.consultar(idFamilia);
 	
