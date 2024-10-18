@@ -158,19 +158,7 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 										<td><%= lista.get(i).getPaciente().getNome() %></td>
 										<td><%= dtf.format(lista.get(i).getDataAgendamento()) %></td>
 										<td><%= lista.get(i).getObservacoes() != null ? lista.get(i).getObservacoes() : "" %></td>
-
-										<td><select class="status ">
-												<option id="cor" value="Confirmado"
-													<% lista.get(i).getStatusAgendamento().equals("Confirmado"); %>>
-													Confirmado</option>
-												<option value="Cancelado"
-													<% lista.get(i).getStatusAgendamento().equals("Cancelado"); %>>
-													Cancelado</option>
-												<option value="NaoCompareceu"
-													<% lista.get(i).getStatusAgendamento().equals("NaoCompareceu"); %>>
-													Não Compareceu</option>
-
-										</select></td>
+										<td><%=lista.get(i).getStatusAgendamento() %></td>
 
 
 
@@ -211,35 +199,6 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-
-	<script>
-		
-	    setTimeout(function() {
-	        var alertElement = document.getElementById('alert');
-	        var alert = new bootstrap.Alert(alertElement);
-	        alert.close();
-	    }, 2000);
-	    	   
-	    document.querySelectorAll('.edit-agendamento-btn').forEach(button => {
-	        button.addEventListener('click', function(event) {
-	            event.preventDefault();
-	           
-	            let btnSalvar = document.getElementById('btnSalvar');
-	            btnSalvar.innerText = 'Editar';
-	            
-	            document.getElementById('formulario').action = "controle.jsp?op=18";
-	        });
-	    });
-
-	    // Captura o evento de clique no botão de limpar
-	    document.getElementById('btnLimpar').addEventListener('click', function() {
-	        let btnSalvar = document.getElementById('btnSalvar');
-	        btnSalvar.innerText = 'Salvar';
-	        
-	        document.getElementById('formulario').action = "controle.jsp?op=17";
-	    });
-		
-	</script>
 
 </body>
 </html>

@@ -143,8 +143,12 @@ case 3:{
 	break;
 }
 case 4:{
+<<<<<<< HEAD
 	/*inserir paciente*/
 	
+=======
+	// nao insere Paciente.
+>>>>>>> 57451d7ed4528ca874a80dc3c7dbd60f200419ad
 	int idFamilia = Integer.parseInt(request.getParameter("inputFamilia"));
 	Familia familia = iFamilia.consultar(idFamilia);
 	
@@ -167,14 +171,14 @@ case 4:{
 	paciente.setFamilia(familia);
 	int idPaciente = iPaciente.inserir(paciente);
 	paciente.setId(idPaciente);
-		
+	iPaciente.inserir(paciente);	
 	String nTelefone = request.getParameter("inputTelefone");	
 	Telefone telefone = new Telefone();
 	telefone.setNumero(nTelefone);
 	telefone.setPaciente(paciente);		
 	int idTelefone = iTelefone.inserir(telefone);
 	telefone.setId(idTelefone);
-		
+	iTelefone.inserir(telefone);	
 	response.sendRedirect("form-paciente.jsp?exibirAlertPaciente="+paciente.getNome());
 
 	break;
@@ -490,7 +494,7 @@ case 17:{
 
 case 18:{
 	/*Editar agendamento*/
-	Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
+	/*Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
 	String obs = request.getParameter("inputObs");
 	String dataAgendamento = request.getParameter("inputData");
 	LocalDate data = null;
@@ -508,7 +512,37 @@ case 18:{
 	agendamento.setStatusAgendamento("CONFIRMADO");
 	iAgendamento.editarAgendamento(agendamento);
 
-	response.sendRedirect("form-agendamento.jsp?exibirAlert=Agendamento <b>"+agendamento.getId()+"</b> editado com sucesso!");
+	response.sendRedirect("form-lista-agendamento.jsp?exibirAlert=Agendamento <b>"+agendamento.getId()+"</b> editado com sucesso!");
+	break;*/
+	
+	
+	int idAgendamento = Integer.parseInt(request.getParameter("inputAgendamento"));
+	
+	int idMedico = Integer.parseInt(request.getParameter("inputIdMedico"));
+	Medico medico = iMedico.consultarMedico(idMedico);
+	
+	int idUnidadeSaude = Integer.parseInt(request.getParameter("inputUnidadeSaude"));
+	UnidadeSaude unidadeSaude = iUnidadeSaude.consultar(idUnidadeSaude);
+	
+	int idpaciente = Integer.parseInt(request.getParameter("inputIdPaciente"));
+	Paciente paciente = iPaciente.consultar(idpaciente);
+
+	Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
+	
+	String dataAgendamento = request.getParameter("inputData");
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	LocalDate data = LocalDate.parse(dataAgendamento, formatter);
+	
+	String obsevacoes = request.getParameter("inputObs");
+	String status = request.getParameter("inputStatus");
+	
+	Agendamento agendamento = new Agendamento(idAgendamento,paciente, medico, funcionario, unidadeSaude, data, status, obsevacoes);
+	
+	iAgendamento.editarAgendamento(agendamento);
+	
+	
+	response.sendRedirect("form-lista-agendamento.jsp?exibirAlert=Agendamento <b>"+agendamento.getId()+"</b> editado com sucesso!");
 	break;
 }
 
