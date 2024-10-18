@@ -477,7 +477,7 @@ case 17:{
 
 case 18:{
 	/*Editar agendamento*/
-	Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
+	/*Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
 	String obs = request.getParameter("inputObs");
 	String dataAgendamento = request.getParameter("inputData");
 	LocalDate data = null;
@@ -495,7 +495,37 @@ case 18:{
 	agendamento.setStatusAgendamento("CONFIRMADO");
 	iAgendamento.editarAgendamento(agendamento);
 
-	response.sendRedirect("form-agendamento.jsp?exibirAlert=Agendamento <b>"+agendamento.getId()+"</b> editado com sucesso!");
+	response.sendRedirect("form-lista-agendamento.jsp?exibirAlert=Agendamento <b>"+agendamento.getId()+"</b> editado com sucesso!");
+	break;*/
+	
+	
+	int idAgendamento = Integer.parseInt(request.getParameter("inputAgendamento"));
+	
+	int idMedico = Integer.parseInt(request.getParameter("inputIdMedico"));
+	Medico medico = iMedico.consultarMedico(idMedico);
+	
+	int idUnidadeSaude = Integer.parseInt(request.getParameter("inputUnidadeSaude"));
+	UnidadeSaude unidadeSaude = iUnidadeSaude.consultar(idUnidadeSaude);
+	
+	int idpaciente = Integer.parseInt(request.getParameter("inputIdPaciente"));
+	Paciente paciente = iPaciente.consultar(idpaciente);
+
+	Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenticado");
+	
+	String dataAgendamento = request.getParameter("inputData");
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	LocalDate data = LocalDate.parse(dataAgendamento, formatter);
+	
+	String obsevacoes = request.getParameter("inputObs");
+	String status = request.getParameter("inputStatus");
+	
+	Agendamento agendamento = new Agendamento(idAgendamento,paciente, medico, funcionario, unidadeSaude, data, status, obsevacoes);
+	
+	iAgendamento.editarAgendamento(agendamento);
+	
+	
+	response.sendRedirect("form-lista-agendamento.jsp?exibirAlert=Agendamento <b>"+agendamento.getId()+"</b> editado com sucesso!");
 	break;
 }
 

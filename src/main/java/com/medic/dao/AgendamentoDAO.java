@@ -104,8 +104,8 @@ public class AgendamentoDAO implements AgendamentoInterface {
             PreparedStatement ps = connection.prepareStatement(sql);
             LocalDate localDate = agendamento.getDataAgendamento();
             Date sqlDate = Date.valueOf(localDate);
-            ps.setDate(1, sqlDate);
-            ps.setInt(2, agendamento.getFuncionario().getId());
+            ps.setInt(1, agendamento.getFuncionario().getId());
+            ps.setDate(2, sqlDate);
             ps.setString(3, agendamento.getStatusAgendamento());
             ps.setString(4, agendamento.getObservacoes());
             ps.setInt(5, agendamento.getId());
@@ -130,7 +130,7 @@ public class AgendamentoDAO implements AgendamentoInterface {
     @Override
     public List<Agendamento> listarAgendamento() {
         List<Agendamento> lista = new ArrayList<>();
-        String sql = "SELECT * FROM AGENDAMENTO WHERE STATUS_AGENDAMENTO = 'CONFIRMADO'";
+        String sql = "SELECT * FROM AGENDAMENTO;";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
