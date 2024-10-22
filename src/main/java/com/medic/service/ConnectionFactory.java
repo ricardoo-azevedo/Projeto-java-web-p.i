@@ -8,9 +8,8 @@ public class ConnectionFactory {
 //mudem o password de vcs 
 	
 	private static final String URL = "jdbc:mysql://localhost:3306/bdmedic";
-	private static final String USER = "root";
-
-	private static final String PASSWORD = "2020";
+	private static final String USER = "root"; 
+	private static final String PASSWORD = "";
 
 	
 	private Connection conexao;

@@ -192,32 +192,21 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 
 											</div>
 
-											<div class="paciente-endereco">
-												<p class='teste teste p-1 fs-5'>Endereco</p>
-												<p class='pacient mt-3'>
-													<strong>Logradouro:</strong>
-													<%= listaFamilia.get(i).getEndereco().getLogradouro() %></p>
-												<p class='pacient mt-3'>
-													<strong>Numero:</strong>
-													<%= listaFamilia.get(i).getEndereco().getNumero() %></p>
-												<p class='pacient mt-3'>
-													<strong>Complemento:</strong>
-													<%= listaFamilia.get(i).getEndereco().getComplemento() %></p>
-												<p class='pacient mt-3'>
-													<strong>Bairro:</strong>
-													<%= listaFamilia.get(i).getEndereco().getBairro() %></p>
-												<p class='pacient mt-3'>
-													<strong>Cidade:</strong>
-													<%= listaFamilia.get(i).getEndereco().getCidade()%></p>
-												<p class='pacient mt-3'>
-													<strong>Uf:</strong>
-													<%= listaFamilia.get(i).getEndereco().getUf()%></p>
-												<p class='pacient mt-3'>
-													<strong>Cep:</strong>
-													<%= listaFamilia.get(i).getEndereco().getCep()%></p>
-
-											</div>
-											<% } %>
+										
+							 	 			<% } %>
+											
+											 <div class="endereco p-3 fs-5">
+    <strong>Endereço:</strong>
+    <%= listaFamilia.get(i).getEndereco().getLogradouro() %>, 
+    <%= listaFamilia.get(i).getEndereco().getNumero() %>
+    <% if (listaFamilia.get(i).getEndereco().getComplemento() != null && !listaFamilia.get(i).getEndereco().getComplemento().isEmpty()) { %>
+        - <%= listaFamilia.get(i).getEndereco().getComplemento() %>
+    <% } %>
+    - <%= listaFamilia.get(i).getEndereco().getBairro() %>, 
+    <%= listaFamilia.get(i).getEndereco().getCidade()%> - 
+    <%= listaFamilia.get(i).getEndereco().getUf() %>, 
+    CEP: <%= listaFamilia.get(i).getEndereco().getCep() %>
+</div>
 										</div>
 									</div>
 								</div>
