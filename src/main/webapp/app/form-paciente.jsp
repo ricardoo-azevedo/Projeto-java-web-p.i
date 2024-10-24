@@ -306,7 +306,7 @@ Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioAutenti
 	        document.getElementById('formulario').action = "controle.jsp?op=4";
 	    });
 	    
-		  <!--  parte de dar um alerta em campos como o cpf ou iguais, teste no cpf com js: -->
+		
 		  
 		  
 		

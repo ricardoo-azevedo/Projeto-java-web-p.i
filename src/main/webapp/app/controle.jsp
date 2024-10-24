@@ -138,7 +138,7 @@ case 3:{
 	iEndereco.excluir(unidadeSaude.getEndereco().getId());
 	iUnidadeSaude.excluir(idUnidadeSaude);
 	 
-	response.sendRedirect("form-unidade-saude.jsp");
+	response.sendRedirect("form-unidade-saude.jsp?exibirAlert=Apenas unidades sem agendamentos ativos podem ser excluidos.");
 	
 	break;
 }
@@ -216,10 +216,10 @@ case 5:{
 }
 
 case 6:{
-	
-	int idPaciente = Integer.parseInt(request.getParameter("id"));
+	 
+	int idPaciente = Integer.parseInt(request.getParameter("id")); 
 	iPaciente.excluir(idPaciente);
-	response.sendRedirect("form-paciente.jsp");
+	response.sendRedirect("form-paciente.jsp?exibirAlert=Apenas pacientes sem agendamentos ativos podem ser excluidos.");
 	break;
 }
 
@@ -400,7 +400,7 @@ case 15:{
      //excluindo idMedico todo 
 	int idMedico = Integer.parseInt(request.getParameter("id"));
 	iMedico.excluirMedico(idMedico);
-	response.sendRedirect("form-medico.jsp");
+	response.sendRedirect("form-medico.jsp?exibirAlert=Apenas medicos sem agendamentos ativos podem ser excluidos.");
 	break;
 }
 
@@ -645,6 +645,6 @@ default:{
 
 	break;
 }
-
+ 
 }
 %>
